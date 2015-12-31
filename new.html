@@ -3,20 +3,38 @@
 
 <HEAD>
     <TITLE>BuffDaddy</TITLE>
-    <script src="..\BuffDaddy\js\main.js"></script>
     <script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="lu219t3dwuy21ud"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/dropbox.js/0.10.2/dropbox.min.js">
-    </script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/dropbox.js/0.10.2/dropbox.min.js"></script>
+    <script src="https://www.dropbox.com/static/api/1/dropbox-datastores-0.1.0-b2.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="..\BuffDaddy\js\main.js"></script>
 </HEAD>
 
 <body>
     <h1>My First Heading</h1>
     <p>My first paragraph.</p>
+    <button onclick="SignIn()">SignIn</button>
     <button onclick="myFunction()">Custom Saver Button</button>
     <button onclick="myFunction2()">Create File</button>
     <button onclick="myFunction3()">Read File</button>
     <button onclick="myFunction4()">Directories</button>
     <a href="https://dl.dropboxusercontent.com/s/deroi5nwm6u7gdf/advice.png" class="dropbox-saver"></a>
+    <div>
+        <form id="workout">
+            <input type="text" name="ExerciseID" id="ExerciseID" hidden> Workout:
+            <br>
+            <input type="text" name="Exercise">
+            <br>Sets:
+            <br>
+            <input type="text" name="Sets" id="sets">
+            <br>Postion:
+            <br>
+            <input type="text" name="Postion">
+            <br>
+            <br>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
 </body>
 
 </html>
