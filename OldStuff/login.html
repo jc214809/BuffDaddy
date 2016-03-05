@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Log In</title>
+</head>
+
+<body>
+    <div id="fb-root"></div>
+    <script>
+    (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=966190206783033";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+    FB.getLoginStatus(function(response) {
+        statusChangeCallback(response);
+    });
+    var status = FB.getLoginStatus();
+    alert(status);
+
+    FB.login(function(response) {
+        if (response.status === 'connected') {
+            alert("Logged into your app and Facebook.");
+        } else if (response.status === 'not_authorized') {
+            alert("The person is logged into Facebook, but not your app.");
+        } else {
+            alert("The person is not logged into Facebook, so we're not sure if");
+            // they are logged into this app or not.
+        }
+    });
+
+    function checkLoginState() {
+        FB.getLoginStatus(function(response) {
+            statusChangeCallback(response);
+
+        });
+    }
+    </script>
+    <div class="fb-login-button" data-max-rows="1" data-size="small" data-show-faces="false" data-auto-logout-link="true" onlogin="checkLoginState();"></div>
+</body>
+
+</html>
