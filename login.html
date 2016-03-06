@@ -5,13 +5,25 @@
     <title>Facebook Login JavaScript Example</title>
     <meta charset="UTF-8">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
     <script src="../BuffDaddy/js/facebook.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 </head>
 
 <body>
-    <fb:login-button scope="public_profile,email" data-max-rows="1" data-size="small" data-show-faces="false" data-auto-logout-link="true" onlogin="checkLoginState();">
-    </fb:login-button>
-    <div id="status">
+    <div class="jumbotron" style="background-color:#2F2868; color:white; vertical-align:middle">
+        <div style="background:transparent url(../BuffDaddy/images/BuffDaddy.png)"></div>
+        <center>
+            <img align="center" src="../BuffDaddy/images/BuffDaddy-Blue.png" alt="some_text" style="position:relative; top:30px;" />
+        </center>
+        <h1 align="center">Welcome To BuffDaddy</h1>
+        <p align="center">Please login to Facebook to start your Journey!</p>
+        <p align="center">
+            <fb:login-button scope="public_profile,email" data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="true" onlogin="checkLoginState();">
+            </fb:login-button>
+        </p>
     </div>
 </body>
 
