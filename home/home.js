@@ -9,7 +9,7 @@ angular.module('sample.home', [
 
         $scope.callApi = function() {
             // Just call the API as you'd do using $http
-            $http.get("http://localhost/BuffDaddyAPI/test")
+            $http.get("http://192.168.1.140:7080/BuffDaddyAPI/test")
                 .then(function(response) {
                     alert(JSON.stringify(response));
                 });
