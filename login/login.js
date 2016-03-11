@@ -21,11 +21,11 @@ angular.module('sample.login', [
                         .then(
                             function successCallback(response) {
                                 //alert("Success");
-                                $location.path("/");
                             },
                             function errorCallback(response) {
                                 //alert("Error " + JSON.stringify(response));
                             });
+                    $location.path("/");
 
                 },
                 function(error) {

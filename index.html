@@ -11,6 +11,7 @@
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- font awesome from BootstrapCDN -->
+    <script src="/BuffDaddy/sidebar/js/jquery.js"></script>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="app.css">
@@ -29,10 +30,20 @@
     <script type="text/javascript" src="app.js"></script>
     <script type="text/javascript" src="home/home.js"></script>
     <script type="text/javascript" src="login/login.js"></script>
+    <!-- Bootstrap Core CSS -->
+    <!-- <link href="/BuffDaddy/css/bootstrap.min.css" rel="stylesheet"> -->
+    <!-- Custom CSS -->
+    <link href="/BuffDaddy/css/simple-sidebar.css" rel="stylesheet">
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/BuffDaddy/sidebar/js/bootstrap.min.js"></script>
+    <!-- Menu Toggle Script -->
 </head>
 
 <body>
-    <div ng-view></div>
+    <div id="wrapper">
+        <div ng-include="'sidebar/sidebar.html'"></div>
+        <div ng-view></div>
+    </div>
 </body>
 
 </html>
