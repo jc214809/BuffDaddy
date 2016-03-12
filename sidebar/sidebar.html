@@ -58,10 +58,10 @@
         </li>
         <li ng-if="auth.isAuthenticated">
             <img style="width:31px; margin-top: 12px;" src="{{auth.profile.picture}}" />
-            <button class="btn-sm btn-warning" ng-click="logout()">Logout {{auth.profile.name}}</button>
+            <button id="logoutSidebar" class="btn-sm btn-warning" ng-click="logout()">Logout {{auth.profile.name}}</button>
         </li>
     </ul>
-    <a href="#" data-activates="slide-out" class="button-collapse show-on-large"><i class="mdi-navigation-menu"></i></a>
+    <a href="#" data-activates="slide-out" class="button-collapse show-on-large"><i ng-if="auth.isAuthenticated" class="mdi-navigation-menu"></i></a>
 </nav>
 <link rel="stylesheet" type="text/css" href="sidebar/css/materialize.css">
 <script type="text/javascript" src="sidebar/js/materialize.js"></script>

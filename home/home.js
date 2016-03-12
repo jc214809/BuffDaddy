@@ -13,18 +13,6 @@ angular.module('sample.home', [
                 .then(function(response) {
                     alert(JSON.stringify(response));
                 });
-
-            // $http.get('').then(function() {
-            //     alert("We got the secured data successfully");
-            // }, function(response) {
-            //     if (response.status == 0) {
-            //         alert("Please download the API seed so that you can call it.");
-            //     } else {
-
-            //     }
-            // });
-
-
         }
 
         $scope.logout = function() {

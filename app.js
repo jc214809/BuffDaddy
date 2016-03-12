@@ -55,16 +55,12 @@
         .controller('AppCtrl', function AppCtrl($scope, $location, auth, store) {
             $scope.auth = auth;
 
-            $scope.sideBar = function() {
-                $("#wrapper").toggleClass("toggled");
-            };
-
             $scope.logout = function() {
                 auth.signout();
                 store.remove('profile');
                 store.remove('token');
                 $location.path('/login');
-                $("#wrapper").toggleClass("toggled");
+                $('.button-collapse').sideNav('hide');
             }
 
             $scope.$on('$routeChangeSuccess', function(e, nextRoute) {
