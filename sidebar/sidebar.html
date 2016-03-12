@@ -56,7 +56,7 @@
         <li>
             <a href="#">Services</a>
         </li>
-        <li>
+        <li ng-if="auth.isAuthenticated">
             <img style="width:31px; margin-top: 12px;" src="{{auth.profile.picture}}" />
             <button class="btn-sm btn-warning" ng-click="logout()">Logout {{auth.profile.name}}</button>
         </li>
