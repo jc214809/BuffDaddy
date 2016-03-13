@@ -4,15 +4,27 @@ angular.module('sample.home', [
     .controller('HomeCtrl', function HomeController($scope, auth, $http, $location, store) {
 
         $scope.auth = auth;
-
-        console.log($scope.auth);
+        $scope.workoutDetails = {
+            "id": $scope.auth.profile.identities[0].user_id
+        };
 
         $scope.callApi = function() {
-            // Just call the API as you'd do using $http
-            $http.get("http://192.168.1.140:7080/BuffDaddyAPI/test")
+            //$http.get("http://192.168.1.140:7080/BuffDaddyAPI/test")
+            $http.get("http://localhost/BuffDaddyAPI/test")
                 .then(function(response) {
                     alert(JSON.stringify(response));
                 });
+        }
+        $scope.newWorkout = function() {
+            //$http.post("http://192.168.1.140:7080/BuffDaddyAPI/newWorkout", $scope.workoutDetails)
+            $http.post("http://localhost/BuffDaddyAPI/newWorkout", $scope.workoutDetails)
+                .then(
+                    function successCallback(response) {
+                        alert("Success");
+                    },
+                    function errorCallback(response) {
+                        alert("Error " + JSON.stringify(response));
+                    });
         }
 
         $scope.logout = function() {
