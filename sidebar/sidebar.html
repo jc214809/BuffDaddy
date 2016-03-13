@@ -23,7 +23,7 @@
             <a href="#">Services</a>
         </li>
         <li ng-if="auth.isAuthenticated">
-            <img style="width:31px; margin-top: 12px;" src="{{auth.profile.picture}}" />
+            <img style="width:31px;" src="{{auth.profile.picture}}" />
             <button id="logoutSidebar" class="btn-sm btn-warning" ng-click="logout()">Logout {{auth.profile.name}}</button>
         </li>
     </ul>

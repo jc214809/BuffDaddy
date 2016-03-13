@@ -9,15 +9,19 @@ angular.module('sample.home', [
         };
 
         $scope.callApi = function() {
-            //$http.get("http://192.168.1.140:7080/BuffDaddyAPI/test")
-            $http.get("http://localhost/BuffDaddyAPI/test")
-                .then(function(response) {
-                    alert(JSON.stringify(response));
-                });
+            $http.get("http://192.168.1.140:7080/BuffDaddyAPI/workoutInProgress?id=" + $scope.workoutDetails.id)
+                //$http.get("http://localhost/BuffDaddyAPI/workoutInProgress?id=" + $scope.workoutDetails.id)
+                .then(
+                    function successCallback(response) {
+                        alert("Success");
+                    },
+                    function errorCallback(response) {
+                        alert("Error " + JSON.stringify(response));
+                    });
         }
         $scope.newWorkout = function() {
-            //$http.post("http://192.168.1.140:7080/BuffDaddyAPI/newWorkout", $scope.workoutDetails)
-            $http.post("http://localhost/BuffDaddyAPI/newWorkout", $scope.workoutDetails)
+            $http.post("http://192.168.1.140:7080/BuffDaddyAPI/newWorkout", $scope.workoutDetails)
+                //$http.post("http://localhost/BuffDaddyAPI/newWorkout", $scope.workoutDetails)
                 .then(
                     function successCallback(response) {
                         alert("Success");
