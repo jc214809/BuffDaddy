@@ -16,15 +16,15 @@ angular.module('sample.login', [
                         gender: profile.gender,
                         id: profile.identities[0].user_id
                     };
-
-                    $http.post("http://192.168.1.140:7080/BuffDaddyAPI/register", JSON.stringify($scope.userDetails))
+                    $http.post("http://192.168.1.140:7080/BuffDaddyAPI/test2", $scope.userDetails)
+                        //$http.post("http://192.168.1.140:7080/BuffDaddyAPI/register", JSON.stringify($scope.userDetails))
                         //$http.post("http://localhost/BuffDaddyAPI/register", JSON.stringify($scope.userDetails))
                         .then(
                             function successCallback(response) {
-                                //alert("Success");
+                                alert("Success");
                             },
                             function errorCallback(response) {
-                                //alert("Error " + JSON.stringify(response));
+                                alert("Error " + JSON.stringify(response));
                             });
                     $location.path("/");
 
