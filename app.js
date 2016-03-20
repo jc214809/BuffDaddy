@@ -19,6 +19,12 @@
                     controller: 'LoginCtrl',
                     templateUrl: 'login/login.html',
                     pageTitle: 'Login'
+                })
+                .when('/exercise', {
+                    controller: 'ExerciseCtrl',
+                    templateUrl: 'exercise/exercise.html',
+                    pageTitle: 'Exercise',
+                    requiresLogin: true
                 });
 
 
