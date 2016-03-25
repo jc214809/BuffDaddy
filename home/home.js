@@ -35,7 +35,7 @@ angular.module('sample.home', [
                     });
         }
         $scope.newWorkout = function() {
-            $http.post($scope.url + "/BuffDaddyAPI/newWorkout", $scope.workoutDetails)
+            $http.post($scope.url + "/newWorkout", $scope.workoutDetails)
                 .then(
                     function successCallback(response) {
                         $scope.workoutIndicator = true;
