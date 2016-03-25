@@ -18,7 +18,6 @@ angular.module('sample.home', [
                     } else {
                         $scope.workoutIndicator = true;
                     }
-                    //console.log(JSON.stringify($scope.workoutData));
                 },
                 function errorCallback(response) {
                     alert("Error " + JSON.stringify(response));
