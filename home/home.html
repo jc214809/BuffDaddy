@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <h3>Welcome {{auth.profile.name}}!</h3>
         <button align="center" class="btn btn-primary" ng-hide="workoutIndicator" ng-click="newWorkout()">Start Workout</button>
-        <button class="btn btn-danger" ng-click="callApi()" ng-show="workoutIndicator">End Workout</button>
+        <button class="btn btn-danger" ng-click="endWorkout()" ng-show="workoutIndicator">End Workout</button>
         <!--      <br />
         <button class="btn-sm btn-warning" ng-click="logout()">Logout</button> -->
     </div>

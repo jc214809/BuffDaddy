@@ -9,7 +9,7 @@ angular.module('sample.home', [
         };
         $scope.workoutIndicator = false;
 
-        $http.get("http://localhost/BuffDaddyAPI/workoutInProgress?id=" + $scope.workoutDetails.id)
+        $http.get($scope.url + "/workoutInProgress?id=" + $scope.workoutDetails.id)
             .then(
                 function successCallback(response) {
                     $scope.workoutData = response.data;
@@ -24,9 +24,8 @@ angular.module('sample.home', [
                     alert("Error " + JSON.stringify(response));
                 });
 
-        $scope.callApi = function() {
-            //$http.get("http://192.168.1.140:7080/BuffDaddyAPI/workoutInProgress?id=" + $scope.workoutDetails.id)
-            $http.post("http://localhost/BuffDaddyAPI/endWorkout", $scope.workoutDetails)
+        $scope.endWorkout = function() {
+            $http.post($scope.url + "/endWorkout", $scope.workoutDetails)
                 .then(
                     function successCallback(response) {
                         $scope.workoutIndicator = false;
@@ -36,8 +35,7 @@ angular.module('sample.home', [
                     });
         }
         $scope.newWorkout = function() {
-            //$http.post("http://192.168.1.140:7080/BuffDaddyAPI/newWorkout", $scope.workoutDetails)
-            $http.post("http://localhost/BuffDaddyAPI/newWorkout", $scope.workoutDetails)
+            $http.post($scope.url + "/BuffDaddyAPI/newWorkout", $scope.workoutDetails)
                 .then(
                     function successCallback(response) {
                         $scope.workoutIndicator = true;
