@@ -1,8 +1,8 @@
 <div class="home">
     <div class="container-fluid">
         <h3>Welcome {{auth.profile.name}}!</h3>
-        <button align="center" class="btn btn-primary" ng-click="newWorkout()">Start Workout</button>
-        <button class="btn btn-primary" ng-click="callApi()">Call API</button>
+        <button align="center" class="btn btn-primary" ng-hide="workoutIndicator" ng-click="newWorkout()">Start Workout</button>
+        <button class="btn btn-primary" ng-click="callApi()" ng-show="workoutIndicator">End Workout</button>
         <!--      <br />
         <button class="btn-sm btn-warning" ng-click="logout()">Logout</button> -->
     </div>

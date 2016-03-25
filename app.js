@@ -3,6 +3,7 @@
             'ngRoute',
             'sample.home',
             'sample.login',
+            'sample.exercise',
             'angular-storage',
             'angular-jwt'
         ])
@@ -66,6 +67,10 @@
                 store.remove('profile');
                 store.remove('token');
                 $location.path('/login');
+                $('.button-collapse').sideNav('hide');
+            }
+
+            $scope.close = function() {
                 $('.button-collapse').sideNav('hide');
             }
 

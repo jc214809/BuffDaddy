@@ -29,6 +29,7 @@
     <script type="text/javascript" src="app.js"></script>
     <script type="text/javascript" src="home/home.js"></script>
     <script type="text/javascript" src="login/login.js"></script>
+    <script type="text/javascript" src="exercise/exercise.js"></script>
     <!-- <link rel="icon" type="image/png" href="../Baseball/images/favicon.ico" sizes="16x16"> -->
     <!-- <link rel="shortcut icon" href="../Baseball/images/favicon.ico" type="image/x-icon" /> -->
     <!-- <link rel="apple-touch-icon" href="../Baseball/images/apple-touch-icon.png" /> -->
@@ -43,10 +44,10 @@
 
 <body>
     <div id="wrapper">
-        <div ng-include="'sidebar/sidebar.html'"></div>
+        <div ng-if="auth.isAuthenticated" ng-include="'sidebar/sidebar.html'"></div>
         <div ng-view></div>
     </div>
 </body>
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
 
 </html>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
