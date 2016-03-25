@@ -3,6 +3,7 @@
             'ngRoute',
             'sample.home',
             'sample.login',
+            'sample.exercise',
             'angular-storage',
             'angular-jwt'
         ])
@@ -61,11 +62,18 @@
         .controller('AppCtrl', function AppCtrl($scope, $location, auth, store) {
             $scope.auth = auth;
 
+            //$scope.url = 'http://localhost/BuffDaddyAPI';
+            $scope.url = 'http://75.118.135.179:7080/BuffDaddyAPI';
+
             $scope.logout = function() {
                 auth.signout();
                 store.remove('profile');
                 store.remove('token');
                 $location.path('/login');
+                $('.button-collapse').sideNav('hide');
+            }
+
+            $scope.close = function() {
                 $('.button-collapse').sideNav('hide');
             }
 
