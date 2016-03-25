@@ -6,20 +6,26 @@
             Buff <img src="../BuffDaddy/images/BuffDaddy.png" style="width:40px" /> Daddy
         </label>
         <li>
-            <a href="#/" ng-click="close()">Home</a>
+            <a href="#/exercise">Exercise</a>
         </li>
         <li>
-            <a href="#/exercise" ng-click="close()">Exercise</a>
+            <a href="#">Shortcuts</a>
         </li>
         <li>
-            <a href="#/exercise" ng-click="close()">Past Workouts</a>
+            <a href="#">Overview</a>
         </li>
         <li>
-            <a href="#/exercise" ng-click="close()">My Account</a>
+            <a href="#">Events</a>
+        </li>
+        <li>
+            <a href="#">About</a>
+        </li>
+        <li>
+            <a href="#">Services</a>
         </li>
         <li ng-if="auth.isAuthenticated">
-            <img style="width:31px;" ng-if="auth.isAuthenticated" src="{{auth.profile.picture}}" />
-            <button ng-if="auth.isAuthenticated" id="logoutSidebar" class="btn-sm btn-warning" ng-click="logout()">Logout</button>
+            <img style="width:31px;" src="{{auth.profile.picture}}" />
+            <button id="logoutSidebar" class="btn-sm btn-warning" ng-click="logout()">Logout {{auth.profile.name}}</button>
         </li>
     </ul>
     <a href="#" data-activates="slide-out" class="button-collapse show-on-large"><i ng-if="auth.isAuthenticated" class="mdi-navigation-menu"></i></a>
