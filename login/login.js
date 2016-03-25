@@ -19,7 +19,7 @@ angular.module('sample.login', [
                     $http.post($scope.url + "/register", JSON.stringify($scope.userDetails))
                         .then(
                             function successCallback(response) {
-                                console.log("Success");
+                                //console.log("Success");
                             },
                             function errorCallback(response) {
                                 alert("Error " + JSON.stringify(response));
