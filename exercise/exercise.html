@@ -1,16 +1,57 @@
 <div>
-    <form class="">
+    <center>
+        <h3>Add Exercises</h3>
+        <p>Here you can add Exercises that you would like to track throughout your workouts.</p>
+    </center>
+    <form id="exerciseForm" class="container">
         <div class="">
-            <label class="col-sm-2 " for="exerciseName">Exercise Name</label>
+            <label class="col-sm-2 left-align" for="exerciseName">Exercise Name</label>
             <div class="col-sm-3">
-                <input type="text" class="" name="exerciseName">
+                <input type="text" name="exerciseName">
             </div>
         </div>
         <div class="form-group">
-            <label class="col-md-2 control-label" for="exerciseDescription">Exercise Description</label>
+            <label class="col-md-2 left-align" for="exerciseDescription">Exercise Description</label>
             <div class="col-md-3">
-                <input type="text" class="form-control" name="exerciseDescription">
+                <textarea id="exerciseDescription" name="exerciseDescription" class="materialize-textarea" length="250"></textarea>
             </div>
         </div>
+        <div class="form-group">
+            <label class="col-md-2 left-align" for="weight">Weight</label>
+            <div class="col-md-3">
+                <div class="switch">
+                    <label>
+                        <input name="weight" type="checkbox">
+                        <span class="lever"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 left-align" for="reps">Reps</label>
+            <div class="col-md-3">
+                <div class="switch">
+                    <label>
+                        <input name="reps" type="checkbox">
+                        <span class="lever"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 left-align" for="time">Time</label>
+            <div class="col-md-3">
+                <div class="switch">
+                    <label>
+                        <input name="time" type="checkbox">
+                        <span class="lever"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <center>
+            <input type="submit" value="Add Exercise" class="white-text blue accent-4 btn-large"></input>
+        </center>
     </form>
+    {{exerciseData}}
 </div>

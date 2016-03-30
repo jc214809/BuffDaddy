@@ -1,9 +1,7 @@
-<link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
-<link href='sidebar/css/sidebar.css' rel='stylesheet' type='text/css'>
-<nav style="background-color:#2F2868; color:white;">
-    <ul id="slide-out" class="side-nav nav-buffdaddy">
+<nav class="blue darken-4 white-text center-align">
+    <ul id="slide-out" class="side-nav nav-buffdaddy ">
         <label class="sideBar-logo">
-            Buff <img src="../BuffDaddy/images/BuffDaddy.png" style="width:40px" /> Daddy
+            <span>Buff</span> <img src="../BuffDaddy/images/BuffDaddy.png" style="width: 50px; top: 10px; position: relative;" /> <span>Daddy</span>
         </label>
         <li>
             <a href="#/" ng-click="close()">Home</a>
@@ -17,9 +15,8 @@
         <li>
             <a href="#/exercise" ng-click="close()">My Account</a>
         </li>
-        <li ng-if="auth.isAuthenticated">
-            <img style="width:31px;" ng-if="auth.isAuthenticated" src="{{auth.profile.picture}}" />
-            <button ng-if="auth.isAuthenticated" id="logoutSidebar" class="btn-sm btn-warning" ng-click="logout()">Logout</button>
+        <li ng-if="auth.isAuthenticated" id="logoutSidebar" ng-click="logout()">
+            <img style="width:31px;top: 10px; position: relative;" ng-if="auth.isAuthenticated" src="{{auth.profile.picture}}" /> Logout
         </li>
     </ul>
     <a href="#" data-activates="slide-out" class="button-collapse show-on-large"><i ng-if="auth.isAuthenticated" class="mdi-navigation-menu"></i></a>

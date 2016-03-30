@@ -1,9 +1,7 @@
-<div class="home">
+<div class="home center-align">
     <div class="container-fluid">
-        <h3>Welcome {{auth.profile.name}}!</h3>
-        <button align="center" class="btn btn-primary" ng-hide="workoutIndicator" ng-click="newWorkout()">Start Workout</button>
-        <button class="btn btn-danger" ng-click="endWorkout()" ng-show="workoutIndicator">End Workout</button>
-        <!--      <br />
-        <button class="btn-sm btn-warning" ng-click="logout()">Logout</button> -->
+        <p>Welcome {{auth.profile.name}}!</p>
+        <button align="center" class="white-text blue accent-4 btn-large" ng-hide="workoutIndicator" ng-click="newWorkout()">Start Workout</button>
+        <button class="white-text red accent-4 btn-large" ng-click="endWorkout()" ng-show="workoutIndicator">End Workout</button>
     </div>
 </div>
