@@ -47,7 +47,9 @@
 
 <body>
     <div id="wrapper">
-        <div ng-if="auth.isAuthenticated" ng-include="'sidebar/sidebar.html'"></div>
+        <center>
+            <div ng-if="auth.isAuthenticated" ng-include="'sidebar/sidebar.html'"></div>
+        </center>
         <div ng-view></div>
     </div>
 </body>

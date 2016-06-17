@@ -1,45 +1,29 @@
 angular.module('sample.exercise', [
-        'auth0'
-    ])
-    .controller('ExerciseCtrl', function ExerciseController($scope, auth, $http, $location, store) {
-        $("#exerciseForm").submit(function(event) {
-            //alert($("#exerciseForm").serializeObject());
+    'auth0'
+  ])
+  .controller('ExerciseCtrl', function ExerciseController($scope, auth, $http, $location, store) {
+    $scope.exercise = {};
+    $scope.exercise.image = "Joel";
+    $scope.exercise.weight = false;
+    $scope.exercise.reps = false;
+    $scope.exercise.time = false;
+    $scope.exercise.distance = false;
+    $scope.exercise.calories = false;
+    $scope.exercise.heartRate = false;
 
-            $scope.exerciseData = $("#exerciseForm").serializeAssoc();
-        });
-
+    $("#exerciseForm").submit(function(event) {
+      //alert($("#exerciseForm").serializeObject());
+      $http.post($scope.url + "/addExercise", $scope.exercise)
+        .then(
+          function successCallback(response) {
+            //$scope.workoutIndicator = false;
+            alert("Success " + JSON.stringify(response));
+            $scope.exercise = {};
+          },
+          function errorCallback(response) {
+            alert("Error " + JSON.stringify(response));
+          });
+      //$scope.exerciseData = $("#exerciseForm").serializeAssoc();
     });
 
-$.fn.serializeAssoc = function() {
-    var data = {};
-    $.each(this.serializeArray(), function(key, obj) {
-        var a = obj.name.match(/(.*?)\[(.*?)\]/);
-        if (a !== null) {
-            var subName = a[1];
-            var subKey = a[2];
-            if (!data[subName]) data[subName] = [];
-            if (data[subName][subKey]) {
-                if ($.isArray(data[subName][subKey])) {
-                    data[subName][subKey].push(obj.value);
-                } else {
-                    data[subName][subKey] = [];
-                    data[subName][subKey].push(obj.value);
-                }
-            } else {
-                data[subName][subKey] = obj.value;
-            }
-        } else {
-            if (data[obj.name]) {
-                if ($.isArray(data[obj.name])) {
-                    data[obj.name].push(obj.value);
-                } else {
-                    data[obj.name] = [];
-                    data[obj.name].push(obj.value);
-                }
-            } else {
-                data[obj.name] = obj.value;
-            }
-        }
-    });
-    return data;
-};
+  });
