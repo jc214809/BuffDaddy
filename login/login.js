@@ -2,7 +2,9 @@ angular.module('sample.login', [
     'auth0'
   ])
   .controller('LoginCtrl', function HomeController($scope, auth, $http, $location, store) {
-
+    if ($scope.auth.isAuthenticated) {
+      $location.path("/");
+    }
     $scope.login = function() {
       auth.signin({}, function(profile, token) {
           console.log("Profile: " + JSON.stringify(profile))
