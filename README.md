@@ -13,3 +13,8 @@ In order to run the example you need to just start a server. What we suggest is 
 1. run serve in the directory of this project.
 
 Go to [http://localhost:3000](http://localhost:3000) and you'll see the app running :).
+
+Useful Links
+<ul><li>http://jsfiddle.net/9bL25jw9/2/</li>
+<li>http://jsfiddle.net/rizkiandrianto/kz3tgafu/3/</li>
+</ul>

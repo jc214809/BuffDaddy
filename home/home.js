@@ -2,7 +2,16 @@ angular.module('sample.home', [
     'auth0'
   ])
   .controller('HomeCtrl', function HomeController($scope, auth, $http, $location, store) {
-
+    $scope.filters = {
+      search: ''
+    };
+    $http.get($scope.url + "/getAllExercises")
+      .then(function successCallback(response) {
+          $scope.exercises = response.data;
+        },
+        function errorCallback(response) {
+          alert("Error " + JSON.stringify(response));
+        });
     $scope.auth = auth;
     $scope.workoutDetails = {
       "socialId": $scope.auth.profile.identities[0].user_id
@@ -18,7 +27,7 @@ angular.module('sample.home', [
           } else {
             $scope.workoutIndicator = true;
           }
-          console.log(JSON.stringify($scope.workoutData));
+          //console.log(JSON.stringify($scope.workoutData));
         },
         function errorCallback(response) {
           alert("Error " + JSON.stringify(response));

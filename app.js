@@ -3,6 +3,7 @@
         'ngRoute',
         'sample.home',
         'sample.login',
+        'sample.exerciseForm',
         'sample.exercise',
         'angular-storage',
         'angular-jwt'
@@ -24,6 +25,12 @@
           .when('/exercise', {
             controller: 'ExerciseCtrl',
             templateUrl: 'exercise/exercise.html',
+            pageTitle: 'Exercise',
+            requiresLogin: true
+          })
+          .when('/exerciseForm', {
+            controller: 'ExerciseFormCtrl',
+            templateUrl: 'exercise/exerciseForm.html',
             pageTitle: 'Exercise',
             requiresLogin: true
           });
@@ -82,6 +89,6 @@
             $scope.pageTitle = nextRoute.$$route.pageTitle + ' | BuffDaddy';
           }
         });
-      })
+      });
 
-    ;
+
