@@ -26,13 +26,36 @@ angular.module('sample.home', [
             $scope.workoutIndicator = false;
           } else {
             $scope.workoutIndicator = true;
+            $scope.getExercise(response.data.workoutID);
+            $scope.getSets(response.data.workoutID);
           }
-          //console.log(JSON.stringify($scope.workoutData));
+          console.log(JSON.stringify($scope.workoutData));
         },
         function errorCallback(response) {
           alert("Error " + JSON.stringify(response));
         });
-
+    $scope.getSets = function(workoutID) {
+      $http.get($scope.url + "/getSets?id=" + workoutID)
+        .then(
+          function successCallback(response) {
+            $scope.sets = response.data;
+            alert("YAY " + JSON.stringify(response));
+          },
+          function errorCallback(response) {
+            alert("Error " + JSON.stringify(response));
+          });
+    }
+    $scope.getExercise = function(workoutID) {
+      $http.get($scope.url + "/getExercisesForWorkout?id=" + workoutID)
+        .then(
+          function successCallback(response) {
+            $scope.workoutExercises = response.data;
+            alert("YAY " + JSON.stringify(response));
+          },
+          function errorCallback(response) {
+            alert("Error " + JSON.stringify(response));
+          });
+    }
     $scope.endWorkout = function() {
       $http.post($scope.url + "/endWorkout", $scope.workoutDetails)
         .then(
@@ -48,6 +71,23 @@ angular.module('sample.home', [
         .then(
           function successCallback(response) {
             $scope.workoutIndicator = true;
+          },
+          function errorCallback(response) {
+            alert("Error " + JSON.stringify(response));
+          });
+    }
+
+    $scope.addSet = function(exerciseId) {
+      $scope.setDetails = {
+        "workoutId": $scope.workoutData.workoutID,
+        "exerciseId": exerciseId
+      }
+
+      $http.post($scope.url + "/addSet", $scope.setDetails)
+        .then(
+          function successCallback(response) {
+            alert(JSON.stringify(response));
+            $location.path('/');
           },
           function errorCallback(response) {
             alert("Error " + JSON.stringify(response));

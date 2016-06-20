@@ -4,35 +4,38 @@
     <button align="center" class="btn btn-primary" ng-hide="workoutIndicator" ng-click="newWorkout()">Start Workout</button>
     <button class="btn btn-danger" ng-click="endWorkout()" ng-show="workoutIndicator">End Workout</button>
     <a class="waves-effect waves-light btn modal-trigger" href="#exerciseModal">Add Exercise</a>
-    <div class="row">
-      <form class="col s12">
-        <div class="row">
-          <div class="input-field col s2">
-            <input id="reps" type="text" class="validate">
-            <label for="reps"><i title="Reps" class="flaticon-gym"></i></label>
+    <div class="row" ng-repeat="exercise in workoutExercises">
+      {{exercise.exerciseName}}
+      <div class="row" ng-repeat="set in sets" ng-if="exercise.exerciseId == set.exerciseId">
+        <form class="col s12">
+          <div class="row">
+            <div class="input-field col s2" ng-if="exercise.reps != 0">
+              <input id="reps" type="text" class="validate">
+              <label for="reps"><i title="Reps" class="flaticon-gym"></i></label>
+            </div>
+            <div class="input-field col s2" ng-if="exercise.weight != 0">
+              <input id="weight" type="text" class="validate">
+              <label for="weight"><i title="Weight" class="flaticon-exercise"></i></label>
+            </div>
+            <div class="input-field col s2" ng-if="exercise.time != 0">
+              <input id="time" type="text" class="validate">
+              <label for="time"><i title="Time" class="fa fa-clock-o" aria-hidden="true"></i></label>
+            </div>
+            <div class="input-field col s2" ng-if="exercise.distance != 0">
+              <input id="distance" type="text" class="validate">
+              <label for="distance"><i title="Distance" class="fa fa-map-marker" aria-hidden="true"></i></label>
+            </div>
+            <div class="input-field col s2" ng-if="exercise.heartRate != 0">
+              <input id="heartRate" type="text" class="validate">
+              <label for="heartRate"><i title="Heart Rate" class="fa fa-heartbeat" aria-hidden="true"></i></label>
+            </div>
+            <div class="input-field col s2" ng-if="exercise.calories != 0">
+              <input id="calories" type="text" class="validate">
+              <label for="calories"><i title="Calories" class="fa fa-fire" aria-hidden="true"></i></label>
+            </div>
           </div>
-          <div class="input-field col s2">
-            <input id="weight" type="text" class="validate">
-            <label for="weight"><i title="Weight" class="flaticon-exercise"></i></label>
-          </div>
-          <div class="input-field col s2">
-            <input id="time" type="text" class="validate">
-            <label for="time"><i title="Time" class="fa fa-clock-o" aria-hidden="true"></i></label>
-          </div>
-          <div class="input-field col s2">
-            <input id="distance" type="text" class="validate">
-            <label for="distance"><i title="Distance" class="fa fa-map-marker" aria-hidden="true"></i></label>
-          </div>
-          <div class="input-field col s2">
-            <input id="heartRate" type="text" class="validate">
-            <label for="heartRate"><i title="Heart Rate" class="fa fa-heartbeat" aria-hidden="true"></i></label>
-          </div>
-          <div class="input-field col s2">
-            <input id="calories" type="text" class="validate">
-            <label for="calories"><i title="Calories" class="fa fa-fire" aria-hidden="true"></i></label>
-          </div>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   </div>
 </div>
@@ -50,7 +53,7 @@
       <input type="text" ng-model="filters.search.exerciseName" placeholder="Search Exercises">
     </div>
     <div class="row" ng-repeat="exercise in exercises | filter:filters.search| orderBy:'exerciseName'">
-      <div class=""><a class="btn-floating btn-large waves-effect waves-light red" style="margin-right: 10px"><i class="fa fa-plus" aria-hidden="true"></i></a><span class="modal-exercise-name" ng-bind="exercise.exerciseName"></span></div>
+      <div class=""><a class="btn-floating btn-large waves-effect waves-light red" style="margin-right: 10px" ng-click="addSet(exercise.exerciseID)"><i class="fa fa-plus" aria-hidden="true"></i></a><span class="modal-exercise-name" ng-bind="exercise.exerciseName"></span></div>
     </div>
   </div>
   <!--   <div class="modal-footer">
