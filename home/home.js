@@ -5,6 +5,7 @@ angular.module('sample.home', [
     $scope.filters = {
       search: ''
     };
+
     $http.get($scope.url + "/getAllExercises")
       .then(function successCallback(response) {
           $scope.exercises = response.data;
@@ -39,7 +40,7 @@ angular.module('sample.home', [
         .then(
           function successCallback(response) {
             $scope.sets = response.data;
-            alert("YAY " + JSON.stringify(response));
+            //alert("YAY " + JSON.stringify(response));
           },
           function errorCallback(response) {
             alert("Error " + JSON.stringify(response));
@@ -50,7 +51,7 @@ angular.module('sample.home', [
         .then(
           function successCallback(response) {
             $scope.workoutExercises = response.data;
-            alert("YAY " + JSON.stringify(response));
+            //alert("YAY " + JSON.stringify(response));
           },
           function errorCallback(response) {
             alert("Error " + JSON.stringify(response));
@@ -87,7 +88,10 @@ angular.module('sample.home', [
         .then(
           function successCallback(response) {
             alert(JSON.stringify(response));
-            $location.path('/');
+            $scope.getExercise($scope.workoutData.workoutID);
+            $scope.getSets($scope.workoutData.workoutID);
+            $scope.filters.search = '';
+            $('#exerciseModal').closeModal();
           },
           function errorCallback(response) {
             alert("Error " + JSON.stringify(response));

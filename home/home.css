@@ -9,3 +9,7 @@
 .modal-exercise-name {
   font-size: 22px;
 }
+
+.exercise-section .row {
+  margin-bottom: 0px !important;
+}
