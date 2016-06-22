@@ -14,14 +14,7 @@
   margin-bottom: 0px !important;
 }
 
-.save-icon {
-  position: relative;
-  bottom: -10px;
-  font-size: 20px;
-  padding-right: 0px !important;
-}
-
-.trash-icon {
+.action-icons {
   position: relative;
   bottom: -10px;
   font-size: 20px;
@@ -38,4 +31,8 @@
   /*padding: 0!important;*/
   /*border is optional*/
   /*border-bottom: 1px solid #444;*/
+}
+
+.set {
+  padding-right: 0px !important;
 }
