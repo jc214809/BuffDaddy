@@ -81,7 +81,7 @@ angular.module('sample.home', [
           $scope.size = "80%";
           break;
         default:
-          $scope.size = "13.5%";
+          $scope.size = "13%";
       }
     }
     $scope.saveSetDetails = function(set) {
