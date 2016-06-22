@@ -18,22 +18,24 @@ angular.module('sample.home', [
       "socialId": $scope.auth.profile.identities[0].user_id
     };
     $scope.workoutIndicator = false;
-
-    $http.get($scope.url + "/workoutInProgress?id=" + $scope.workoutDetails.socialId)
-      .then(
-        function successCallback(response) {
-          $scope.workoutData = response.data;
-          if ($scope.workoutData == '') {
-            $scope.workoutIndicator = false;
-          } else {
-            $scope.workoutIndicator = true;
-            $scope.getExercise(response.data.workoutID);
-            $scope.getSets(response.data.workoutID);
-          }
-        },
-        function errorCallback(response) {
-          alert("Error " + JSON.stringify(response));
-        });
+    $scope.checkForWorkout = function() {
+      $http.get($scope.url + "/workoutInProgress?id=" + $scope.workoutDetails.socialId)
+        .then(
+          function successCallback(response) {
+            $scope.workoutData = response.data;
+            if ($scope.workoutData == '') {
+              $scope.workoutIndicator = false;
+            } else {
+              $scope.workoutIndicator = true;
+              $scope.getExercise(response.data.workoutID);
+              $scope.getSets(response.data.workoutID);
+            }
+          },
+          function errorCallback(response) {
+            alert("Error " + JSON.stringify(response));
+          });
+    };
+    $scope.checkForWorkout();
     $scope.inputWidth = function(exerciseId) {
       var count = 0
       for (var i = 0; i < $scope.workoutExercises.length; i++) {
@@ -59,7 +61,7 @@ angular.module('sample.home', [
         }
         $scope.setWidth(count);
       }
-    }
+    };
     $scope.setWidth = function(count) {
       switch (count) {
         case 6:
@@ -83,7 +85,7 @@ angular.module('sample.home', [
         default:
           $scope.size = "13%";
       }
-    }
+    };
     $scope.saveSetDetails = function(set) {
       $http.post($scope.url + "/saveSetDetails", set)
         .then(
@@ -93,17 +95,19 @@ angular.module('sample.home', [
           function errorCallback(response) {
             alert("Error " + JSON.stringify(response));
           });
-    }
+    };
     $scope.deleteSet = function(set) {
       $http.post($scope.url + "/deleteSet", set)
         .then(
           function successCallback(response) {
+            $scope.getExercise($scope.workoutData.workoutID);
+            $scope.getSets($scope.workoutData.workoutID);
             alert("Deleted");
           },
           function errorCallback(response) {
             alert("Error " + JSON.stringify(response));
           });
-    }
+    };
     $scope.getSets = function(workoutID) {
       $http.get($scope.url + "/getSets?id=" + workoutID)
         .then(
@@ -113,38 +117,43 @@ angular.module('sample.home', [
           function errorCallback(response) {
             alert("Error " + JSON.stringify(response));
           });
-    }
+    };
     $scope.getExercise = function(workoutID) {
       $http.get($scope.url + "/getExercisesForWorkout?id=" + workoutID)
         .then(
           function successCallback(response) {
             $scope.workoutExercises = response.data;
-            //alert("YAY " + JSON.stringify(response));
           },
           function errorCallback(response) {
             alert("Error " + JSON.stringify(response));
           });
-    }
+    };
+
     $scope.endWorkout = function() {
       $http.post($scope.url + "/endWorkout", $scope.workoutDetails)
         .then(
           function successCallback(response) {
+            $scope.workoutData = '';
+            $scope.sets = {};
+            $scope.workoutExercises = {};
             $scope.workoutIndicator = false;
           },
           function errorCallback(response) {
             alert("Error " + JSON.stringify(response));
           });
-    }
+    };
+
     $scope.newWorkout = function() {
       $http.post($scope.url + "/newWorkout", $scope.workoutDetails)
         .then(
           function successCallback(response) {
             $scope.workoutIndicator = true;
+            $scope.checkForWorkout();
           },
           function errorCallback(response) {
             alert("Error " + JSON.stringify(response));
           });
-    }
+    };
 
     $scope.addSet = function(exerciseId) {
       $scope.setDetails = {
@@ -155,7 +164,6 @@ angular.module('sample.home', [
       $http.post($scope.url + "/addSet", $scope.setDetails)
         .then(
           function successCallback(response) {
-            alert(JSON.stringify(response));
             $scope.getExercise($scope.workoutData.workoutID);
             $scope.getSets($scope.workoutData.workoutID);
             $scope.filters.search = '';
@@ -164,13 +172,13 @@ angular.module('sample.home', [
           function errorCallback(response) {
             alert("Error " + JSON.stringify(response));
           });
-    }
+    };
 
     $scope.logout = function() {
       auth.signout();
       store.remove('profile');
       store.remove('token');
       $location.path('/login');
-    }
+    };
 
   });
