@@ -30,7 +30,6 @@ angular.module('sample.home', [
             $scope.getExercise(response.data.workoutID);
             $scope.getSets(response.data.workoutID);
           }
-          console.log(JSON.stringify($scope.workoutData));
         },
         function errorCallback(response) {
           alert("Error " + JSON.stringify(response));
@@ -58,7 +57,6 @@ angular.module('sample.home', [
             count++
           }
         }
-        console.log($scope.workoutExercises[i]);
         $scope.setWidth(count);
       }
     }
@@ -111,7 +109,6 @@ angular.module('sample.home', [
         .then(
           function successCallback(response) {
             $scope.sets = response.data;
-            console.log(JSON.stringify($scope.sets));
           },
           function errorCallback(response) {
             alert("Error " + JSON.stringify(response));
