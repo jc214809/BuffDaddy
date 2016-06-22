@@ -6,7 +6,8 @@
         'sample.exerciseForm',
         'sample.exercise',
         'angular-storage',
-        'angular-jwt'
+        'angular-jwt',
+        'ui.materialize'
       ])
       .config(function myAppConfig($routeProvider, authProvider, $httpProvider, $locationProvider,
         jwtInterceptorProvider) {
@@ -90,5 +91,3 @@
           }
         });
       });
-
-

@@ -6,35 +6,41 @@
     <a class="waves-effect waves-light btn modal-trigger" href="#exerciseModal">Add Exercise</a>
   </div>
   <div class="exercise-section row" ng-repeat="exercise in workoutExercises">
+    {{inputWidth(exercise.exerciseId)}}
     <h5 ng-bind="exercise.exerciseName" class="col s12"></h5>
-    <div class="set-section row" ng-repeat="set in sets" ng-if="exercise.exerciseId == set.exerciseId">
-      <form class="col s12">
-        <div class="row">
-          <div class="input-field col s2" ng-if="exercise.reps != 0">
-            <input id="reps" type="text" class="validate">
-            <label for="reps"><i title="Reps" class="flaticon-gym"></i></label>
-          </div>
-          <div class="input-field col s2" ng-if="exercise.weight != 0">
-            <input id="weight" type="text" class="validate">
-            <label for="weight"><i title="Weight" class="flaticon-exercise"></i></label>
-          </div>
-          <div class="input-field col s2" ng-if="exercise.time != 0">
-            <input id="time" type="text" class="validate">
-            <label for="time"><i title="Time" class="fa fa-clock-o" aria-hidden="true"></i></label>
-          </div>
-          <div class="input-field col s2" ng-if="exercise.distance != 0">
-            <input id="distance" type="text" class="validate">
-            <label for="distance"><i title="Distance" class="fa fa-map-marker" aria-hidden="true"></i></label>
-          </div>
-          <div class="input-field col s2" ng-if="exercise.heartRate != 0">
-            <input id="heartRate" type="text" class="validate">
-            <label for="heartRate"><i title="Heart Rate" class="fa fa-heartbeat" aria-hidden="true"></i></label>
-          </div>
-          <div class="input-field col s2" ng-if="exercise.calories != 0">
-            <input id="calories" type="text" class="validate">
-            <label for="calories"><i title="Calories" class="fa fa-fire" aria-hidden="true"></i></label>
-          </div>
+    <div class="set-section row" ng-repeat="set in sets | orderBy:'setId'" ng-if="exercise.exerciseId == set.exerciseId">
+      <form ng-submit="saveSetDetails(set)">
+        <!-- <div class="row"> -->
+        <input id="setId" type="text" ng-model="set.setId" class="validate" hidden>
+        <div class="input-field col " style="width:{{size}}" ng-class="{'hide-input': exercise.reps == 0}">
+          <input id="reps" type="text" ng-model="set.reps" class="validate">
+          <label for="reps"><i title="Reps" class="flaticon-gym"></i></label>
         </div>
+        <div class="input-field col " style="width:{{size}}" ng-class="{'hide-input': exercise.weight == 0}">
+          <input id="weight" type="text" ng-model="set.weight" class="validate">
+          <label for="weight"><i title="Weight" class="flaticon-exercise"></i></label>
+        </div>
+        <div class="input-field col " style="width:{{size}}" ng-class="{'hide-input': exercise.time == 0}">
+          <input id="time" type="text" ng-model="set.time" class="validate">
+          <label for="time"><i title="Time" class="fa fa-clock-o" aria-hidden="true"></i></label>
+        </div>
+        <div class="input-field col " style="width:{{size}}" ng-class="{'hide-input': exercise.distance == 0}">
+          <input id="distance" type="text" ng-model="set.distance" class="validate">
+          <label for="distance"><i title="Distance" class="fa fa-map-marker" aria-hidden="true"></i></label>
+        </div>
+        <div class="input-field col " style="width:{{size}}" ng-class="{'hide-input': exercise.heartRate == 0}">
+          <input id="heartRate" type="text" ng-model="set.heartRate" class="validate">
+          <label for="heartRate"><i title="Heart Rate" class="fa fa-heartbeat" aria-hidden="true"></i></label>
+        </div>
+        <div class="input-field col " style="width:{{size}}" ng-class="{'hide-input': exercise.calories == 0}">
+          <input id="calories" type="text" ng-model="set.calories" class="validate">
+          <label for="calories"><i title="Calories" class="fa fa-fire" aria-hidden="true"></i></label>
+        </div>
+        <div class="input-field trash-icon">
+          <button type="submit"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
+          <button type="button" ng-click="deleteSet(set)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+        </div>
+        <!-- </div> -->
       </form>
     </div>
   </div>

@@ -13,3 +13,21 @@
 .exercise-section .row {
   margin-bottom: 0px !important;
 }
+
+.save-icon {
+  position: relative;
+  bottom: -10px;
+  font-size: 20px;
+  padding-right: 0px !important;
+}
+
+.trash-icon {
+  position: relative;
+  bottom: -10px;
+  font-size: 20px;
+  padding-left: 0px !important;
+}
+
+.hide-input {
+  display: none;
+}

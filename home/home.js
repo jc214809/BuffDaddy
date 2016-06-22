@@ -35,12 +35,83 @@ angular.module('sample.home', [
         function errorCallback(response) {
           alert("Error " + JSON.stringify(response));
         });
+    $scope.inputWidth = function(exerciseId) {
+      var count = 0
+      for (var i = 0; i < $scope.workoutExercises.length; i++) {
+        if (exerciseId == $scope.workoutExercises[i].exerciseId) {
+          if ($scope.workoutExercises[i].calories == "1") {
+            count++
+          }
+          if ($scope.workoutExercises[i].distance == "1") {
+            count++
+          }
+          if ($scope.workoutExercises[i].heartRate == "1") {
+            count++
+          }
+          if ($scope.workoutExercises[i].reps == "1") {
+            count++
+          }
+          if ($scope.workoutExercises[i].time == "1") {
+            count++
+          }
+          if ($scope.workoutExercises[i].weight == "1") {
+            count++
+          }
+        }
+        console.log($scope.workoutExercises[i]);
+        $scope.setWidth(count);
+      }
+    }
+    $scope.setWidth = function(count) {
+      switch (count) {
+        case 6:
+          $scope.size = "13.5%";
+          break;
+        case 5:
+          $scope.size = "16.2%";
+          break;
+        case 4:
+          $scope.size = "20.25%";
+          break;
+        case 3:
+          $scope.size = "27%";
+          break;
+        case 2:
+          $scope.size = "40.5%";
+          break;
+        case 1:
+          $scope.size = "81%";
+          break;
+        default:
+          $scope.size = "13.5%";
+      }
+    }
+    $scope.saveSetDetails = function(set) {
+      $http.post($scope.url + "/saveSetDetails", set)
+        .then(
+          function successCallback(response) {
+            alert("Success");
+          },
+          function errorCallback(response) {
+            alert("Error " + JSON.stringify(response));
+          });
+    }
+    $scope.deleteSet = function(set) {
+      $http.post($scope.url + "/deleteSet", set)
+        .then(
+          function successCallback(response) {
+            alert("Deleted");
+          },
+          function errorCallback(response) {
+            alert("Error " + JSON.stringify(response));
+          });
+    }
     $scope.getSets = function(workoutID) {
       $http.get($scope.url + "/getSets?id=" + workoutID)
         .then(
           function successCallback(response) {
             $scope.sets = response.data;
-            //alert("YAY " + JSON.stringify(response));
+            console.log(JSON.stringify($scope.sets));
           },
           function errorCallback(response) {
             alert("Error " + JSON.stringify(response));
