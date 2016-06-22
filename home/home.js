@@ -63,22 +63,22 @@ angular.module('sample.home', [
     $scope.setWidth = function(count) {
       switch (count) {
         case 6:
-          $scope.size = "13.33%";
+          $scope.size = "13.5%";
           break;
         case 5:
-          $scope.size = "16%";
+          $scope.size = "16.2%";
           break;
         case 4:
-          $scope.size = "20%";
+          $scope.size = "20.25%";
           break;
         case 3:
-          $scope.size = "26.66%";
+          $scope.size = "27%";
           break;
         case 2:
-          $scope.size = "40%";
+          $scope.size = "40.5%";
           break;
         case 1:
-          $scope.size = "80%";
+          $scope.size = "81%";
           break;
         default:
           $scope.size = "13%";
