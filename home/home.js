@@ -100,19 +100,60 @@ angular.module('sample.home', [
       $http.post($scope.url + "/deleteSet", set)
         .then(
           function successCallback(response) {
-            $scope.getExercise($scope.workoutData.workoutID);
-            $scope.getSets($scope.workoutData.workoutID);
+            for (var i = 0; i < $scope.sets.length; i++) {
+              if ($scope.sets[i].setId == set.setId) {
+                $scope.sets.splice(i, 1);
+              }
+            }
+            var count = 0;
+            angular.forEach($scope.sets, function(eachSet) {
+              if (eachSet.exerciseId == set.exerciseId) {
+                count++;
+              }
+            });
+            if (count == 0) {
+              for (var i = 0; i < $scope.workoutExercises.length; i++) {
+                if ($scope.workoutExercises[i].exerciseId == set.exerciseId) {
+                  $scope.workoutExercises.splice(i, 1);
+                }
+              }
+            }
             alert("Deleted");
           },
           function errorCallback(response) {
             alert("Error " + JSON.stringify(response));
           });
     };
+    $scope.checkForSets = function(newSetId, oldSetsArray) {
+      for (var i = 0; i < oldSetsArray.length; i++) {
+        if (oldSetsArray[i].setId == newSetId) {
+          return true;
+        }
+      }
+      return false;
+    };
+    $scope.checkForExercise = function(newExerciseId, oldExerciseArray) {
+      for (var i = 0; i < oldExerciseArray.length; i++) {
+        if (oldExerciseArray[i].exerciseId == newExerciseId) {
+          return true;
+        }
+      }
+      return false;
+    };
     $scope.getSets = function(workoutID) {
       $http.get($scope.url + "/getSets?id=" + workoutID)
         .then(
           function successCallback(response) {
-            $scope.sets = response.data;
+            if ($scope.sets == undefined) {
+              $scope.sets = response.data;
+            } else {
+              $scope.newSets = response.data;
+              angular.forEach($scope.newSets, function(set) {
+                if (!$scope.checkForSets(set.setId, $scope.sets, 'setId')) {
+                  $scope.sets.push(set);
+                }
+              });
+            }
           },
           function errorCallback(response) {
             alert("Error " + JSON.stringify(response));
@@ -122,7 +163,17 @@ angular.module('sample.home', [
       $http.get($scope.url + "/getExercisesForWorkout?id=" + workoutID)
         .then(
           function successCallback(response) {
-            $scope.workoutExercises = response.data;
+            if ($scope.workoutExercises == undefined) {
+              $scope.workoutExercises = response.data;
+            } else {
+              $scope.newWorkoutExercises = response.data;
+              angular.forEach($scope.newWorkoutExercises, function(exercise) {
+                if (!$scope.checkForExercise(exercise.exerciseId, $scope.workoutExercises)) {
+                  $scope.workoutExercises.push(exercise);
+                }
+              });
+            }
+
           },
           function errorCallback(response) {
             alert("Error " + JSON.stringify(response));
