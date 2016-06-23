@@ -18,3 +18,4 @@ Useful Links
 <ul><li>http://jsfiddle.net/9bL25jw9/2/</li>
 <li>http://jsfiddle.net/rizkiandrianto/kz3tgafu/3/</li>
 </ul>
+http://stackoverflow.com/questions/14852802/detect-unsaved-changes-and-alert-user-using-angularjs

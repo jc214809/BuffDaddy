@@ -144,7 +144,7 @@ angular.module('sample.home', [
       $http.get($scope.url + "/getSets?id=" + workoutID)
         .then(
           function successCallback(response) {
-            if ($scope.sets == undefined) {
+            if ($scope.sets == undefined || $scope.sets.length == undefined) {
               $scope.sets = response.data;
             } else {
               $scope.newSets = response.data;
@@ -163,7 +163,7 @@ angular.module('sample.home', [
       $http.get($scope.url + "/getExercisesForWorkout?id=" + workoutID)
         .then(
           function successCallback(response) {
-            if ($scope.workoutExercises == undefined) {
+            if ($scope.workoutExercises == undefined || $scope.workoutExercises.length == undefined) {
               $scope.workoutExercises = response.data;
             } else {
               $scope.newWorkoutExercises = response.data;
@@ -198,7 +198,7 @@ angular.module('sample.home', [
       $http.post($scope.url + "/newWorkout", $scope.workoutDetails)
         .then(
           function successCallback(response) {
-            $scope.workoutIndicator = true;
+            //$scope.workoutIndicator = true;
             $scope.checkForWorkout();
           },
           function errorCallback(response) {
