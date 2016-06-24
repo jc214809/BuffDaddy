@@ -9,7 +9,7 @@
     {{inputWidth(exercise.exerciseId)}}
     <h5 ng-bind="exercise.exerciseName" class="col s12"></h5>
     <div class="set-section row" ng-repeat="set in sets | orderBy:'setId'" ng-if="exercise.exerciseId == set.exerciseId">
-      <form ng-submit="saveSetDetails(set)">
+      <form ng-submit="saveSetDetails(set)" name="setForm">
         <div class="row">
           <input id="setId{{set.setId}}" type="text" ng-model="set.setId" class="validate" hidden>
           <div class="input-field col set" style="width:{{size}}" ng-class="{'hide-input': exercise.reps == 0}">
@@ -38,8 +38,8 @@
           </div>
           <div class="input-field col action-icons">
             &nbsp;
-            <i class="fa fa-floppy-o" aria-hidden="true" ng-click="saveSetDetails(set)"></i> &nbsp;
-            <i class="fa fa-trash" aria-hidden="true" ng-click="deleteSet(set)"></i>
+            <i class="fa fa-floppy-o" aria-hidden="true" ng-click="saveSetDetails(set);setForm.$setPristine();"></i> &nbsp;
+            <i class="fa fa-trash" aria-hidden="true" ng-click="deleteSet(set);setForm.$setPristine();"></i>
           </div>
         </div>
       </form>
