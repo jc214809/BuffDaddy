@@ -71,6 +71,9 @@ angular.module('sample.home', [
         $scope.setWidth(count);
       }
     };
+    $scope.resetScroll = function() {
+      $('#exerciseModal').scrollTop(0);
+    };
     $scope.setWidth = function(count) {
       switch (count) {
         case 6:
