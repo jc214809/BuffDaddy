@@ -62,6 +62,14 @@ input.ng-modified {
   cursor: pointer;
 }
 
+.fixed-modal-btn {
+  position: fixed;
+  width: 100px;
+  padding: 5px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
 .add-exercise .plus-icon {
   font-size: xx-large;
   position: relative;
