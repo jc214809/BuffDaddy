@@ -60,7 +60,7 @@
     <div class="row">
       <input type="text" ng-model="filters.search.exerciseName" placeholder="Search Exercises">
     </div>
-    <div class="row" ng-repeat="exercise in exercises | filter:filters.search| orderBy:'exerciseName'">
+    <div class="row" ng-repeat="exercise in exercises | filter:filters.search| inArray:filterBy:'exerciseID' | orderBy:'exerciseName'">
       <div class=""><a class="btn-floating btn-large waves-effect waves-light red" style="margin-right: 10px" ng-click="addSet(exercise.exerciseID)"><i class="fa fa-plus" aria-hidden="true"></i></a><span class="modal-exercise-name" ng-bind="exercise.exerciseName"></span></div>
     </div>
   </div>

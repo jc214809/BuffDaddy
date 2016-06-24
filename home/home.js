@@ -1,10 +1,19 @@
 angular.module('sample.home', [
     'auth0'
-  ])
+  ]).filter('inArray', function($filter) {
+    return function(list, arrayFilter, element) {
+      if (arrayFilter) {
+        return $filter("filter")(list, function(listItem) {
+          return arrayFilter.indexOf(listItem[element]) == -1;
+        });
+      }
+    };
+  })
   .controller('HomeCtrl', function HomeController($scope, auth, $http, $location, store) {
     $scope.filters = {
       search: ''
     };
+    $scope.filterBy = [];
 
     $http.get($scope.url + "/getAllExercises")
       .then(function successCallback(response) {
@@ -114,6 +123,8 @@ angular.module('sample.home', [
             if (count == 0) {
               for (var i = 0; i < $scope.workoutExercises.length; i++) {
                 if ($scope.workoutExercises[i].exerciseId == set.exerciseId) {
+                  var index = $scope.filterBy.indexOf($scope.workoutExercises[i].exerciseId);
+                  $scope.filterBy.splice(index, 1);
                   $scope.workoutExercises.splice(i, 1);
                 }
               }
@@ -165,11 +176,15 @@ angular.module('sample.home', [
           function successCallback(response) {
             if ($scope.workoutExercises == undefined || $scope.workoutExercises.length == undefined) {
               $scope.workoutExercises = response.data;
+              angular.forEach($scope.workoutExercises, function(exercise) {
+                $scope.filterBy.push(exercise.exerciseId);
+              });
             } else {
               $scope.newWorkoutExercises = response.data;
               angular.forEach($scope.newWorkoutExercises, function(exercise) {
                 if (!$scope.checkForExercise(exercise.exerciseId, $scope.workoutExercises)) {
                   $scope.workoutExercises.push(exercise);
+                  $scope.filterBy.push(exercise.exerciseId);
                 }
               });
             }
