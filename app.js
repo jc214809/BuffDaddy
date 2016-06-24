@@ -7,7 +7,8 @@
         'sample.exercise',
         'angular-storage',
         'angular-jwt',
-        'ui.materialize'
+        'ui.materialize',
+        'ngInputModified'
       ])
       .config(function myAppConfig($routeProvider, authProvider, $httpProvider, $locationProvider,
         jwtInterceptorProvider) {
