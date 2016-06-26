@@ -71,8 +71,8 @@
       .controller('AppCtrl', function AppCtrl($scope, $location, auth, store) {
         $scope.auth = auth;
 
-        $scope.url = 'http://localhost:8089/BuffDaddyAPI';
-        //$scope.url = 'http://75.118.135.179:7080/BuffDaddyAPI';
+        //$scope.url = 'http://localhost:8089/BuffDaddyAPI';
+        $scope.url = 'http://75.118.135.179:7080/BuffDaddyAPI';
 
         $scope.logout = function() {
           auth.signout();
