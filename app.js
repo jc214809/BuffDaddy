@@ -71,8 +71,8 @@
       .controller('AppCtrl', function AppCtrl($scope, $location, auth, store) {
         $scope.auth = auth;
 
-        //$scope.url = 'http://localhost:8089/BuffDaddyAPI';
-        $scope.url = 'http://75.118.135.179:7080/BuffDaddyAPI';
+        $scope.url = 'http://localhost:8089/BuffDaddyAPI';
+        //$scope.url = 'http://75.118.135.179:7080/BuffDaddyAPI';
 
         $scope.logout = function() {
           auth.signout();
@@ -91,4 +91,20 @@
             $scope.pageTitle = nextRoute.$$route.pageTitle + ' | BuffDaddy';
           }
         });
+      }).filter('inArray', function($filter) {
+        return function(list, arrayFilter, element) {
+          if (arrayFilter) {
+            return $filter("filter")(list, function(listItem) {
+              return arrayFilter.indexOf(listItem[element]) != -1;
+            });
+          }
+        };
+      }).filter('notInArray', function($filter) {
+        return function(list, arrayFilter, element) {
+          if (arrayFilter) {
+            return $filter("filter")(list, function(listItem) {
+              return arrayFilter.indexOf(listItem[element]) == -1;
+            });
+          }
+        };
       });

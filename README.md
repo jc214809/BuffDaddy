@@ -19,3 +19,7 @@ Useful Links
 <li>http://jsfiddle.net/rizkiandrianto/kz3tgafu/3/</li>
 </ul>
 http://stackoverflow.com/questions/14852802/detect-unsaved-changes-and-alert-user-using-angularjs
+
+
+
+LAST_INSERT_ID()

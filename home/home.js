@@ -1,21 +1,13 @@
 angular.module('sample.home', [
     'auth0'
-  ]).filter('inArray', function($filter) {
-    return function(list, arrayFilter, element) {
-      if (arrayFilter) {
-        return $filter("filter")(list, function(listItem) {
-          return arrayFilter.indexOf(listItem[element]) == -1;
-        });
-      }
-    };
-  })
+  ])
   .controller('HomeCtrl', function HomeController($scope, auth, $http, $location, store) {
     $scope.filters = {
       search: ''
     };
     $scope.filterBy = [];
 
-    $http.get($scope.url + "/getAllExercises")
+    $http.get($scope.url + "/getUsersExercises?id=" + $scope.auth.profile.identities[0].user_id)
       .then(function successCallback(response) {
           $scope.exercises = response.data;
         },
