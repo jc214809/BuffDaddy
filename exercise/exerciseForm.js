@@ -16,9 +16,11 @@ angular.module('sample.exerciseForm', [
     };
     $scope.resetForm();
     $scope.count = function() {
-      var checkboxes = document.querySelectorAll('input[type="checkbox"]');
-      return Array.prototype.slice.call(checkboxes).some(x => x.checked);
-      return false;
+      if ($("input[type=checkbox]:checked").length === 0) {
+        return false;
+      } else {
+        return true;
+      }
     }
 
     $scope.exercise = exerciseservice.exercise;
