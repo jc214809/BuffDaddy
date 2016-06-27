@@ -22,8 +22,9 @@ angular.module('sample.exerciseForm', [
         return true;
       }
     }
-
-    $scope.exercise = exerciseservice.exercise;
+    if (exerciseservice.exercise.exerciseID) {
+      $scope.exercise = exerciseservice.exercise;
+    }
     if ($scope.exercise.exerciseID == null) {
       $scope.header = "Add";
       $scope.directions = "Here you can add Exercises that you would like to track throughout your workouts.";
