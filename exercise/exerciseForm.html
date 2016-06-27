@@ -1,9 +1,10 @@
 <div>
   <center>
-    <h3>Add Exercises</h3>
-    <p>Here you can add Exercises that you would like to track throughout your workouts.</p>
+    <h3>{{header}} Exercises</h3>
+    <p>{{directions}}</p>
   </center>
-  <form id="exerciseForm" class="container">
+  <form id="exerciseForm" name="exerciseForm" class="container">
+    <input type="hidden" ng-model="exercise.socialId" name="socialId">
     <div class="">
       <label class="col-sm-2 left-align" for="exerciseName">Exercise Name</label>
       <div class="col-sm-3">
@@ -107,7 +108,7 @@
       </div>
     </div>
     <center>
-      <input type="submit" value="Add Exercise" class="white-text blue accent-4 btn-large"></input>
+      <input type="submit" value="{{buttonText}} Exercise" ng-disabled="!count()" class="white-text blue accent-4 btn-large"></input>
     </center>
   </form>
 </div>
