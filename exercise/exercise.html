@@ -43,10 +43,9 @@
       <div id="allExercises" class="col s12">
         </br>
         <div class="list collection-item" ng-repeat="exercise in exercises | notInArray:filterByUsersExercises:'exerciseID'" ng-click="toggle(exercise.exerciseID)">
-          <a class="btn-floating btn-large waves-effect waves-light red modal-trigger" ng-click="deleteUserExercise(exercise.exerciseID)">
-            <i class="fa fa-minus material-icons plus-icon" aria-hidden="true"></i>
-          </a>
-          {{exercise.exerciseName}}
+          <a class="btn-floating btn-large waves-effect waves-light green modal-trigger" ng-click="addUserExercise(exercise.exerciseID)">
+            <i class="fa fa-plus material-icons plus-icon" aria-hidden="true"></i>
+          </a> {{exercise.exerciseName}}
           <i ng-if="exercise.weight" title="Weight" class="flaticon-exercise icon"></i>
           <i ng-if="exercise.reps" title="Reps" class="flaticon-gym icon"></i>
           <i ng-if="exercise.time" title="Time" class="fa fa-clock-o icon" aria-hidden="true"></i>
