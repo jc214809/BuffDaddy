@@ -208,7 +208,6 @@ angular.module('sample.home', [
       $http.post($scope.url + "/newWorkout", $scope.workoutDetails)
         .then(
           function successCallback(response) {
-            //$scope.workoutIndicator = true;
             $scope.checkForWorkout();
           },
           function errorCallback(response) {
