@@ -1,10 +1,9 @@
 angular.module('sample.exercise', [
     'auth0'
   ])
-  .controller('ExerciseCtrl', function ExerciseController($scope, auth, $http, $location, store, exerciseservice) {
+  .controller('ExerciseCtrl', function ExerciseController($scope, auth, $http, $location, store) {
     $scope.filterAllExercises = [];
     $scope.filterByUsersExercises = [];
-    $scope.user = $scope.auth.profile.identities[0].user_id
     $http.get($scope.url + "/getAllExercises")
       .then(function successCallback(response) {
           $scope.exercises = response.data;
@@ -15,7 +14,7 @@ angular.module('sample.exercise', [
         function errorCallback(response) {
           alert("Error " + JSON.stringify(response));
         });
-    $http.get($scope.url + "/getUsersExercises?id=" + $scope.user)
+    $http.get($scope.url + "/getUsersExercises?id=" + $scope.auth.profile.identities[0].user_id)
       .then(function successCallback(response) {
           $scope.usersExercises = response.data;
           angular.forEach($scope.usersExercises, function(exercise) {
@@ -28,7 +27,7 @@ angular.module('sample.exercise', [
 
     $scope.deleteUserExercise = function(exerciseId) {
       $scope.exercise = {
-        "socialId": $scope.user,
+        "socialId": $scope.auth.profile.identities[0].user_id,
         "exerciseID": exerciseId
       };
 
@@ -50,14 +49,9 @@ angular.module('sample.exercise', [
     $scope.goToForm = function() {
       $location.path('/exerciseForm');
     }
-
-    $scope.editExercise = function(exercise) {
-      exerciseservice.exercise = exercise;
-      $location.path('/exerciseForm');
-    }
     $scope.addUserExercise = function(exerciseId) {
       $scope.exercise = {
-        "socialId": $scope.user,
+        "socialId": $scope.auth.profile.identities[0].user_id,
         "exerciseID": exerciseId
       };
 
