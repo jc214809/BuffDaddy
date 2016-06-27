@@ -46,6 +46,9 @@ angular.module('sample.exercise', [
             alert("Error " + JSON.stringify(response));
           });
     };
+    $scope.goToForm = function() {
+      $location.path('/exerciseForm');
+    }
     $scope.addUserExercise = function(exerciseId) {
       $scope.exercise = {
         "socialId": $scope.auth.profile.identities[0].user_id,
