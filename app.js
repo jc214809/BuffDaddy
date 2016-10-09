@@ -11,7 +11,10 @@
         'ngInputModified'
       ])
       .config(function myAppConfig($routeProvider, authProvider, $httpProvider, $locationProvider,
-        jwtInterceptorProvider) {
+        jwtInterceptorProvider, jwtOptionsProvider) {
+        jwtOptionsProvider.config({
+          whiteListedDomains: ['localhost']
+        });
         $routeProvider
           .when('/', {
             controller: 'HomeCtrl',
