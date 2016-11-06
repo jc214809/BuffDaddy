@@ -13,7 +13,7 @@
       .config(function myAppConfig($routeProvider, authProvider, $httpProvider, $locationProvider,
         jwtInterceptorProvider, jwtOptionsProvider) {
         jwtOptionsProvider.config({
-          whiteListedDomains: ['localhost']
+          whiteListedDomains: ['localhost', 'jc214809.github.io']
         });
         $routeProvider
           .when('/', {
