@@ -5,6 +5,7 @@ angular.module('sample.login', [
     // if ($scope.auth.isAuthenticated) {
     //   $location.path("/");
     // }
+    alert("0");
     $scope.login = function() {
       alert("1");
       auth.signin({}, function(profile, token) {
