@@ -6,8 +6,9 @@ angular.module('sample.login', [
     //   $location.path("/");
     // }
     $scope.login = function() {
-      console.log("jOEL WAS HERE");
+      alert("1");
       auth.signin({}, function(profile, token) {
+              alert("2");
           console.log("Profile: " + JSON.stringify(profile))
           //store.set('profile', profile);
           //store.set('token', token);
@@ -22,6 +23,7 @@ angular.module('sample.login', [
           $http.post($scope.url + "/register", JSON.stringify($scope.userDetails))
             .then(
               function successCallback(response) {
+                              alert("3");
                 console.log("Success");
               },
               function errorCallback(response) {
