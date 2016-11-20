@@ -27,6 +27,11 @@
             templateUrl: 'login/login.html',
             pageTitle: 'Login'
           })
+          .when('/one', {
+            controller: 'LoginCtrl',
+            templateUrl: 'one.html',
+            pageTitle: 'One'
+          })
           .when('/exercise', {
             controller: 'ExerciseCtrl',
             templateUrl: 'exercise/exercise.html',
