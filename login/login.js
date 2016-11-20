@@ -6,6 +6,7 @@ angular.module('sample.login', [
       $location.path("/");
     }
     $scope.login = function() {
+      console.log("jOEL WAS HERE");
       auth.signin({}, function(profile, token) {
           console.log("Profile: " + JSON.stringify(profile))
           store.set('profile', profile);
