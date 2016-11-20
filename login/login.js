@@ -9,8 +9,8 @@ angular.module('sample.login', [
       console.log("jOEL WAS HERE");
       auth.signin({}, function(profile, token) {
           console.log("Profile: " + JSON.stringify(profile))
-          store.set('profile', profile);
-          store.set('token', token);
+          //store.set('profile', profile);
+          //store.set('token', token);
 
           $scope.userDetails = {
             emailAddress: profile.email,
@@ -27,13 +27,12 @@ angular.module('sample.login', [
               function errorCallback(response) {
                 alert("Error " + JSON.stringify(response));
               });
-          //$location.path("/");
+          $location.path("/");
 
         },
         function(error) {
           console.log("There was an error logging in", error);
         });
-      $location.path("/one");
     }
 
   });
