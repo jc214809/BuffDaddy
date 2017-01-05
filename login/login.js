@@ -36,7 +36,7 @@ angular.module('sample.login', [
           },
           function(error) {
             alert("There was an error logging in");
-            $window.location.href = 'http://www.google.com';           
+           // $window.location.href = 'http://www.google.com';           
             location.href = 'http://www.google.com'; 
           });
       } catch (err) {
