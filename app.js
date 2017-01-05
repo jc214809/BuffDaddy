@@ -1,4 +1,11 @@
-    angular.module('sample', [
+var myDiv;
+console.origLog = console.log;
+console.log = function(x) {
+if(!myDiv) myDiv = document.getElementById('div');
+if(myDiv) myDiv.innerHTML = x;
+else console.origLog("can not determine myDiv");
+}    
+angular.module('sample', [
         'auth0',
         'ngRoute',
         'sample.home',
