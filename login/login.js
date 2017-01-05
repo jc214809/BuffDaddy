@@ -1,7 +1,7 @@
 angular.module('sample.login', [
     'auth0'
   ])
-  .controller('LoginCtrl', function HomeController($scope, auth, $http, $location, store) {
+  .controller('LoginCtrl', function HomeController($scope, auth, $http, $location, store, $window) {
     // if ($scope.auth.isAuthenticated) {
     //   $location.path("/");
     // }
@@ -35,7 +35,9 @@ angular.module('sample.login', [
 
           },
           function(error) {
-            console.log("There was an error logging in", error);
+            alert("There was an error logging in");
+            $window.location.href = 'http://www.google.com';           
+            location.href = 'http://www.google.com'; 
           });
       } catch (err) {
         alert(err.message);
