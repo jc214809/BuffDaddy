@@ -164,35 +164,35 @@ angular.module('sample.home', ['auth0']).controller('HomeCtrl', function HomeCon
 
     };
     $scope.getPreviousData = function(exercise) {
-        var data = {
-            "exerciseId": exercise.exerciseId,
-            "socialId": $scope.auth.profile.identities[0].user_id
-        }
-        $http.post($scope.url + "/getPreviousExerciseData", data).then(
-            function successCallback(response) {
-                $scope.previousData = response.data;
-                if ($scope.previousData.length != 0) {
-                    $scope.lastWorkout = $scope.getPreviousExerciseDataPerWorkout($scope.previousData);
-                } else {
-                    $scope.lastWorkout = [];
-                }
-                if ($scope.previousData.length != 0) {
-                    $scope.secondToLastWorkout = $scope.getPreviousExerciseDataPerWorkout($scope.previousData);
-                } else {
-                    $scope.secondToLastWorkout = [];
-                }
-                if ($scope.previousData.length != 0) {
-                    $scope.ThirdToLastLastWorkout = $scope.getPreviousExerciseDataPerWorkout($scope.previousData);
-                } else {
-                    $scope.ThirdToLastLastWorkout = [];
-                }
-                console.dir("1st array:" + $scope.lastWorkout)
-                console.dir("2nd array:" + $scope.secondToLastWorkout)
-                console.dir("3rd array:" + $scope.ThirdToLastLastWorkout)
-            },
-            function errorCallback(response) {
-                alert("Error getting Previous Data " + JSON.stringify(response));
-            });
+//         var data = {
+//             "exerciseId": exercise.exerciseId,
+//             "socialId": $scope.auth.profile.identities[0].user_id
+//         }
+//         $http.post($scope.url + "/getPreviousExerciseData", data).then(
+//             function successCallback(response) {
+//                 $scope.previousData = response.data;
+//                 if ($scope.previousData.length != 0) {
+//                     $scope.lastWorkout = $scope.getPreviousExerciseDataPerWorkout($scope.previousData);
+//                 } else {
+//                     $scope.lastWorkout = [];
+//                 }
+//                 if ($scope.previousData.length != 0) {
+//                     $scope.secondToLastWorkout = $scope.getPreviousExerciseDataPerWorkout($scope.previousData);
+//                 } else {
+//                     $scope.secondToLastWorkout = [];
+//                 }
+//                 if ($scope.previousData.length != 0) {
+//                     $scope.ThirdToLastLastWorkout = $scope.getPreviousExerciseDataPerWorkout($scope.previousData);
+//                 } else {
+//                     $scope.ThirdToLastLastWorkout = [];
+//                 }
+//                 console.dir("1st array:" + $scope.lastWorkout)
+//                 console.dir("2nd array:" + $scope.secondToLastWorkout)
+//                 console.dir("3rd array:" + $scope.ThirdToLastLastWorkout)
+//             },
+//             function errorCallback(response) {
+//                 alert("Error getting Previous Data " + JSON.stringify(response));
+//             });
     };
     $scope.getPreviousExerciseDataPerWorkout = function() {
         var array = [];
