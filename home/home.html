@@ -14,11 +14,11 @@
         <div class="row">
           <input id="setId{{set.setId}}" type="text" ng-model="set.setId" class="validate" hidden>
           <div class="input-field col set" style="width:{{size}}" ng-class="{'hide-input': exercise.reps == 0}">
-            <input id="reps{{set.setId}}" ng-blur="saveSetDetails(set);setForm.$setPristine();" type="text" ng-model="set.reps" class="validate">
+            <input id="reps{{set.setId}}" ng-blur="saveSetDetails(set);setForm.$setPristine();" type="text" pattern="[0-9]*" ng-model="set.reps" class="validate">
             <label for="reps{{set.setId}}"><i title="Reps" class="flaticon-gym"></i> Reps</label>
           </div>
           <div class="input-field col set" style="width:{{size}}" ng-class="{'hide-input': exercise.weight == 0}">
-            <input id="weight{{set.setId}}" ng-blur="saveSetDetails(set);setForm.$setPristine();" type="text" ng-model="set.weight" class="validate">
+            <input id="weight{{set.setId}}" ng-blur="saveSetDetails(set);setForm.$setPristine();" type="text" pattern="[0-9]*" ng-model="set.weight" class="validate">
             <label for="weight{{set.setId}}"><i title="Weight" class="flaticon-exercise"></i> Weight</label>
           </div>
           <div class="input-field col set" style="width:{{size}}" ng-class="{'hide-input': exercise.time == 0}">
@@ -30,11 +30,11 @@
             <label for="distance{{set.setId}}"><i title="Distance" class="fa fa-map-marker" aria-hidden="true"></i> Distance</label>
           </div>
           <div class="input-field col set" style="width:{{size}}" ng-class="{'hide-input': exercise.heartRate == 0}">
-            <input id="heartRate{{set.setId}}" ng-blur="saveSetDetails(set);setForm.$setPristine();" type="text" ng-model="set.heartRate" class="validate">
+            <input id="heartRate{{set.setId}}" ng-blur="saveSetDetails(set);setForm.$setPristine();" type="text" pattern="[0-9]*" ng-model="set.heartRate" class="validate">
             <label for="heartRate{{set.setId}}"><i title="Heart Rate" class="fa fa-heartbeat" aria-hidden="true"></i> Heart Rate</label>
           </div>
           <div class="input-field col set" style="width:{{size}}" ng-class="{'hide-input': exercise.calories == 0}">
-            <input id="calories{{set.setId}}" ng-blur="saveSetDetails(set);setForm.$setPristine();" type="text" ng-model="set.calories" class="validate">
+            <input id="calories{{set.setId}}" ng-blur="saveSetDetails(set);setForm.$setPristine();" type="text" pattern="[0-9]*" ng-model="set.calories" class="validate">
             <label for="calories{{set.setId}}"><i title="Calories" class="fa fa-fire" aria-hidden="true"></i> Calories</label>
           </div>
           <div class="input-field col action-icons">
