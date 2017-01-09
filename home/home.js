@@ -9,7 +9,7 @@ angular.module('sample.home', ['auth0']).controller('HomeCtrl', function HomeCon
         $scope.exercises = response.data;
       },
       function errorCallback(response) {
-        alert("Error getting users exercises " + JSON.stringify(response));
+        console.log("Error getting users exercises " + JSON.stringify(response));
       });
   $scope.auth = auth;
   $scope.workoutDetails = {
@@ -30,7 +30,7 @@ angular.module('sample.home', ['auth0']).controller('HomeCtrl', function HomeCon
           }
         },
         function errorCallback(response) {
-          alert("Error checking for workout" + JSON.stringify(response));
+          console.log("Error checking for workout" + JSON.stringify(response));
         });
   };
   $scope.checkForWorkout();
@@ -94,10 +94,10 @@ angular.module('sample.home', ['auth0']).controller('HomeCtrl', function HomeCon
     $http.post($scope.url + "/saveSetDetails", set)
       .then(
         function successCallback(response) {
-          //alert("Success");
+          console.log("Success");
         },
         function errorCallback(response) {
-          alert("Error saving set details " + JSON.stringify(response));
+          console.log("Error saving set details " + JSON.stringify(response));
         });
   };
   $scope.deleteSet = function(set) {
@@ -124,10 +124,10 @@ angular.module('sample.home', ['auth0']).controller('HomeCtrl', function HomeCon
               }
             }
           }
-          alert("Deleted");
+          console.log("Deleted");
         },
         function errorCallback(response) {
-          alert("Error deleting set " + JSON.stringify(response));
+          console.log("Error deleting set " + JSON.stringify(response));
         });
   };
   $scope.checkForSets = function(newSetId, oldSetsArray) {
@@ -162,7 +162,7 @@ angular.module('sample.home', ['auth0']).controller('HomeCtrl', function HomeCon
           }
         },
         function errorCallback(response) {
-          alert("Error Getting sets " + JSON.stringify(response));
+          console.log("Error Getting sets " + JSON.stringify(response));
         });
 
   };
@@ -237,7 +237,7 @@ angular.module('sample.home', ['auth0']).controller('HomeCtrl', function HomeCon
 
         },
         function errorCallback(response) {
-          alert("Error getting Exercises " + JSON.stringify(response));
+          console.log("Error getting Exercises " + JSON.stringify(response));
         });
     // 
   };
@@ -252,7 +252,7 @@ angular.module('sample.home', ['auth0']).controller('HomeCtrl', function HomeCon
           $scope.workoutIndicator = false;
         },
         function errorCallback(response) {
-          alert("Error Ending workout " + JSON.stringify(response));
+          console.log("Error Ending workout " + JSON.stringify(response));
         });
   };
 
@@ -263,7 +263,7 @@ angular.module('sample.home', ['auth0']).controller('HomeCtrl', function HomeCon
           $scope.checkForWorkout();
         },
         function errorCallback(response) {
-          alert("Error starting workout " + JSON.stringify(response));
+          console.log("Error starting workout " + JSON.stringify(response));
         });
   };
 
@@ -282,7 +282,7 @@ angular.module('sample.home', ['auth0']).controller('HomeCtrl', function HomeCon
           $('#exerciseModal').closeModal();
         },
         function errorCallback(response) {
-          alert("Error adding set" + JSON.stringify(response));
+          console.log("Error adding set" + JSON.stringify(response));
         });
   };
 
