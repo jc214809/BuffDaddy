@@ -3,7 +3,7 @@
     <h3>Welcome</h3>
     <h3>{{auth.profile.name}}!</h3>
     <button align="center" class="btn btn-primary" ng-hide="workoutIndicator" ng-click="newWorkout()">Start Workout</button>
-    <button class="btn red" ng-click="endWorkout()" ng-show="workoutIndicator">End Workout</button>
+    <button class="btn red" ng-click="openConfirmationModal" ng-show="workoutIndicator">End Workout</button>
     <a class="btn-floating btn-large waves-effect waves-light red modal-trigger add-exercise" ng-show="workoutIndicator" href="#exerciseModal" ng-click="resetScroll()"><i class="fa fa-plus material-icons plus-icon" aria-hidden="true"></i></a>
   </div>
   <div class="exercise-section row" ng-repeat="exercise in workoutExercises" repeat-done="initModals()">
@@ -68,6 +68,16 @@
     </div> -->
   </div>
 </div>
+  <div id="confirmationModal" class="modal modal-fixed-footer">
+    <div class="modal-content">
+      <h4>Complete Workout?</h4>
+      <p>Would you like to complete this current workout?</p>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat " ng-click="endWorkout()">End Workout</a>
+      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat " ng-click="closeModal()">Cancel</a>
+    </div>
+  </div>
 <div id="exerciseModal" class="modal bottom-sheet">
   <div class="modal-content">
     <div class="row">
