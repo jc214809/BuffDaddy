@@ -64,10 +64,15 @@ angular.module('sample.home', ['auth0']).controller('HomeCtrl', function HomeCon
     $('#exerciseModal').scrollTop(0);
   };
   $scope.closeModal = function() {
+    //$('.modal-trigger').leanModal(); // Initialize the modals
     $('#confirmationModal').modal('close');
   };
   $scope.openConfirmationModal = function() {
+    alert("0");
+    $('.modal-trigger').leanModal(); // Initialize the modals
+     alert("1");
     $('#confirmationModal').modal('open');
+     alert("2");
   };
   $scope.initModals = function() {
     $('.modal-trigger').leanModal(); // Initialize the modals
