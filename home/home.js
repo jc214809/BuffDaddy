@@ -63,6 +63,12 @@ angular.module('sample.home', ['auth0']).controller('HomeCtrl', function HomeCon
   $scope.resetScroll = function() {
     $('#exerciseModal').scrollTop(0);
   };
+  $scope.closeModal = function() {
+    $('#confirmationModal').modal('close');
+  };
+  $scope.openConfirmationModal = function() {
+    $('#confirmationModal').modal('open');
+  };
   $scope.initModals = function() {
     $('.modal-trigger').leanModal(); // Initialize the modals
   }
