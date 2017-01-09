@@ -1,50 +1,71 @@
 <div class="container-fluid">
   <div class="home center-align">
-    <h3>Welcome {{auth.profile.name}}!</h3>
+    <h3>Welcome</h3>
+    <h3>{{auth.profile.name}}!</h3>
     <button align="center" class="btn btn-primary" ng-hide="workoutIndicator" ng-click="newWorkout()">Start Workout</button>
-    <button class="btn btn-danger" ng-click="endWorkout()" ng-show="workoutIndicator">End Workout</button>
+    <button class="btn red" ng-click="endWorkout()" ng-show="workoutIndicator">End Workout</button>
     <a class="btn-floating btn-large waves-effect waves-light red modal-trigger add-exercise" ng-show="workoutIndicator" href="#exerciseModal" ng-click="resetScroll()"><i class="fa fa-plus material-icons plus-icon" aria-hidden="true"></i></a>
   </div>
-  <div class="exercise-section row" ng-repeat="exercise in workoutExercises">
+  <div class="exercise-section row" ng-repeat="exercise in workoutExercises" repeat-done="initModals()">
     {{inputWidth(exercise.exerciseId)}}
-    <h5 ng-bind="exercise.exerciseName" class="col s12"></h5>
+    <a class="modal-trigger" href="#modal1"><h5 ng-bind="exercise.exerciseName" class="col s12"></h5></a>
     <div class="set-section row" ng-repeat="set in sets | orderBy:'setId'" ng-if="exercise.exerciseId == set.exerciseId">
       <form ng-submit="saveSetDetails(set)" name="setForm">
         <div class="row">
           <input id="setId{{set.setId}}" type="text" ng-model="set.setId" class="validate" hidden>
           <div class="input-field col set" style="width:{{size}}" ng-class="{'hide-input': exercise.reps == 0}">
-            <input id="reps{{set.setId}}" type="text" ng-model="set.reps" class="validate">
-            <label for="reps{{set.setId}}"><i title="Reps" class="flaticon-gym"></i></label>
+            <input id="reps{{set.setId}}" ng-blur="saveSetDetails(set);setForm.$setPristine();" type="text" ng-model="set.reps" class="validate">
+            <label for="reps{{set.setId}}"><i title="Reps" class="flaticon-gym"></i> Reps</label>
           </div>
           <div class="input-field col set" style="width:{{size}}" ng-class="{'hide-input': exercise.weight == 0}">
-            <input id="weight{{set.setId}}" type="text" ng-model="set.weight" class="validate">
-            <label for="weight{{set.setId}}"><i title="Weight" class="flaticon-exercise"></i></label>
+            <input id="weight{{set.setId}}" ng-blur="saveSetDetails(set);setForm.$setPristine();" type="text" ng-model="set.weight" class="validate">
+            <label for="weight{{set.setId}}"><i title="Weight" class="flaticon-exercise"></i> Weight</label>
           </div>
           <div class="input-field col set" style="width:{{size}}" ng-class="{'hide-input': exercise.time == 0}">
-            <input id="time{{set.setId}}" type="text" ng-model="set.time" class="validate">
-            <label for="time{{set.setId}}"><i title="Time" class="fa fa-clock-o" aria-hidden="true"></i></label>
+            <input id="time{{set.setId}}" ng-blur="saveSetDetails(set);setForm.$setPristine();" type="text" ng-model="set.time" class="validate">
+            <label for="time{{set.setId}}"><i title="Time" class="fa fa-clock-o" aria-hidden="true"></i> Duration</label>
           </div>
           <div class="input-field col set" style="width:{{size}}" ng-class="{'hide-input': exercise.distance == 0}">
-            <input id="distance{{set.setId}}" type="text" ng-model="set.distance" class="validate">
-            <label for="distance{{set.setId}}"><i title="Distance" class="fa fa-map-marker" aria-hidden="true"></i></label>
+            <input id="distance{{set.setId}}" ng-blur="saveSetDetails(set);setForm.$setPristine();" type="text" ng-model="set.distance" class="validate">
+            <label for="distance{{set.setId}}"><i title="Distance" class="fa fa-map-marker" aria-hidden="true"></i> Distance</label>
           </div>
           <div class="input-field col set" style="width:{{size}}" ng-class="{'hide-input': exercise.heartRate == 0}">
-            <input id="heartRate{{set.setId}}" type="text" ng-model="set.heartRate" class="validate">
-            <label for="heartRate{{set.setId}}"><i title="Heart Rate" class="fa fa-heartbeat" aria-hidden="true"></i></label>
+            <input id="heartRate{{set.setId}}" ng-blur="saveSetDetails(set);setForm.$setPristine();" type="text" ng-model="set.heartRate" class="validate">
+            <label for="heartRate{{set.setId}}"><i title="Heart Rate" class="fa fa-heartbeat" aria-hidden="true"></i> Heart Rate</label>
           </div>
           <div class="input-field col set" style="width:{{size}}" ng-class="{'hide-input': exercise.calories == 0}">
-            <input id="calories{{set.setId}}" type="text" ng-model="set.calories" class="validate">
-            <label for="calories{{set.setId}}"><i title="Calories" class="fa fa-fire" aria-hidden="true"></i></label>
+            <input id="calories{{set.setId}}" ng-blur="saveSetDetails(set);setForm.$setPristine();" type="text" ng-model="set.calories" class="validate">
+            <label for="calories{{set.setId}}"><i title="Calories" class="fa fa-fire" aria-hidden="true"></i> Calories</label>
           </div>
           <div class="input-field col action-icons">
             &nbsp;
-            <i class="fa fa-floppy-o" aria-hidden="true" ng-click="saveSetDetails(set);setForm.$setPristine();"></i> &nbsp;
-            <i class="fa fa-trash" aria-hidden="true" ng-click="deleteSet(set);setForm.$setPristine();"></i>
+            <!-- <i class="fa fa-floppy-o" aria-hidden="true" ng-click="saveSetDetails(set);setForm.$setPristine();"></i> &nbsp; -->
+            <i class="fa fa-trash" style="color: red" aria-hidden="true" ng-click="deleteSet(set);setForm.$setPristine();"></i>
           </div>
         </div>
       </form>
     </div>
     <a href="#/" class="form-btn col" ng-click="addSet(exercise.exerciseId)">Add a Set...</a>
+  </div>
+</div>
+<div id="modal1" class="modal">
+  <div class="modal-content">
+    <!--     <div style="width:100%; background-color: red; overflow: auto; font-size: 14px;">
+      10/12/2016 -- <i title="Reps" class="flaticon-gym"></i>10 : <i title="Weight" class="flaticon-exercise"></i> 10 |
+      <i title="Reps" class="flaticon-gym"></i>10 : <i title="Weight" class="flaticon-exercise"></i> 10 |
+      <i title="Reps" class="flaticon-gym"></i>10 : <i title="Weight" class="flaticon-exercise"></i> 10
+      <i class="fa fa-plus" aria-hidden="true" style="float: right; margin-right: 10px;"></i>
+    </div>
+    <div name="secondarySets" style="width:100%; background-color: red; overflow: auto; font-size: 14px;">
+      10/10/2016 -- <i title="Reps" class="flaticon-gym"></i>10 : <i title="Weight" class="flaticon-exercise"></i> 10 |
+      <i title="Reps" class="flaticon-gym"></i>10 : <i title="Weight" class="flaticon-exercise"></i> 10 |
+      <i title="Reps" class="flaticon-gym"></i>10 : <i title="Weight" class="flaticon-exercise"></i> 10
+    </div>
+    <div name="secondarySets" style="width:100%; background-color: red; overflow: auto; font-size: 14px;">
+      10/05/2016 -- <i title="Reps" class="flaticon-gym"></i>10 : <i title="Weight" class="flaticon-exercise"></i> 10 |
+      <i title="Reps" class="flaticon-gym"></i>10 : <i title="Weight" class="flaticon-exercise"></i> 10 |
+      <i title="Reps" class="flaticon-gym"></i>10 : <i title="Weight" class="flaticon-exercise"></i> 10
+    </div> -->
   </div>
 </div>
 <div id="exerciseModal" class="modal bottom-sheet">
@@ -64,17 +85,9 @@
       <div class=""><a class="btn-floating btn-large waves-effect waves-light red" style="margin-right: 10px" ng-click="addSet(exercise.exerciseID)"><i class="fa fa-plus" aria-hidden="true"></i></a><span class="modal-exercise-name" ng-bind="exercise.exerciseName"></span></div>
     </div>
   </div>
-  <!--   <div class="modal-footer">
-    <a href="#/" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
-  </div> -->
 </div>
 <script type="text/javascript">
-$('.modal-trigger').leanModal({
-  dismissible: false, // Modal can be dismissed by clicking outside of the modal
-  opacity: .5, // Opacity of modal background
-  in_duration: 500, // Transition in duration
-  out_duration: 400, // Transition out duration
-  ready: function() {}, // Callback for Modal open
-  complete: function() {} // Callback for Modal close
+$(document).ready(function() {
+  $('.modal-trigger').leanModal();
 });
 </script>
