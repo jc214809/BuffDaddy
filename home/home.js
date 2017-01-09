@@ -94,7 +94,7 @@ angular.module('sample.home', ['auth0']).controller('HomeCtrl', function HomeCon
     $http.post($scope.url + "/saveSetDetails", set)
       .then(
         function successCallback(response) {
-          alert("Success");
+          //alert("Success");
         },
         function errorCallback(response) {
           alert("Error saving set details " + JSON.stringify(response));
