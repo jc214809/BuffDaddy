@@ -74,8 +74,8 @@
     <p>Would you like to complete this current workout?</p>
   </div>
   <div class="modal-footer">
-    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat " ng-click="endWorkout()">End Workout</a>
-    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat " ng-click="closeModal()">Cancel</a>
+    <a href="#/" class="modal-action modal-close waves-effect waves-green btn-flat " ng-click="endWorkout()">End Workout</a>
+    <a href="#/" class="modal-action modal-close waves-effect waves-green btn-flat " ng-click="closeModal()">Cancel</a>
   </div>
 </div>
 <div id="exerciseModal" class="modal bottom-sheet">
@@ -92,12 +92,29 @@
       <input type="text" ng-model="filters.search.exerciseName" placeholder="Search Exercises">
     </div>
     <div class="row" ng-repeat="exercise in exercises | filter:filters.search| notInArray:filterBy:'exerciseID' | orderBy:'exerciseName'">
-      <div class=""><a class="btn-floating btn-large waves-effect waves-light red" style="margin-right: 10px" ng-click="addSet(exercise.exerciseID)"><i class="fa fa-plus" aria-hidden="true"></i></a><span class="modal-exercise-name" ng-bind="exercise.exerciseName"></span></div>
+      <div class=""><a class="modal-action modal-close btn-floating btn-large waves-effect waves-light red" style="margin-right: 10px" ng-click="addSet(exercise.exerciseID)"><i class="fa fa-plus" aria-hidden="true"></i></a><span class="modal-exercise-name" ng-bind="exercise.exerciseName"></span></div>
     </div>
   </div>
 </div>
 <script type="text/javascript">
 $(document).ready(function() {
-  $('.modal-trigger').leanModal();
+  $('.modal-trigger').leanModal({
+    dismissible: true,
+    opacity: 0.5,
+    in_duration: 300,
+    out_duration: 200,
+    ready: function() {
+        if($(".lean-overlay").length > 1) {
+            $(".lean-overlay:not(:first)").each(function() {
+                $(this).remove();
+            });
+        }
+    },
+    complete: function() {
+        $(".lean-overlay").each(function() {
+            $(this).remove();
+        });
+    }
+});
 });
 </script>
