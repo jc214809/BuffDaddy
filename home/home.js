@@ -70,9 +70,9 @@ angular.module('sample.home', ['auth0']).controller('HomeCtrl', function HomeCon
   $scope.openConfirmationModal = function() {
     //alert("0");
     //$('.modal-trigger').leanModal(); // Initialize the modals
-     alert("1");
+    alert("1");
     $('#confirmationModal').modal('open');
-     alert("2");
+    alert("2");
   };
   $scope.initModals = function() {
     $('.modal-trigger').leanModal(); // Initialize the modals
@@ -295,6 +295,15 @@ angular.module('sample.home', ['auth0']).controller('HomeCtrl', function HomeCon
         function errorCallback(response) {
           console.log("Error adding set" + JSON.stringify(response));
         });
+  };
+
+  $scope.getModalDetails = function(exerciseId) {
+    for (var i = $scope.exercises.length - 1; i >= 0; i--) {
+      if ($scope.exercises[i].exerciseID == exerciseId) {
+         $scope.modalExerciseDetails = $scope.exercises[i];
+         break;
+      }
+    }
   };
 
   $scope.logout = function() {

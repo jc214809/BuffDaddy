@@ -3,12 +3,12 @@
     <h3>Welcome</h3>
     <h3>{{auth.profile.name}}!</h3>
     <button align="center" class="btn btn-primary" ng-hide="workoutIndicator" ng-click="newWorkout()">Start Workout</button>
-    <button class="btn modal-trigger red" data-target="confirmationModal" ng-show="workoutIndicator">End Workout!</button>
+    <button class="btn modal-trigger red" data-target="confirmationModal" ng-show="workoutIndicator">End Workout</button>
     <a class="btn-floating btn-large waves-effect waves-light red modal-trigger add-exercise" ng-show="workoutIndicator" href="#exerciseModal" ng-click="resetScroll()"><i class="fa fa-plus material-icons plus-icon" aria-hidden="true"></i></a>
   </div>
   <div class="exercise-section row" ng-repeat="exercise in workoutExercises" repeat-done="initModals()">
     {{inputWidth(exercise.exerciseId)}}
-    <a class="modal-trigger" href="#modal1"><h5 ng-bind="exercise.exerciseName" class="col s12"></h5></a>
+    <a class="modal-trigger" href="#modal1" ng-click="getModalDetails(exercise.exerciseId)"><h5 ng-bind="exercise.exerciseName" class="col s12"></h5></a>
     <div class="set-section row" ng-repeat="set in sets | orderBy:'setId'" ng-if="exercise.exerciseId == set.exerciseId">
       <form ng-submit="saveSetDetails(set)" name="setForm">
         <div class="row">
@@ -50,6 +50,12 @@
 </div>
 <div id="modal1" class="modal">
   <div class="modal-content">
+  <div>
+  <h2>{{modalExerciseDetails.exerciseName}}</h2>
+  </div>
+  <div>
+    <p>{{modalExerciseDetails.exerciseDescription}}</p>
+  </div>
     <!--     <div style="width:100%; background-color: red; overflow: auto; font-size: 14px;">
       10/12/2016 -- <i title="Reps" class="flaticon-gym"></i>10 : <i title="Weight" class="flaticon-exercise"></i> 10 |
       <i title="Reps" class="flaticon-gym"></i>10 : <i title="Weight" class="flaticon-exercise"></i> 10 |
