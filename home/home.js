@@ -177,36 +177,39 @@ angular.module('sample.home', ['auth0']).controller('HomeCtrl', function HomeCon
         });
 
   };
-  $scope.getPreviousData = function(exercise) {
-    // var data = {
-    //   "exerciseId": exercise.exerciseId,
-    //   "socialId": $scope.auth.profile.identities[0].user_id
-    // }
-    // $http.post($scope.url + "/getPreviousExerciseData", data).then(
-    //   function successCallback(response) {
-    //     $scope.previousData = response.data;
-    //     if ($scope.previousData.length != 0) {
-    //       $scope.lastWorkout = $scope.getPreviousExerciseDataPerWorkout($scope.previousData);
-    //     } else {
-    //       $scope.lastWorkout = [];
-    //     }
-    //     if ($scope.previousData.length != 0) {
-    //       $scope.secondToLastWorkout = $scope.getPreviousExerciseDataPerWorkout($scope.previousData);
-    //     } else {
-    //       $scope.secondToLastWorkout = [];
-    //     }
-    //     if ($scope.previousData.length != 0) {
-    //       $scope.ThirdToLastLastWorkout = $scope.getPreviousExerciseDataPerWorkout($scope.previousData);
-    //     } else {
-    //       $scope.ThirdToLastLastWorkout = [];
-    //     }
-    //     console.dir("1st array:" + $scope.lastWorkout)
-    //     console.dir("2nd array:" + $scope.secondToLastWorkout)
-    //     console.dir("3rd array:" + $scope.ThirdToLastLastWorkout)
-    //   },
-    //   function errorCallback(response) {
-    //     alert("Error getting Previous Data " + JSON.stringify(response));
-    //   });
+  $scope.getPreviousData = function(exerciseId) {
+    var data = {
+      "exerciseId": exerciseId,
+      "socialId": $scope.auth.profile.identities[0].user_id
+    }
+    $http.post($scope.url + "/getPreviousExerciseData", data).then(
+      function successCallback(response) {
+        $scope.Gus = response.data;
+        //$scope.$apply();
+        console.dir(response);
+        return response.data;
+        // if ($scope.previousData.length != 0) {
+        //   $scope.lastWorkout = $scope.getPreviousExerciseDataPerWorkout($scope.previousData);
+        // } else {
+        //   $scope.lastWorkout = [];
+        // }
+        // if ($scope.previousData.length != 0) {
+        //   $scope.secondToLastWorkout = $scope.getPreviousExerciseDataPerWorkout($scope.previousData);
+        // } else {
+        //   $scope.secondToLastWorkout = [];
+        // }
+        // if ($scope.previousData.length != 0) {
+        //   $scope.ThirdToLastLastWorkout = $scope.getPreviousExerciseDataPerWorkout($scope.previousData);
+        // } else {
+        //   $scope.ThirdToLastLastWorkout = [];
+        // }
+        // console.dir("1st array:" + $scope.lastWorkout)
+        // console.dir("2nd array:" + $scope.secondToLastWorkout)
+        // console.dir("3rd array:" + $scope.ThirdToLastLastWorkout)
+      },
+      function errorCallback(response) {
+        alert("Error getting Previous Data " + JSON.stringify(response));
+      });
   };
   $scope.getPreviousExerciseDataPerWorkout = function() {
     var array = [];
@@ -233,8 +236,11 @@ angular.module('sample.home', ['auth0']).controller('HomeCtrl', function HomeCon
           if ($scope.workoutExercises == undefined || $scope.workoutExercises.length == undefined) {
             $scope.workoutExercises = response.data;
             angular.forEach($scope.workoutExercises, function(exercise) {
+              // $scope.$apply(function() { // put $scope var that needs to be updated
+              //   exercise.previousData = $scope.getPreviousData(exercise.exerciseId);
+              //   //$scope.previousData = $scope.getPreviousData(exerciseId); // inside a function inside $apply like this
+              // });
               $scope.filterBy.push(exercise.exerciseId);
-              exercise.previousData = $scope.getPreviousData(exercise);
             });
           } else {
             $scope.newWorkoutExercises = response.data;
@@ -298,12 +304,25 @@ angular.module('sample.home', ['auth0']).controller('HomeCtrl', function HomeCon
   };
 
   $scope.getModalDetails = function(exerciseId) {
+
     for (var i = $scope.exercises.length - 1; i >= 0; i--) {
       if ($scope.exercises[i].exerciseID == exerciseId) {
-         $scope.modalExerciseDetails = $scope.exercises[i];
-         break;
+        $scope.modalExerciseDetails = $scope.exercises[i];
+        break;
       }
     }
+    $.ajax({
+      type: 'GET',
+      url: $scope.url + "/getPreviousExerciseData?exerciseId="+ exerciseId+"&socialId=" + $scope.auth.profile.identities[0].user_id, 
+      async: false,
+      dataType: 'json',
+      success: function(data) {
+        $scope.previousData = data;
+      },
+      error: function() {
+        //alert("Error getting Pitcher vs Batter data. Cors-Anywhere may be down.");
+      }
+    });
   };
 
   $scope.logout = function() {

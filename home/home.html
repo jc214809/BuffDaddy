@@ -50,12 +50,19 @@
 </div>
 <div id="modal1" class="modal">
   <div class="modal-content">
-  <div>
-  <h4>{{modalExerciseDetails.exerciseName}}</h4>
-  </div>
-  <div>
-    <p>{{modalExerciseDetails.exerciseDescription}}</p>
-  </div>
+    <div>
+      <h4>{{modalExerciseDetails.exerciseName}}</h4>
+    </div>
+    <div>
+      <p>{{modalExerciseDetails.exerciseDescription}}</p>
+    </div>
+    <div ng-repeat="workout in previousData">
+      <div ng-repeat="set in workout">
+        <b><span style="" ng-bind="$index+1">.</span></b>
+        <i title="Reps" class="flaticon-gym"></i>{{set.reps}}
+        <i title="Weight" class="flaticon-exercise"></i>{{set.weight}}
+      </div>
+    </div>
     <!--     <div style="width:100%; background-color: red; overflow: auto; font-size: 14px;">
       10/12/2016 -- <i title="Reps" class="flaticon-gym"></i>10 : <i title="Weight" class="flaticon-exercise"></i> 10 |
       <i title="Reps" class="flaticon-gym"></i>10 : <i title="Weight" class="flaticon-exercise"></i> 10 |
@@ -110,17 +117,17 @@ $(document).ready(function() {
     in_duration: 300,
     out_duration: 200,
     ready: function() {
-        if($(".lean-overlay").length > 1) {
-            $(".lean-overlay:not(:first)").each(function() {
-                $(this).remove();
-            });
-        }
+      if ($(".lean-overlay").length > 1) {
+        $(".lean-overlay:not(:first)").each(function() {
+          $(this).remove();
+        });
+      }
     },
     complete: function() {
-        $(".lean-overlay").each(function() {
-            $(this).remove();
-        });
+      $(".lean-overlay").each(function() {
+        $(this).remove();
+      });
     }
-});
+  });
 });
 </script>
