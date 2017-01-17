@@ -21,5 +21,11 @@ Useful Links
 http://stackoverflow.com/questions/14852802/detect-unsaved-changes-and-alert-user-using-angularjs
 
 
+AngularJS Promise
+http://stackoverflow.com/questions/11966252/how-does-the-resource-get-function-work-synchronously-in-angularjs
+http://stackoverflow.com/questions/13088153/how-to-http-synchronous-call-with-angularjs
+http://jsfiddle.net/softwaredoug/z58vmdnn/
+http://stackoverflow.com/questions/18755201/angularjs-http-get-to-get-json-not-working-in-the-service-layer
 
 LAST_INSERT_ID()
+
