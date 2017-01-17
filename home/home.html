@@ -57,10 +57,15 @@
       <p>{{modalExerciseDetails.exerciseDescription}}</p>
     </div>
     <div ng-repeat="workout in previousData">
+      <h5 ng-if="workout != null">{{$index+1}} Workout(s) Ago</h5>
       <div ng-repeat="set in workout">
-        <b><span style="" ng-bind="$index+1">.</span></b>
-        <i title="Reps" class="flaticon-gym"></i>{{set.reps}}
-        <i title="Weight" class="flaticon-exercise"></i>{{set.weight}}
+        <b>Set {{$index+1}} => </b>
+        <b ng-if="set.reps != null"><i title="Reps" class="flaticon-gym"></i> {{set.reps}}</b>
+        <b ng-if="set.weight != null"><i title="Weight" class="flaticon-exercise"></i> {{set.weight}}</b>
+        <b ng-if="set.time != null"><i title="Time" class="fa fa-clock-o" aria-hidden="true"></i> {{set.time}}</b>
+        <b ng-if="set.distance != null"><i title="Distance" class="fa fa-map-marker" aria-hidden="true"></i> {{set.distance}}</b>
+        <b ng-if="set.heartRate != null"><i title="Heart Rate" class="fa fa-heartbeat" aria-hidden="true"></i> {{set.heartRate}}</b>
+        <b ng-if="set.calories != null"><i title="Calories" class="fa fa-fire" aria-hidden="true"></i> {{set.calories}}</b>
       </div>
     </div>
     <!--     <div style="width:100%; background-color: red; overflow: auto; font-size: 14px;">
