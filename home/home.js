@@ -15,7 +15,7 @@ angular.module('sample.home', ['auth0'])
       search: ''
     };
     $scope.filterBy = [];
-
+    
     $http.get($scope.url + "/getUsersExercises?id=" + $scope.auth.profile.identities[0].user_id)
       .then(function successCallback(response) {
           $scope.exercises = response.data;
@@ -112,7 +112,8 @@ angular.module('sample.home', ['auth0'])
             console.log("Error saving set details " + JSON.stringify(response));
           });
     };
-    $scope.deleteSet = function(set) {
+    $scope.deleteSet = function() {
+      var set = $scope.setDeleteData;
       $http.post($scope.url + "/deleteSet", set)
         .then(
           function successCallback(response) {
@@ -183,23 +184,6 @@ angular.module('sample.home', ['auth0'])
       promise.then(function(data) {
         return data;
       });
-    };
-    $scope.getPreviousExerciseDataPerWorkout = function() {
-      var array = [];
-      var maxId = $scope.getMaxWorkoutId($scope.previousData);
-      for (var i = $scope.previousData.length - 1; i >= 0; i--) {
-        if ($scope.previousData[i].workoutId == maxId) {
-          array.push($scope.previousData[i]);
-          $scope.previousData.splice(i, 1);
-        }
-      }
-      return array;
-    };
-
-    $scope.getMaxWorkoutId = function(array) {
-      return Math.max.apply(Math, array.map(function(o) {
-        return o.workoutId;
-      }));
     };
 
     $scope.getExercise = function(workoutID) {
@@ -280,8 +264,12 @@ angular.module('sample.home', ['auth0'])
       }
       var promise = previousDataService.getPreviousData($scope.url, exerciseId, $scope.auth.profile.identities[0].user_id)
       promise.then(function(data) {
-         $scope.previousData = data;
+        $scope.previousData = data;
       });
+    };
+
+    $scope.storeDeleteData = function(set) {
+      $scope.setDeleteData = set;
     };
 
     $scope.logout = function() {
