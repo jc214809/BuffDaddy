@@ -8,8 +8,8 @@
   </div>
   <div class="exercise-section row" ng-repeat="exercise in workoutExercises" repeat-done="initModals()">
     {{inputWidth(exercise.exerciseId)}}
-    <a class="modal-trigger" href="#modal1" ng-click="getModalDetails(exercise.exerciseId)"><h5 ng-bind="exercise.exerciseName" class="col s12"></h5></a>
-    <div class="set-section row" ng-repeat="set in sets | orderBy:'setId'" ng-if="exercise.exerciseId == set.exerciseId">
+    <a class="modal-trigger" href="#exerciseDetails" ng-click="getModalDetails(exercise.exerciseId)"><h5 ng-bind="exercise.exerciseName" class="col s12"></h5></a>
+    <div class="set-section row" ng-repeat="set in sets | orderBy:'set.setId'" ng-if="exercise.exerciseId == set.exerciseId">
       <form ng-submit="saveSetDetails(set)" name="setForm">
         <div class="row">
           <input id="setId{{set.setId}}" type="text" ng-model="set.setId" class="validate" hidden>
@@ -48,7 +48,7 @@
     <a href="#/" class="form-btn col" ng-click="addSet(exercise.exerciseId)">Add a Set...</a>
   </div>
 </div>
-<div id="modal1" class="modal">
+<div id="exerciseDetails" class="modal">
   <div class="modal-content">
     <div>
       <h4>{{modalExerciseDetails.exerciseName}}</h4>
@@ -68,22 +68,6 @@
         <b ng-if="set.calories != null"><i title="Calories" class="fa fa-fire" aria-hidden="true"></i> {{set.calories}}</b>
       </div>
     </div>
-    <!--     <div style="width:100%; background-color: red; overflow: auto; font-size: 14px;">
-      10/12/2016 -- <i title="Reps" class="flaticon-gym"></i>10 : <i title="Weight" class="flaticon-exercise"></i> 10 |
-      <i title="Reps" class="flaticon-gym"></i>10 : <i title="Weight" class="flaticon-exercise"></i> 10 |
-      <i title="Reps" class="flaticon-gym"></i>10 : <i title="Weight" class="flaticon-exercise"></i> 10
-      <i class="fa fa-plus" aria-hidden="true" style="float: right; margin-right: 10px;"></i>
-    </div>
-    <div name="secondarySets" style="width:100%; background-color: red; overflow: auto; font-size: 14px;">
-      10/10/2016 -- <i title="Reps" class="flaticon-gym"></i>10 : <i title="Weight" class="flaticon-exercise"></i> 10 |
-      <i title="Reps" class="flaticon-gym"></i>10 : <i title="Weight" class="flaticon-exercise"></i> 10 |
-      <i title="Reps" class="flaticon-gym"></i>10 : <i title="Weight" class="flaticon-exercise"></i> 10
-    </div>
-    <div name="secondarySets" style="width:100%; background-color: red; overflow: auto; font-size: 14px;">
-      10/05/2016 -- <i title="Reps" class="flaticon-gym"></i>10 : <i title="Weight" class="flaticon-exercise"></i> 10 |
-      <i title="Reps" class="flaticon-gym"></i>10 : <i title="Weight" class="flaticon-exercise"></i> 10 |
-      <i title="Reps" class="flaticon-gym"></i>10 : <i title="Weight" class="flaticon-exercise"></i> 10
-    </div> -->
   </div>
 </div>
 <div id="confirmationModal" class="modal modal-fixed-footer">
@@ -92,8 +76,18 @@
     <p>Would you like to complete this current workout?</p>
   </div>
   <div class="modal-footer">
-    <a href="#/" class="modal-action modal-close waves-effect waves-green btn-flat " ng-click="endWorkout()">End Workout</a>
-    <a href="#/" class="modal-action modal-close waves-effect waves-green btn-flat " ng-click="closeModal()">Cancel</a>
+    <a href="#/" class="modal-action modal-close red btn-flat" ng-click="endWorkout()">End Workout</a>
+    <a href="#/" class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+  </div>
+</div>
+<div id="deleteSetModal" class="modal modal-fixed-footer">
+  <div class="modal-content">
+    <h4>Delete Set?</h4>
+    <p>Would you like to delete this current set from the workout?</p>
+  </div>
+  <div class="modal-footer">
+    <a href="#/" class="modal-action modal-close red btn-flat" ng-click="deleteSet()">Delete</a>
+    <a href="#/" class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
   </div>
 </div>
 <div id="exerciseModal" class="modal bottom-sheet">
