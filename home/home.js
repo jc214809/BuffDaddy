@@ -15,7 +15,7 @@ angular.module('sample.home', ['auth0'])
       search: ''
     };
     $scope.filterBy = [];
-    
+
     $http.get($scope.url + "/getUsersExercises?id=" + $scope.auth.profile.identities[0].user_id)
       .then(function successCallback(response) {
           $scope.exercises = response.data;
@@ -76,7 +76,24 @@ angular.module('sample.home', ['auth0'])
       $('#exerciseModal').scrollTop(0);
     };
     $scope.initModals = function() {
-      $('.modal-trigger').leanModal(); // Initialize the modals
+      $('.modal-trigger').leanModal({
+        dismissible: true,
+        // opacity: 0.5,
+        // in_duration: 300,
+        // out_duration: 200,
+        ready: function() {
+          if ($(".lean-overlay").length > 1) {
+            $(".lean-overlay:not(:first)").each(function() {
+              $(this).remove();
+            });
+          }
+        },
+        complete: function() {
+          $(".lean-overlay").each(function() {
+            $(this).remove();
+          });
+        }
+      }); // Initialize the modals
     }
     $scope.setWidth = function(count) {
       switch (count) {
