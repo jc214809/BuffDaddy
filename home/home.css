@@ -2,6 +2,10 @@
   font-size: 12px;
 }
 
+label{
+ color: black !important;
+}
+
 .btn-close {
   padding: 0px !important;
 }
