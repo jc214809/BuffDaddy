@@ -27,5 +27,9 @@ http://stackoverflow.com/questions/13088153/how-to-http-synchronous-call-with-an
 http://jsfiddle.net/softwaredoug/z58vmdnn/
 http://stackoverflow.com/questions/18755201/angularjs-http-get-to-get-json-not-working-in-the-service-layer
 
+
+Min/Max 
+https://jsfiddle.net/45c5r246/
+
 LAST_INSERT_ID()
 

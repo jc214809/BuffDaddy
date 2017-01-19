@@ -12,6 +12,12 @@ angular.module('sample.exerciseForm', [
       $scope.exercise.distance = false;
       $scope.exercise.calories = false;
       $scope.exercise.heartRate = false;
+      $scope.exercise.stairs = false;
+      $scope.exercise.steps = false;
+      $scope.exercise.level = false;
+      $scope.exercise.incline = false;
+      $scope.exercise.strokes = false;
+      $scope.exercise.speed = false;
       $scope.exercise.socialId = $scope.auth.profile.identities[0].user_id;
     };
     $scope.resetForm();
