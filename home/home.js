@@ -68,6 +68,24 @@ angular.module('sample.home', ['auth0'])
           if ($scope.workoutExercises[i].weight == "1") {
             count++
           }
+          if ($scope.workoutExercises[i].stairs == "1") {
+            count++
+          }
+          if ($scope.workoutExercises[i].steps == "1") {
+            count++
+          }
+          if ($scope.workoutExercises[i].level == "1") {
+            count++
+          }
+          if ($scope.workoutExercises[i].incline == "1") {
+            count++
+          }
+          if ($scope.workoutExercises[i].strokes == "1") {
+            count++
+          }
+          if ($scope.workoutExercises[i].speed == "1") {
+            count++
+          }
         }
         $scope.setWidth(count);
       }
