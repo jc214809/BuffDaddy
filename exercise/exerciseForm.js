@@ -28,6 +28,17 @@ angular.module('sample.exerciseForm', [
         return true;
       }
     }
+
+    $scope.maxSelect = function() {
+      var limit = 4;
+      $('input[type=checkbox]').on('change', function(evt) {
+        if ($("input[type=checkbox]:checked").length > limit) {
+          this.checked = false;
+          alert("Only four attribute allowed per exercise");
+        }
+      });
+    }
+
     if (exerciseservice.exercise.exerciseID) {
       $scope.exercise = exerciseservice.exercise;
     }
