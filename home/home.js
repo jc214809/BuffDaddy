@@ -39,7 +39,6 @@ angular.module('sample.home', ['auth0'])
             console.log("Error checking for workout" + JSON.stringify(response));
           });
     };
-    $scope.checkForWorkout();
 
     $http.get($scope.url + "/getUsersExercises?id=" + $scope.socialId)
       .then(function successCallback(response) {
