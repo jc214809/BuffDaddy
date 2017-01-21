@@ -15,19 +15,13 @@ angular.module('sample.home', ['auth0'])
       search: ''
     };
     $scope.filterBy = [];
-
-    $http.get($scope.url + "/getUsersExercises?id=" + $scope.auth.profile.identities[0].user_id)
-      .then(function successCallback(response) {
-          $scope.exercises = response.data;
-        },
-        function errorCallback(response) {
-          console.log("Error getting users exercises " + JSON.stringify(response));
-        });
+    $scope.workoutIndicator = null;
     $scope.auth = auth;
+    $scope.socialId = $scope.auth.profile.identities[0].user_id
     $scope.workoutDetails = {
-      "socialId": $scope.auth.profile.identities[0].user_id
+      "socialId": $scope.socialId
     };
-    $scope.workoutIndicator = false;
+    
     $scope.checkForWorkout = function() {
       $http.get($scope.url + "/workoutInProgress?id=" + $scope.workoutDetails.socialId)
         .then(
@@ -46,6 +40,14 @@ angular.module('sample.home', ['auth0'])
           });
     };
     $scope.checkForWorkout();
+
+    $http.get($scope.url + "/getUsersExercises?id=" + $scope.socialId)
+      .then(function successCallback(response) {
+          $scope.exercises = response.data;
+        },
+        function errorCallback(response) {
+          console.log("Error getting users exercises " + JSON.stringify(response));
+        });
     $scope.inputWidth = function(exerciseId) {
       var count = 0
       for (var i = 0; i < $scope.workoutExercises.length; i++) {
@@ -222,7 +224,7 @@ angular.module('sample.home', ['auth0'])
 
     };
     $scope.getPreviousData = function(exerciseId) {
-      var promise = previousDataService.getPreviousData($scope.url, exerciseId, $scope.auth.profile.identities[0].user_id)
+      var promise = previousDataService.getPreviousData($scope.url, exerciseId, $scope.socialId)
       promise.then(function(data) {
         return data;
       });
@@ -304,7 +306,7 @@ angular.module('sample.home', ['auth0'])
           break;
         }
       }
-      var promise = previousDataService.getPreviousData($scope.url, exerciseId, $scope.auth.profile.identities[0].user_id)
+      var promise = previousDataService.getPreviousData($scope.url, exerciseId, $scope.socialId)
       promise.then(function(data) {
         $scope.previousData = data;
       });
