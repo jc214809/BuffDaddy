@@ -76,12 +76,13 @@
   <div class="modal-content">
     <div>
       <h4>{{modalExerciseDetails.exerciseName}}</h4>
+      <span ng-if="modalExerciseDetails.recommendation" style="color: red;" ng-bind="modalExerciseDetails.recommendation"></span>
     </div>
-    <div>
-      <p>{{modalExerciseDetails.exerciseDescription}}</p>
+    <div class="exerciseDescription" ng-click="toggleExerciseDescription()">
+      {{modalExerciseDetails.exerciseDescription}}
     </div>
-    <div ng-repeat="workout in previousData">
-      <h5 ng-if="workout != null">{{$index+1}} Workout(s) Ago</h5>
+    <div ng-repeat="workout in previousData" ng-if="workout != null">
+      <h5>{{$index+1}} Workout(s) Ago</h5>
       <div ng-repeat="set in workout">
         <b>Set {{$index+1}} => </b>
         <b ng-if="set.reps != null"><i title="Reps" class="flaticon-reps"></i> {{set.reps}}</b>

@@ -93,6 +93,13 @@ angular.module('sample.home', ['auth0'])
     $scope.resetScroll = function() {
       $('#exerciseModal').scrollTop(0);
     };
+    $scope.toggleExerciseDescription = function() {
+      if ($(".exerciseDescription").css("height") == "75px") {
+      $('.exerciseDescription').css('height', 'auto');
+      } else {
+      $('.exerciseDescription').css('height', '75px');
+      }
+    };
     $scope.initModals = function() {
       $('.modal-trigger').leanModal({
         dismissible: true,

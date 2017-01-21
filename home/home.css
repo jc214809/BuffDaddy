@@ -2,8 +2,8 @@
   font-size: 12px;
 }
 
-label{
- color: black !important;
+label {
+  color: black !important;
 }
 
 .btn-close {
@@ -79,4 +79,11 @@ input.ng-modified {
   position: relative;
   left: -4px;
   top: -2px;
+}
+
+.exerciseDescription {
+  height: 75px;
+  overflow: hidden;
+  white-space: pre-line;
+  font-size: 11px;
 }
