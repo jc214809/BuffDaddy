@@ -1,0 +1,106 @@
+ .nav-buffdaddy {
+   text-align: center;
+   background-color: white;
+   font-family: 'Rock Salt', cursive;
+   font-weight: bold;
+   color: black;
+   font-size: 20px;
+ }
+ 
+ .sideBar-logo {
+   text-align: center;
+   font-family: 'Rock Salt', cursive;
+   font-weight: bold;
+   color: black;
+   font-size: 20px;
+ }
+ 
+ .icon-drop {
+   font-size: 12px;
+ }
+ 
+ label {
+   color: black !important;
+ }
+ 
+ .btn-close {
+   padding: 0px !important;
+ }
+ 
+ .modal-exercise-name {
+   font-size: 22px;
+ }
+ 
+ .exercise-section.row {
+   margin-bottom: 0px !important;
+ }
+ 
+ .set-section.row {
+   margin-bottom: 0px !important;
+ }
+ 
+ .exercise-section .row,
+ .set-section .row {
+   margin-bottom: 0px !important;
+ }
+ 
+ .action-icons {
+   position: relative;
+   bottom: -10px;
+   font-size: 20px;
+   padding-left: 0px !important;
+ }
+ 
+ .hide-input {
+   display: none;
+ }
+ 
+ .form-btn {
+   background: none!important;
+   border: none;
+   /*padding: 0!important;*/
+   /*border is optional*/
+   /*border-bottom: 1px solid #444;*/
+   color: blue;
+ }
+ 
+ .set {
+   padding-right: 0px !important;
+ }
+ 
+ input.ng-modified {
+   border-color: red !important;
+   box-shadow: 0 1px 0 0 red !important;
+ }
+ 
+ .add-exercise {
+   position: fixed;
+   bottom: 15px;
+   right: 15px;
+   width: 100px;
+   padding: 5px;
+   font-size: 20px;
+   cursor: pointer;
+ }
+ 
+ .fixed-modal-btn {
+   position: fixed;
+   width: 100px;
+   padding: 5px;
+   font-size: 20px;
+   cursor: pointer;
+ }
+ 
+ .add-exercise .plus-icon {
+   font-size: xx-large;
+   position: relative;
+   left: -4px;
+   top: -2px;
+ }
+ 
+ .exerciseDescription {
+   height: 75px;
+   overflow: hidden;
+   white-space: pre-line;
+   font-size: 13px;
+ }

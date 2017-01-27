@@ -1,0 +1,24 @@
+#exerciseForm label {
+  font-size: 15px !important;
+  color: black !important;
+}
+
+input {
+  border-bottom: 1px solid #2F2868 !important;
+}
+
+.list {
+  font-size: 30px;
+}
+
+.icon {
+  font-size: 12px;
+}
+
+
+/*.display {
+    position: relative !important;
+    left: 0px !important;
+    visibility: visible !important;
+}
+*/

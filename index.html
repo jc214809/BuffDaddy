@@ -1,0 +1,118 @@
+<html>
+
+<head>
+  <title>04 - User Profile</title>
+  <!-- Viewport settings-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <!-- ICONS -->
+  <link rel="stylesheet" type="text/css" href="images/icons/font/flaticon.css">
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+  <link rel="apple-touch-icon" sizes="57x57" href="./images/icon/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="./images/icon/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="./images/icon/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="./images/icon/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="./images/icon/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="./images/icon/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="./images/icon/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="./images/icon/apple-touch-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="./images/icon/apple-touch-icon-180x180.png">
+  <link rel="icon" type="image/png" href="./images/icon/favicon-16x16.png" sizes="16x16">
+  <link rel="icon" type="image/png" href="./images/icon/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="./images/icon/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="./images/icon/android-chrome-192x192.png" sizes="192x192">
+  <meta name="msapplication-square70x70logo" content="./images/icon/smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="./images/icon/mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="./images/icon/widetile.png" />
+  <meta name="msapplication-square310x310logo" content="./images/icon/largetile.png" />
+  <!-- Basic style -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="login/login.css">
+  <link rel="stylesheet" type="text/css" href="home/home.css">
+  <link rel="stylesheet" type="text/css" href="exercise/exercise.css">
+  <!-- <link rel="stylesheet" type="text/css" href="app.css"> -->
+  <!-- <link rel="stylesheet" type="text/css" href="exercise/exercise.css"> -->
+  <!-- <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" /> -->
+  <script type="text/javascript">
+  var myDiv;
+  console.origLog = console.log;
+  console.log = function(x) {
+    if (!myDiv) myDiv = document.getElementById('div');
+    if (myDiv) myDiv.innerHTML = x;
+    else console.origLog("can not determine myDiv");
+  }
+  </script>
+</head>
+
+<body>
+  <div ng-app="app" ng-controller="AppCtrl">
+    <nav ng-hide="!isAuthenticated" style="background-color:#2F2868; color:white;">
+      <div class="nav-wrapper">
+        <a href="#!" class="brand-logo"><img src="./images/BuffDaddy.png" style="width: 50px; top: 10px; position: relative;" /></a>
+        <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+        <ul class="right hide-on-med-and-down">
+          <li><a href="sass.html">Sass</a></li>
+          <li><a href="badges.html">Components</a></li>
+          <li><a href="collapsible.html">Javascript</a></li>
+          <li><a href="mobile.html">Mobile</a></li>
+        </ul>
+        <ul class="side-nav nav-buffdaddy" id="mobile-demo">
+          <label class="sideBar-logo">
+            <span>Buff</span> <img src="./images/BuffDaddy.png" style="width: 50px; top: 10px; position: relative;" /> <span>Daddy</span>
+          </label>
+          <li>
+            <a href="#/" ng-click="close()">Home</a>
+          </li>
+          <li>
+            <a href="#!/exercise" ng-click="close()">Exercise</a>
+          </li>
+          <li>
+            <a href="#/exercise" ng-click="close()">Past Workouts</a>
+          </li>
+          <li>
+            <a href="#/exercise" ng-click="close()">My Account</a>
+          </li>
+          <li id="logoutSidebar" ng-click="authService.logout();close();">
+            <img style="width:31px;top: 10px; position: relative;" src="{{profile.picture}}" /> Logout
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div ui-view></div>
+  </div>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <!-- The Original Scripts -->
+  <script type="text/javascript" src="auth0-variables.js"></script>
+  <script type="text/javascript" src="bower_components/angular/angular.js"></script>
+  <script type="text/javascript" src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+  <script type="text/javascript" src="bower_components/auth0-lock/build/lock.js"></script>
+  <script type="text/javascript" src="bower_components/angular-lock/dist/angular-lock.js"></script>
+  <script type="text/javascript" src="bower_components/angular-jwt/dist/angular-jwt.js"></script>
+  <script type="text/javascript" src="app.js"></script>
+  <script type="text/javascript" src="app.run.js"></script>
+  <script type="text/javascript" src="home/notInArray.filter.js"></script>
+  <script type="text/javascript" src="home/home.controller.js"></script>
+  <script type="text/javascript" src="login/login.controller.js"></script>
+  <script type="text/javascript" src="exercise/exercise.controller.js"></script>
+  <script type="text/javascript" src="exercise/exerciseForm.controller.js"></script>
+  <script type="text/javascript" src="auth/auth.service.js"></script>
+  <!-- MY SCRIPTS -->
+   <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.css">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-materialize/0.1.8/angular-materialize.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+  <!-- <link href='sidebar/css/sidebar.css' rel='stylesheet' type='text/css'> -->
+  <script src="https://rawgit.com/betsol/angular-input-modified/v2.1.0/dist/angular-input-modified.js"></script>
+  <script type="text/javascript">
+  $('.button-collapse').sideNav();
+   $(document).ready(function() {
+      Materialize.updateTextFields();
+    });
+  </script>
+</body>
+<div id="div"></div>
+
+</html>

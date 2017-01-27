@@ -1,0 +1,158 @@
+<div class="container-fluid" data-ng-init="checkForWorkout();">
+  <div class="home center-align">
+    <h3>Welcome</h3>
+    <h3>{{profile.name}}!</h3>
+    <button class="btn btn-primary" ng-if="workoutIndicator != null" ng-hide="workoutIndicator" ng-click="newWorkout()">Start Workout</button>
+    <button class="btn modal-trigger red" data-target="confirmationModal" ng-if="workoutIndicator != null" ng-show="workoutIndicator">End Workout</button>
+    <a class="btn-floating btn-large waves-effect waves-light red modal-trigger add-exercise" ng-show="workoutIndicator" data-target='exerciseModal' ng-click="resetScroll()"><i class="fa fa-plus material-icons plus-icon" aria-hidden="true"></i></a>
+  </div>
+  <div class="exercise-section row" ng-repeat="exercise in workoutExercises" repeat-done="initModals()">
+    {{inputWidth(exercise.exerciseId)}}
+    <a class="modal-trigger" data-target="exerciseDetails" ng-click="getModalDetails(exercise.exerciseId)"><h5 ng-bind="exercise.exerciseName" class="col s12"></h5></a>
+    <div class="set-section row" ng-repeat="set in sets | orderBy:'set.setId'" repeat-done="initModals()" ng-if="exercise.exerciseId == set.exerciseId">
+      <form ng-submit="saveSetDetails(set)" name="setForm">
+        <div class="row">
+          <input id="setId{{set.setId}}" type="text" ng-model="set.setId" class="validate" hidden>
+          <div class="input-field col set" style="width:{{size}}" ng-class="{'hide-input': exercise.reps == 0}">
+            <input id="reps{{set.setId}}" ng-model-options="{ updateOn: 'blur' }" ng-change="saveSetDetails(set);setForm.$setPristine();" type="text" pattern="[0-9]*" ng-model="set.reps" class="validate">
+            <label for="reps{{set.setId}}"><i title="Reps" class="flaticon-reps"></i>Reps</label>
+          </div>
+          <div class="input-field col set" style="width:{{size}}" ng-class="{'hide-input': exercise.weight == 0}">
+            <input id="weight{{set.setId}}" ng-model-options="{ updateOn: 'blur' }" ng-change="saveSetDetails(set);setForm.$setPristine();" type="text" pattern="[0-9]*" ng-model="set.weight" class="validate">
+            <label for="weight{{set.setId}}"><i title="Weight" class="flaticon-weight"></i>Weight</label>
+          </div>
+          <div class="input-field col set" style="width:{{size}}" ng-class="{'hide-input': exercise.time == 0}">
+            <input id="time{{set.setId}}" ng-model-options="{ updateOn: 'blur' }" ng-change="saveSetDetails(set);setForm.$setPristine();" type="text" ng-model="set.time" class="validate">
+            <label for="time{{set.setId}}"><i title="Time" class="fa fa-clock-o" aria-hidden="true"></i>Duration</label>
+          </div>
+          <div class="input-field col set" style="width:{{size}}" ng-class="{'hide-input': exercise.distance == 0}">
+            <input id="distance{{set.setId}}" ng-model-options="{ updateOn: 'blur' }" ng-change="saveSetDetails(set);setForm.$setPristine();" type="text" ng-model="set.distance" class="validate">
+            <label for="distance{{set.setId}}"><i title="Distance" class="fa fa-map-marker" aria-hidden="true"></i>Distance</label>
+          </div>
+          <div class="input-field col set" style="width:{{size}}" ng-class="{'hide-input': exercise.heartRate == 0}">
+            <input id="heartRate{{set.setId}}" ng-model-options="{ updateOn: 'blur' }" ng-change="saveSetDetails(set);setForm.$setPristine();" type="text" pattern="[0-9]*" ng-model="set.heartRate" class="validate">
+            <label for="heartRate{{set.setId}}"><i title="Heart Rate" class="fa fa-heartbeat" aria-hidden="true"></i>Heart Rate</label>
+          </div>
+          <div class="input-field col set" style="width:{{size}}" ng-class="{'hide-input': exercise.calories == 0}">
+            <input id="calories{{set.setId}}" ng-model-options="{ updateOn: 'blur' }" ng-change="saveSetDetails(set);setForm.$setPristine();" type="text" pattern="[0-9]*" ng-model="set.calories" class="validate">
+            <label for="calories{{set.setId}}"><i title="Calories" class="fa fa-fire" aria-hidden="true"></i>Calories</label>
+          </div>
+          <div class="input-field col set" style="width:{{size}}" ng-class="{'hide-input': exercise.stairs == 0}">
+            <input id="stairs{{set.setId}}" ng-model-options="{ updateOn: 'blur' }" ng-change="saveSetDetails(set);setForm.$setPristine();" type="text" pattern="[0-9]*" ng-model="set.stairs" class="validate">
+            <label for="stairs{{set.setId}}"><i title="Stairs" class="flaticon-stairs" aria-hidden="true"></i>Stairs</label>
+          </div>
+          <div class="input-field col set" style="width:{{size}}" ng-class="{'hide-input': exercise.steps == 0}">
+            <input id="steps{{set.setId}}" ng-model-options="{ updateOn: 'blur' }" ng-change="saveSetDetails(set);setForm.$setPristine();" type="text" pattern="[0-9]*" ng-model="set.steps" class="validate">
+            <label for="steps{{set.setId}}"><i title="Steps" class="flaticon-steps" aria-hidden="true"></i>Steps</label>
+          </div>
+          <div class="input-field col set" style="width:{{size}}" ng-class="{'hide-input': exercise.level == 0}">
+            <input id="level{{set.setId}}" ng-model-options="{ updateOn: 'blur' }" ng-change="saveSetDetails(set);setForm.$setPristine();" type="text" pattern="[0-9]*" ng-model="set.level" class="validate">
+            <label for="level{{set.setId}}"><i title="Level" class="flaticon-level" aria-hidden="true"></i>Level</label>
+          </div>
+          <div class="input-field col set" style="width:{{size}}" ng-class="{'hide-input': exercise.incline == 0}">
+            <input id="incline{{set.setId}}" ng-model-options="{ updateOn: 'blur' }" ng-change="saveSetDetails(set);setForm.$setPristine();" type="text" ng-model="set.incline" class="validate">
+            <label for="incline{{set.setId}}"><i title="Incline" class="flaticon-incline" aria-hidden="true"></i>Incline</label>
+          </div>
+          <div class="input-field col set" style="width:{{size}}" ng-class="{'hide-input': exercise.strokes == 0}">
+            <input id="strokes{{set.setId}}" ng-model-options="{ updateOn: 'blur' }" ng-change="saveSetDetails(set);setForm.$setPristine();" type="text" pattern="[0-9]*" ng-model="set.strokes" class="validate">
+            <label for="strokes{{set.setId}}"><i title="Strokes" class="flaticon-strokes" aria-hidden="true"></i>Strokes</label>
+          </div>
+          <div class="input-field col set" style="width:{{size}}" ng-class="{'hide-input': exercise.speed == 0}">
+            <input id="speed{{set.setId}}" ng-model-options="{ updateOn: 'blur' }" ng-change="saveSetDetails(set);setForm.$setPristine();" type="text" ng-model="set.speed" class="validate">
+            <label for="speed{{set.setId}}"><i title="Speed" class="flaticon-speed" aria-hidden="true"></i>Speed</label>
+          </div>
+          <div class="input-field col action-icons">
+            &nbsp;
+            <!-- <i class="fa fa-floppy-o" aria-hidden="true" ng-click="saveSetDetails(set);setForm.$setPristine();"></i> &nbsp; -->
+            <a class="modal-trigger" data-target='deleteSetModal' ng-click="storeDeleteData(set)"><i class="fa fa-trash" style="color: red" aria-hidden="true"></i></a>
+          </div>
+        </div>
+      </form>
+    </div>
+    <a href="#!/" class="form-btn col" ng-click="addSet(exercise.exerciseId)">Add a Set...</a>
+  </div>
+  <div id="exerciseModal" class="modal bottom-sheet">
+    <div class="modal-content">
+      <div class="row">
+        <div class="col s11">
+          <h4>Add an Exercise</h4>
+        </div>
+        <div class="col s1">
+          <a href="#!/" class="modal-action modal-close waves-effect waves-green btn-flat pull-right btn-close fixed-modal-btn"><i class="fa fa-chevron-circle-down" aria-hidden="true"></i></a>
+        </div>
+      </div>
+      <div class="row">
+        <input type="text" ng-model="filters.search.exerciseName" placeholder="Search Exercises">
+      </div>
+      <div class="row" ng-repeat="exercise in exercises | filter:filters.search| notInArray:filterBy:'exerciseID'  | orderBy:'exerciseName'">
+        <!--  -->
+        <div class=""><a class="modal-action modal-close btn-floating btn-large waves-effect waves-light red" style="margin-right: 10px" ng-click="addSet(exercise.exerciseID)"><i class="fa fa-plus" aria-hidden="true"></i></a><span class="modal-exercise-name" ng-bind="exercise.exerciseName"></span></div>
+      </div>
+    </div>
+  </div>
+  <div id="exerciseDetails" class="modal">
+    <div class="modal-content">
+      <div>
+        <h4>{{modalExerciseDetails.exerciseName}}</h4>
+        <span ng-if="modalExerciseDetails.recommendation" style="color: red;" ng-bind="modalExerciseDetails.recommendation"></span>
+      </div>
+      <div class="exerciseDescription" ng-click="toggleExerciseDescription()">
+        {{modalExerciseDetails.exerciseDescription}}
+      </div>
+      <div ng-repeat="workout in previousData" ng-if="workout != null">
+        <h5>{{$index+1}} Workout(s) Ago</h5>
+        <div ng-repeat="set in workout">
+          <b>Set {{$index+1}} => </b>
+          <b ng-if="set.reps != null"><i title="Reps" class="flaticon-reps"></i> {{set.reps}}</b>
+          <b ng-if="set.weight != null"><i title="Weight" class="flaticon-weight"></i> {{set.weight}}</b>
+          <b ng-if="set.time != null"><i title="Time" class="fa fa-clock-o" aria-hidden="true"></i> {{set.time}}</b>
+          <b ng-if="set.distance != null"><i title="Distance" class="fa fa-map-marker" aria-hidden="true"></i> {{set.distance}}</b>
+          <b ng-if="set.heartRate != null"><i title="Heart Rate" class="fa fa-heartbeat" aria-hidden="true"></i> {{set.heartRate}}</b>
+          <b ng-if="set.calories != null"><i title="Calories" class="fa fa-fire" aria-hidden="true"></i> {{set.calories}}</b>
+          <b ng-if="set.stairs != null"><i title="Stairs" class="flaticon-stairs" aria-hidden="true"></i> {{set.stairs}}</b>
+          <b ng-if="set.steps != null"><i title="Steps" class="flaticon-steps" aria-hidden="true"></i> {{set.steps}}</b>
+          <b ng-if="set.level != null"><i title="Level" class="flaticon-level" aria-hidden="true"></i> {{set.level}}</b>
+          <b ng-if="set.incline != null"><i title="Incline" class="flaticon-incline" aria-hidden="true"></i> {{set.incline}}</b>
+          <b ng-if="set.strokes != null"><i title="Strokes" class="flaticon-strokes" aria-hidden="true"></i> {{set.strokes}}</b>
+          <b ng-if="set.speed != null"><i title="Speed" class="flaticon-speed" aria-hidden="true"></i> {{set.speed}}</b>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="confirmationModal" class="modal modal-fixed-footer">
+    <div class="modal-content">
+      <h4>Complete Workout?</h4>
+      <p>Would you like to complete this current workout?</p>
+    </div>
+    <div class="modal-footer">
+      <a href="#!/" class="modal-action modal-close red btn-flat white-text" ng-click="endWorkout()">End Workout</a>
+      <a href="#!/" class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+    </div>
+  </div>
+  <div id="deleteSetModal" class="modal modal-fixed-footer">
+    <div class="modal-content">
+      <h4>Delete Set?</h4>
+      <p>Would you like to delete this current set from the workout?</p>
+    </div>
+    <div class="modal-footer">
+      <a href="#!/" class="modal-close red btn-flat white-text" ng-click="deleteSet(set);setForm.$setPristine();">Delete</a>
+      <a href="#!/" class="modal-close waves-effect waves-green btn-flat">Cancel</a>
+    </div>
+  </div>
+  <br>
+  <br>
+  <br>
+  <script type="text/javascript">
+  $(document).ready(function() {
+    $('.modal').modal({
+      dismissible: true, // Modal can be dismissed by clicking outside of the modal
+      ready: function(modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
+      },
+      complete: function() {} // Callback for Modal close
+    });
+  });
+  $(".modal .modal-close").click(function(e) {
+    e.preventDefault();
+    $(".modal").modal("close");
+  })
+  </script>
