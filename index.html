@@ -1,7 +1,7 @@
-<html>
+<html  ng-app="app" ng-controller="AppCtrl">
 
 <head>
-  <title>04 - User Profile</title>
+ <title>{{title}} | Buff Daddy</title>
   <!-- Viewport settings-->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -47,7 +47,7 @@
 </head>
 
 <body>
-  <div ng-app="app" ng-controller="AppCtrl">
+  <div>
     <nav ng-hide="!isAuthenticated" style="background-color:#2F2868; color:white;">
       <div class="nav-wrapper">
         <a href="#!" class="brand-logo"><img src="./images/BuffDaddy.png" style="width: 50px; top: 10px; position: relative;" /></a>
@@ -92,6 +92,7 @@
   <script type="text/javascript" src="bower_components/angular-jwt/dist/angular-jwt.js"></script>
   <script type="text/javascript" src="app.js"></script>
   <script type="text/javascript" src="app.run.js"></script>
+  <script type="text/javascript" src="updateTitle.directive.js"></script>
   <script type="text/javascript" src="home/notInArray.filter.js"></script>
   <script type="text/javascript" src="home/home.controller.js"></script>
   <script type="text/javascript" src="login/login.controller.js"></script>

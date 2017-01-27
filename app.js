@@ -66,7 +66,8 @@
         templateUrl: 'home/home.html',
         //controllerAs: 'vm',
         data: {
-          requiresLogin: true
+          requiresLogin: true,
+          pageTitle: 'Home'
         }
       })
       .state('login', {
@@ -75,7 +76,8 @@
         templateUrl: 'login/login.html',
         //controllerAs: 'vm',
         data: {
-          requiresLogin: false
+          requiresLogin: false,
+          pageTitle: 'Login'
         }
       }).state('exercise', {
         url: '/exercise',
@@ -83,7 +85,8 @@
         templateUrl: 'exercise/exercise.html',
         //controllerAs: 'vm',
         data: {
-          requiresLogin: true
+          requiresLogin: true,
+          pageTitle: 'Exercise'
         }
       }).state('exerciseForm', {
         url: '/exerciseForm',
@@ -91,7 +94,8 @@
         templateUrl: 'exercise/exerciseForm.html',
         //controllerAs: 'vm',
         data: {
-          requiresLogin: true
+          requiresLogin: true,
+          pageTitle: 'Exercise'
         }
       });
 
