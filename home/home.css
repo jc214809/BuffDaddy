@@ -73,6 +73,10 @@
    box-shadow: 0 1px 0 0 red !important;
  }
  
+ .row .set input {
+   margin: 0 0 -10px 0 !important;
+ }
+ 
  #exerciseModal.modal {
    max-height: 100% !important;
  }
