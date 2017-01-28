@@ -9,21 +9,33 @@
   HomeController.$inject = ['$scope', 'authService', '$http', '$location', 'previousDataService'];
 
   function HomeController($scope, authService, $http, $location, previousDataService) {
-
     $scope.authService = authService;
+
+    authService.getProfileDeferred().then(function(profile) {
+      $scope.profile = profile;
+      $scope.socialId = $scope.profile.identities[0].user_id;
+
+      $scope.checkForWorkout();
+      $http.get($scope.url + "/getUsersExercises?id=" + $scope.socialId).then(function successCallback(response) {
+          $scope.exercises = response.data;
+        },
+        function errorCallback(response) {
+          console.log("Error getting users exercises " + JSON.stringify(response));
+        });
+    });
 
     $scope.filters = {
       search: ''
     };
     $scope.filterBy = [];
     $scope.workoutIndicator = null;
-    
+
     $scope.workoutDetails = {
       "socialId": $scope.socialId
     };
 
     $scope.checkForWorkout = function() {
-      $http.get($scope.url + "/workoutInProgress?id=" + $scope.workoutDetails.socialId)
+      $http.get($scope.url + "/workoutInProgress?id=" + $scope.socialId)
         .then(
           function successCallback(response) {
             $scope.workoutData = response.data;
@@ -40,13 +52,14 @@
           });
     };
 
-    $http.get($scope.url + "/getUsersExercises?id=" + $scope.socialId)
-      .then(function successCallback(response) {
-          $scope.exercises = response.data;
-        },
-        function errorCallback(response) {
-          console.log("Error getting users exercises " + JSON.stringify(response));
-        });
+    // $http.get($scope.url + "/getUsersExercises?id=" + $scope.socialId)
+    //   .then(function successCallback(response) {
+    //       $scope.exercises = response.data;
+    //     },
+    //     function errorCallback(response) {
+    //       console.log("Error getting users exercises " + JSON.stringify(response));
+    //     });
+
     $scope.inputWidth = function(exerciseId) {
       var count = 0
       for (var i = 0; i < $scope.workoutExercises.length; i++) {
@@ -95,20 +108,35 @@
       $('#exerciseModal').scrollTop(0);
     };
     $scope.toggleExerciseDescription = function() {
-      if ($(".exerciseDescription").css("height") == "75px") {
-        $('.exerciseDescription').css('height', 'auto');
-      } else {
-        $('.exerciseDescription').css('height', '75px');
+       alert($(".exerciseDescription").offsetHeight);
+      if ($(".exerciseDescription").offsetHeight < 75) {
+        if ($(".exerciseDescription").css("height") == "75px") {
+          $('.exerciseDescription').css('height', 'auto');
+        } else {
+          $('.exerciseDescription').css('height', '75px');
+        }
       }
     };
+    $scope.functionThatReturnsStyle = function(_this) {
+      var element = document.getElementById('exerciseDescription');
+       alert(element.offsetHeight);
+      var style1 = "height: 75px";
+      var style2 = "height: auto";
+      if (element.offsetHeight > 75) {
+        return style1;
+      } else {
+        return style2;
+      }
+
+    }
     $scope.initModals = function() {
       $('.modal').modal({
         dismissible: true, // Modal can be dismissed by clicking outside of the modal
         ready: function(modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
         },
         complete: function() {
-          //e.preventDefault();
-        } // Callback for Modal close
+            //e.preventDefault();
+          } // Callback for Modal close
       });
     }
     $scope.setWidth = function(count) {
@@ -315,4 +343,3 @@
   }
 
 }());
-

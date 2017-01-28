@@ -64,7 +64,7 @@
     lockProvider.init({
       clientID: AUTH0_CLIENT_ID,
       domain: AUTH0_DOMAIN,
-      //loginUrl: 'login'
+      loginState: '/login',
     });
 
     $urlRouterProvider.otherwise('/login');

@@ -1,10 +1,10 @@
-<div class="container-fluid" data-ng-init="checkForWorkout();">
+<div class="container-fluid">
   <div class="home center-align">
     <h3>Welcome</h3>
     <h3>{{profile.name}}!</h3>
     <button class="btn btn-primary" ng-if="workoutIndicator != null" ng-hide="workoutIndicator" ng-click="newWorkout()">Start Workout</button>
     <button class="btn modal-trigger red" data-target="confirmationModal" ng-if="workoutIndicator != null" ng-show="workoutIndicator">End Workout</button>
-    <a class="btn-floating btn-large waves-effect waves-light red modal-trigger add-exercise" ng-show="workoutIndicator" data-target='exerciseModal' ng-click="resetScroll()"><i class="fa fa-plus material-icons plus-icon" aria-hidden="true"></i></a>
+    <a class="btn-floating btn-large waves-effect waves-light red modal-trigger add-exercise" ng-show="workoutIndicator" data-target="exerciseModal" ng-click="resetScroll()"><i class="fa fa-plus material-icons plus-icon" aria-hidden="true"></i></a>
   </div>
   <div class="exercise-section row" ng-repeat="exercise in workoutExercises" repeat-done="initModals()">
     {{inputWidth(exercise.exerciseId)}}
@@ -85,7 +85,6 @@
         <input type="text" ng-model="filters.search.exerciseName" placeholder="Search Exercises">
       </div>
       <div class="row" ng-repeat="exercise in exercises | filter:filters.search| notInArray:filterBy:'exerciseID'  | orderBy:'exerciseName'">
-        <!--  -->
         <div class=""><a class="modal-action modal-close btn-floating btn-large waves-effect waves-light red" style="margin-right: 10px" ng-click="addSet(exercise.exerciseID)"><i class="fa fa-plus" aria-hidden="true"></i></a><span class="modal-exercise-name" ng-bind="exercise.exerciseName"></span></div>
       </div>
     </div>
@@ -96,8 +95,7 @@
         <h4>{{modalExerciseDetails.exerciseName}}</h4>
         <span ng-if="modalExerciseDetails.recommendation" style="color: red;" ng-bind="modalExerciseDetails.recommendation"></span>
       </div>
-      <div class="exerciseDescription" ng-click="toggleExerciseDescription()">
-        {{modalExerciseDetails.exerciseDescription}}
+      <div id="exerciseDescription" class="exerciseDescription" ng-click="toggleExerciseDescription()" style="{{functionThatReturnsStyle()}}" ng-bind="modalExerciseDetails.exerciseDescription">
       </div>
       <div ng-repeat="workout in previousData" ng-if="workout != null">
         <h5>{{$index+1}} Workout(s) Ago</h5>
@@ -118,6 +116,17 @@
         </div>
       </div>
     </div>
+<!--     <script type="text/javascript">
+    $(document).ready(function() {
+    if ($(".exerciseDescription").offsetHeight > 75) {
+      alert($(".exerciseDescription").offsetHeight);
+      $(".exerciseDescription").css("height", "auto");
+    } else {
+      alert($(".exerciseDescription").offsetHeight);
+      $(".exerciseDescription").css("height", "75px");
+    }
+    });
+    </script> -->
   </div>
   <div id="confirmationModal" class="modal modal-fixed-footer">
     <div class="modal-content">
@@ -144,7 +153,7 @@
   <br>
   <script type="text/javascript">
   $(document).ready(function() {
-    $('.modal').modal({
+    $(".modal").modal({
       dismissible: true, // Modal can be dismissed by clicking outside of the modal
       ready: function(modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
       },
