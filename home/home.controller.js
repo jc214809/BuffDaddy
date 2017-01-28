@@ -6,9 +6,9 @@
     .module('app')
     .controller('HomeController', HomeController);
 
-  HomeController.$inject = ['$scope', 'authService', '$http', '$location', 'previousDataService', 'exerciseservice'];
+  HomeController.$inject = ['$scope', 'authService', '$http', '$location', 'previousDataService'];
 
-  function HomeController($scope, authService, $http, $location, previousDataService, exerciseservice) {
+  function HomeController($scope, authService, $http, $location, previousDataService) {
 
     $scope.authService = authService;
 

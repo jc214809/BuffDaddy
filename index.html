@@ -1,7 +1,7 @@
-<html  ng-app="app" ng-controller="AppCtrl">
+<html ng-app="app" ng-controller="AppCtrl">
 
 <head>
- <title>{{title}} | Buff Daddy</title>
+  <title>{{title}} | Buff Daddy</title>
   <!-- Viewport settings-->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -91,16 +91,21 @@
   <script type="text/javascript" src="bower_components/angular-lock/dist/angular-lock.js"></script>
   <script type="text/javascript" src="bower_components/angular-jwt/dist/angular-jwt.js"></script>
   <script type="text/javascript" src="app.js"></script>
-  <script type="text/javascript" src="app.run.js"></script>
   <script type="text/javascript" src="updateTitle.directive.js"></script>
-  <script type="text/javascript" src="home/notInArray.filter.js"></script>
+  <script type="text/javascript" src="app.run.js"></script>
   <script type="text/javascript" src="home/home.controller.js"></script>
   <script type="text/javascript" src="login/login.controller.js"></script>
   <script type="text/javascript" src="exercise/exercise.controller.js"></script>
   <script type="text/javascript" src="exercise/exerciseForm.controller.js"></script>
+  <!-- DIRECTIVES | FILTERS | SERVICES -->
   <script type="text/javascript" src="auth/auth.service.js"></script>
+  <script type="text/javascript" src="home/notInArray.filter.js"></script>
+  <script type="text/javascript" src="home/inArray.filter.js"></script>
+  <script type="text/javascript" src="home/previousDataService.service.js"></script>
+  <script type="text/javascript" src="exercise/exerciseservice.service.js"></script>
+  <script type="text/javascript" src="home/repeatDone.directive.js"></script>
   <!-- MY SCRIPTS -->
-   <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.css">
+  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.css">
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-materialize/0.1.8/angular-materialize.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
@@ -109,9 +114,9 @@
   <script src="https://rawgit.com/betsol/angular-input-modified/v2.1.0/dist/angular-input-modified.js"></script>
   <script type="text/javascript">
   $('.button-collapse').sideNav();
-   $(document).ready(function() {
-      Materialize.updateTextFields();
-    });
+  $(document).ready(function() {
+    Materialize.updateTextFields();
+  });
   </script>
 </body>
 <div id="div"></div>

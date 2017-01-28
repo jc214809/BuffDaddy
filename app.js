@@ -6,7 +6,6 @@
     .module('app', ['auth0.lock', 'angular-jwt', 'ui.router', 'ui.materialize'])
     .config(config)
     .controller('AppCtrl', function AppCtrl($scope, authService) {
-      //var vm = this;
       $scope.authService = authService;
 
       authService.getProfileDeferred().then(function(profile) {
@@ -20,39 +19,6 @@
       $scope.close = function() {
         $('.button-collapse').sideNav('hide');
       }
-
-      // $scope.$on('$routeChangeSuccess', function(e, nextRoute) {
-      //   if (nextRoute.$$route && angular.isDefined(nextRoute.$$route.pageTitle)) {
-      //     $scope.pageTitle = nextRoute.$$route.pageTitle + ' | BuffDaddy';
-      //   }
-      // });
-    })
-    .service("previousDataService", function($http, $q) {
-      this.getPreviousData = function(url, exerciseId, userId) {
-        var deferred = $q.defer();
-        $http.get(url + "/getPreviousExerciseData?exerciseId=" + exerciseId + "&socialId=" + userId).then(function(data) {
-          deferred.resolve(data);
-        }, function(data) {
-          deferred.reject(data);
-        });
-        return deferred.promise;
-      }
-    }).filter('inArray', function($filter) {
-      return function(list, arrayFilter, element) {
-        if (arrayFilter) {
-          return $filter("filter")(list, function(listItem) {
-            return arrayFilter.indexOf(listItem[element]) != -1;
-          });
-        }
-      };
-    }).service('exerciseservice', function() {
-      this.exercise = {};
-    }).directive('repeatDone', function() {
-      return function(scope, element, attrs) {
-        if (scope.$last) { // all are rendered
-          scope.$eval(attrs.repeatDone);
-        }
-      }
     });
 
   config.$inject = ['$stateProvider', 'lockProvider', '$urlRouterProvider', 'jwtOptionsProvider'];
@@ -64,7 +30,6 @@
         url: '/',
         controller: 'HomeController',
         templateUrl: 'home/home.html',
-        //controllerAs: 'vm',
         data: {
           requiresLogin: true,
           pageTitle: 'Home'
@@ -74,7 +39,6 @@
         url: '/login',
         controller: 'LoginController',
         templateUrl: 'login/login.html',
-        //controllerAs: 'vm',
         data: {
           requiresLogin: false,
           pageTitle: 'Login'
@@ -83,7 +47,6 @@
         url: '/exercise',
         controller: 'ExerciseController',
         templateUrl: 'exercise/exercise.html',
-        //controllerAs: 'vm',
         data: {
           requiresLogin: true,
           pageTitle: 'Exercise'
@@ -92,7 +55,6 @@
         url: '/exerciseForm',
         controller: 'ExerciseFormController',
         templateUrl: 'exercise/exerciseForm.html',
-        //controllerAs: 'vm',
         data: {
           requiresLogin: true,
           pageTitle: 'Exercise'
@@ -102,7 +64,7 @@
     lockProvider.init({
       clientID: AUTH0_CLIENT_ID,
       domain: AUTH0_DOMAIN,
-      loginUrl: 'login'
+      //loginUrl: 'login'
     });
 
     $urlRouterProvider.otherwise('/login');
