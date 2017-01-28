@@ -108,7 +108,6 @@
       $('#exerciseModal').scrollTop(0);
     };
     $scope.toggleExerciseDescription = function() {
-       alert($(".exerciseDescription").offsetHeight);
       if ($(".exerciseDescription").offsetHeight < 75) {
         if ($(".exerciseDescription").css("height") == "75px") {
           $('.exerciseDescription').css('height', 'auto');
@@ -117,9 +116,8 @@
         }
       }
     };
-    $scope.functionThatReturnsStyle = function(_this) {
+    $scope.functionThatReturnsStyle = function() {
       var element = document.getElementById('exerciseDescription');
-       alert(element.offsetHeight);
       var style1 = "height: 75px";
       var style2 = "height: auto";
       if (element.offsetHeight > 75) {

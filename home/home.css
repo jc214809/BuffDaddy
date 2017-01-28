@@ -107,7 +107,6 @@
  }
  
  .exerciseDescription {
-   /*height: 75px;*/
    overflow: hidden;
    white-space: pre-line;
    font-size: 13px;
