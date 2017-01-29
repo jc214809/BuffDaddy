@@ -28,7 +28,9 @@
  }
  
  .modal-exercise-name {
-   font-size: 22px;
+   font-size: 18px;
+   position: relative;
+   top: 3.5px;
  }
  
  .exercise-section.row {
@@ -110,4 +112,8 @@
    overflow: hidden;
    white-space: pre-line;
    font-size: 13px;
+ }
+ 
+ .row {
+   margin-bottom: 10px !important;
  }

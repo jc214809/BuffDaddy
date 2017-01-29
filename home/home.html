@@ -78,29 +78,29 @@
           <h4>Add an Exercise</h4>
         </div>
         <div class="col s1">
-          <a href="#!/" class="modal-action modal-close waves-effect waves-green btn-flat pull-right btn-close fixed-modal-btn"><i class="fa fa-chevron-circle-down" aria-hidden="true"></i></a>
+          <a href="#!/" class="modal-action modal-close btn-flat pull-right btn-close fixed-modal-btn"><i class="fa fa-chevron-circle-down" aria-hidden="true"></i></a>
         </div>
       </div>
       <div class="row">
-        <input type="text" ng-model="filters.search.exerciseName" placeholder="Search Exercises">
+        <input type="text" ng-model="filters.search" placeholder="Search Exercises">
       </div>
-      <div class="row" ng-repeat="exercise in exercises | filter:filters.search| notInArray:filterBy:'exerciseID'  | orderBy:'exerciseName'">
-        <div class=""><a class="modal-action modal-close btn-floating btn-large waves-effect waves-light red" style="margin-right: 10px" ng-click="addSet(exercise.exerciseID)"><i class="fa fa-plus" aria-hidden="true"></i></a><span class="modal-exercise-name" ng-bind="exercise.exerciseName"></span></div>
+      <div class="row" ng-repeat="exercise in exercises | filter:filters.search | notInArray:filterBy:'exerciseID' | orderBy:'exerciseName'">
+        <a class="modal-action modal-close btn-floating btn-small waves-effect waves-light red" style="margin-right: 3px" ng-click="addSet(exercise.exerciseID)"><i class="fa fa-plus" aria-hidden="true"></i></a><span class="modal-exercise-name" ng-bind="exercise.exerciseName"></span>
       </div>
     </div>
   </div>
   <div id="exerciseDetails" class="modal">
     <div class="modal-content">
       <div>
-        <h4>{{modalExerciseDetails.exerciseName}}</h4>
-        <span ng-if="modalExerciseDetails.recommendation" style="color: red;" ng-bind="modalExerciseDetails.recommendation"></span>
+        <h4 ng-bind="modalExerciseDetails.exerciseName"></h4>
+        <span ng-if="modalExerciseDetails.recommendation" class="red-text" ng-bind="modalExerciseDetails.recommendation"></span>
       </div>
       <div id="exerciseDescription" class="exerciseDescription" ng-click="toggleExerciseDescription()" style="{{functionThatReturnsStyle()}}" ng-bind="modalExerciseDetails.exerciseDescription">
       </div>
       <div ng-repeat="workout in previousData" ng-if="workout != null">
-        <h5>{{$index+1}} Workout(s) Ago</h5>
+        <h5 class="light-blue-text text-accent-4">{{$index+1}} Workout(s) Ago</h5>
         <div ng-repeat="set in workout">
-          <b>Set {{$index+1}} => </b>
+          <b>Set {{$index+1}} <i class="fa fa-arrow-right" aria-hidden="true"></i> </b>
           <b ng-if="set.reps != null"><i title="Reps" class="flaticon-reps"></i> {{set.reps}}</b>
           <b ng-if="set.weight != null"><i title="Weight" class="flaticon-weight"></i> {{set.weight}}</b>
           <b ng-if="set.time != null"><i title="Time" class="fa fa-clock-o" aria-hidden="true"></i> {{set.time}}</b>

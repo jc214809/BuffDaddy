@@ -3,8 +3,12 @@
   color: black !important;
 }
 
+input:focus {
+  border-bottom: 1px solid black !important;
+}
+
 input {
-  border-bottom: 1px solid #2F2868 !important;
+  box-shadow: none !important;
 }
 
 .list {
