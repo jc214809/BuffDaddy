@@ -27,20 +27,11 @@
 
     authManager.redirectWhenUnauthenticated();
 
-    // $rootScope.$on('$stateChangeStart',
-    //   function(event, to, toParams) {
-    //     $rootScope.isNavigating = true;
-
-    //     var token = localStorage.getItem('id_token');
-    //     if (to.data && to.data.requiresLogin) {
-    //       if (!token || jwtHelper.isTokenExpired(token)) {
-    //         $timeout(function() {
-    //           $state.go('login');
-    //         });
-    //       }
-    //     }
-    //   }
-    // );
+    $rootScope.$on("$stateChangeSuccess", function(event, toState) {
+      $timeout(function() { // Needed to ensure the title is changed *after* the url so that history entries are correct.
+        $(document).prop('title', toState.data.pageTitle + " | Buff Daddy");
+      });
+    });
   }
 
 })();
