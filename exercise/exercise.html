@@ -35,7 +35,7 @@
               <span>Exercise Description:</span>
               <div>{{exercise.exerciseDescription}}</div>
             </div>
-            <div class="col s12" ng-hide="exercise.socialId != user" ng-show="exercise.socialId == user">
+            <div class="col s12" ng-hide="exercise.socialId != socialId" ng-show="exercise.socialId == socialId">
               <a class="waves-effect waves-light btn green" ng-click="editExercise(exercise)"><i class="fa fa-pencil material-icons plus-icon" aria-hidden="true"></i> Edit</a>
               <a class="waves-effect waves-light btn red"><i class="fa fa-trash material-icons plus-icon" aria-hidden="true"></i> Delete</a>
             </div>
