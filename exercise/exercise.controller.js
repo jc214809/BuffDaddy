@@ -66,7 +66,7 @@
     }
     $scope.addUserExercise = function(exerciseId) {
       $scope.exercise = {
-        "socialId": $scope.user,
+        "socialId": $scope.socialId,
         "exerciseID": exerciseId
       };
 
