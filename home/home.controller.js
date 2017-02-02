@@ -240,7 +240,6 @@
               $scope.newSets = response.data;
               angular.forEach($scope.newSets, function(set) {
                 if (!$scope.checkForSets(set.setId, $scope.sets, 'setId')) {
-                  set.sortId = $scope.getSortId(set);
                   $scope.sets.push(set);
                 }
               });
@@ -288,8 +287,9 @@
         .then(
           function successCallback(response) {
             $scope.workoutData = '';
-            $scope.sets = {};
-            $scope.workoutExercises = {};
+            $scope.sets = [];
+            $scope.workoutExercises = [];
+            $scope.filterBy = [];
             $scope.workoutIndicator = false;
           },
           function errorCallback(response) {
