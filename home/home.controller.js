@@ -10,6 +10,11 @@
 
   function HomeController($scope, authService, $http, $location, previousDataService) {
     $scope.authService = authService;
+    $scope.filters = {
+      search: ''
+    };
+    $scope.filterBy = [];
+    $scope.workoutIndicator = null;
 
     authService.getProfileDeferred().then(function(profile) {
       $scope.profile = profile;
@@ -23,12 +28,6 @@
           console.log("Error getting users exercises " + JSON.stringify(response));
         });
     });
-
-    $scope.filters = {
-      search: ''
-    };
-    $scope.filterBy = [];
-    $scope.workoutIndicator = null;
 
     $scope.workoutDetails = {
       "socialId": $scope.socialId
@@ -51,14 +50,6 @@
             console.log("Error checking for workout" + JSON.stringify(response));
           });
     };
-
-    // $http.get($scope.url + "/getUsersExercises?id=" + $scope.socialId)
-    //   .then(function successCallback(response) {
-    //       $scope.exercises = response.data;
-    //     },
-    //     function errorCallback(response) {
-    //       console.log("Error getting users exercises " + JSON.stringify(response));
-    //     });
 
     $scope.inputWidth = function(exerciseId) {
       var count = 0
@@ -104,21 +95,11 @@
         $scope.setWidth(count);
       }
     };
+
     $scope.resetScroll = function() {
       $('#exerciseModal').scrollTop(0);
     };
-    // $scope.getIndexAndTime = function(exerciseId, index) {
-    //   $scope.workoutExercises
-    //   for (var i = 0; i < $scope.workoutExercises.length; i++) {
-    //     if (true) {
-    //       if ($scope.workoutExercises[i].sortNumber || $scope.workoutExercises[i].time) {
-    //         $scope.workoutExercises[i].sortNumber = index;
-    //         var d = new Date();
-    //         $scope.workoutExercises[i].time = d.toJSON();
-    //       }
-    //     }
-    //   }
-    // };
+
     $scope.toggleExerciseDescription = function() {
       if ($(".exerciseDescription").offsetHeight < 75) {
         if ($(".exerciseDescription").css("height") == "75px") {
@@ -128,6 +109,7 @@
         }
       }
     };
+
     $scope.functionThatReturnsStyle = function() {
       var element = document.getElementById('exerciseDescription');
       var style1 = "height: 75px";
@@ -137,8 +119,8 @@
       } else {
         return style2;
       }
-
     }
+
     $scope.initModals = function() {
       $('.modal').modal({
         dismissible: true, // Modal can be dismissed by clicking outside of the modal
@@ -198,12 +180,22 @@
               if (eachSet.exerciseId == set.exerciseId) {
                 count++;
               }
+
             });
             if (count == 0) {
               for (var i = 0; i < $scope.workoutExercises.length; i++) {
                 if ($scope.workoutExercises[i].exerciseId == set.exerciseId) {
                   var index = $scope.filterBy.indexOf($scope.workoutExercises[i].exerciseId);
                   $scope.filterBy.splice(index, 1);
+                  //Delete Workout Exercise
+                  $http.post($scope.url + "/deleteWorkoutExercise", $scope.workoutExercises[i])
+                    .then(
+                      function successCallback(response) {
+                        console.log("Deleted UserExercise");
+                      },
+                      function errorCallback(response) {
+                        console.log("Failed to Deleted UserExercise");
+                      });
                   $scope.workoutExercises.splice(i, 1);
                 }
               }
@@ -313,7 +305,16 @@
         "workoutId": $scope.workoutData.workoutID,
         "exerciseId": exerciseId
       }
-
+      if (!$scope.checkForExercise(exerciseId, $scope.workoutExercises)) {
+        $http.post($scope.url + "/addWorkoutExercise", $scope.setDetails)
+          .then(
+            function successCallback(response) {
+              console.log("Added UserExercise");
+            },
+            function errorCallback(response) {
+              console.log("Failed to Add UserExercise");
+            });
+      }
       $http.post($scope.url + "/addSet", $scope.setDetails)
         .then(
           function successCallback(response) {
@@ -344,14 +345,6 @@
     $scope.storeDeleteData = function(set) {
       $scope.setDeleteData = set;
     };
-
-    // $scope.logout = function() {
-    //   auth.signout();
-    //   store.remove('profile');
-    //   store.remove('token');
-    //   $location.path('/login');
-    // };
-
   }
 
 }());
