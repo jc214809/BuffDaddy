@@ -13,7 +13,7 @@
       </div>
       <div id="myExercises" class="col s12">
         </br>
-        <div class="list collection-item" ng-repeat="exercise in usersExercises">
+        <div class="list collection-item" ng-repeat="exercise in usersExercises | orderBy:'exerciseName'">
           <a class="btn-floating btn-large waves-effect waves-light red modal-trigger" ng-click="deleteUserExercise(exercise.exerciseID)">
             <i class="fa fa-minus material-icons plus-icon" aria-hidden="true"></i>
           </a>
@@ -44,7 +44,7 @@
       </div>
       <div id="allExercises" class="col s12">
         </br>
-        <div class="list collection-item" ng-repeat="exercise in exercises | notInArray:filterByUsersExercises:'exerciseID'">
+        <div class="list collection-item" ng-repeat="exercise in exercises | notInArray:filterByUsersExercises:'exerciseID' | orderBy:'exerciseName'">
           <a class="btn-floating btn-large waves-effect waves-light green modal-trigger" ng-click="addUserExercise(exercise.exerciseID)">
             <i class="fa fa-plus material-icons plus-icon" aria-hidden="true"></i>
           </a>
