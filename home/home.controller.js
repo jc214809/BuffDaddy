@@ -107,6 +107,18 @@
     $scope.resetScroll = function() {
       $('#exerciseModal').scrollTop(0);
     };
+    // $scope.getIndexAndTime = function(exerciseId, index) {
+    //   $scope.workoutExercises
+    //   for (var i = 0; i < $scope.workoutExercises.length; i++) {
+    //     if (true) {
+    //       if ($scope.workoutExercises[i].sortNumber || $scope.workoutExercises[i].time) {
+    //         $scope.workoutExercises[i].sortNumber = index;
+    //         var d = new Date();
+    //         $scope.workoutExercises[i].time = d.toJSON();
+    //       }
+    //     }
+    //   }
+    // };
     $scope.toggleExerciseDescription = function() {
       if ($(".exerciseDescription").offsetHeight < 75) {
         if ($(".exerciseDescription").css("height") == "75px") {
@@ -228,6 +240,7 @@
               $scope.newSets = response.data;
               angular.forEach($scope.newSets, function(set) {
                 if (!$scope.checkForSets(set.setId, $scope.sets, 'setId')) {
+                  set.sortId = $scope.getSortId(set);
                   $scope.sets.push(set);
                 }
               });
@@ -258,6 +271,7 @@
               $scope.newWorkoutExercises = response.data;
               angular.forEach($scope.newWorkoutExercises, function(exercise) {
                 if (!$scope.checkForExercise(exercise.exerciseId, $scope.workoutExercises)) {
+
                   $scope.workoutExercises.push(exercise);
                   $scope.filterBy.push(exercise.exerciseId);
                 }

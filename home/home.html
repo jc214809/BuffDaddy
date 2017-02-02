@@ -6,10 +6,10 @@
     <button class="btn modal-trigger red" data-target="confirmationModal" ng-if="workoutIndicator != null" ng-show="workoutIndicator">End Workout</button>
     <a class="btn-floating btn-large waves-effect waves-light red modal-trigger add-exercise" ng-show="workoutIndicator" data-target="exerciseModal" ng-click="resetScroll()"><i class="fa fa-plus material-icons plus-icon" aria-hidden="true"></i></a>
   </div>
-  <div class="exercise-section row" ng-repeat="exercise in workoutExercises" repeat-done="initModals()">
+  <div class="exercise-section row" ng-repeat="exercise in workoutExercises | orderBy:'sortId'" repeat-done="initModals()">
     {{inputWidth(exercise.exerciseId)}}
     <a class="modal-trigger" data-target="exerciseDetails" ng-click="getModalDetails(exercise.exerciseId)"><h5 ng-bind="exercise.exerciseName" class="col s12"></h5></a>
-    <div class="set-section row" ng-repeat="set in sets | orderBy:'set.setId'" repeat-done="initModals()" ng-if="exercise.exerciseId == set.exerciseId">
+    <div class="set-section row" ng-repeat="set in sets | orderBy:'setId'" repeat-done="initModals()" ng-if="exercise.exerciseId == set.exerciseId">
       <form ng-submit="saveSetDetails(set)" name="setForm">
         <div class="row">
           <input id="setId{{set.setId}}" type="text" ng-model="set.setId" class="validate" hidden>
@@ -116,17 +116,6 @@
         </div>
       </div>
     </div>
-<!--     <script type="text/javascript">
-    $(document).ready(function() {
-    if ($(".exerciseDescription").offsetHeight > 75) {
-      alert($(".exerciseDescription").offsetHeight);
-      $(".exerciseDescription").css("height", "auto");
-    } else {
-      alert($(".exerciseDescription").offsetHeight);
-      $(".exerciseDescription").css("height", "75px");
-    }
-    });
-    </script> -->
   </div>
   <div id="confirmationModal" class="modal modal-fixed-footer">
     <div class="modal-content">
