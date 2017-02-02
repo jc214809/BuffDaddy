@@ -109,7 +109,13 @@
   <!-- <link href='sidebar/css/sidebar.css' rel='stylesheet' type='text/css'> -->
   <script src="https://rawgit.com/betsol/angular-input-modified/v2.1.0/dist/angular-input-modified.js"></script>
   <script type="text/javascript">
-  $('.button-collapse').sideNav();
+    $('.button-collapse').sideNav({
+      closeOnClick: true,
+      draggable: true
+    });
+    $(".drag-target").on("swipeleft", function () {
+      $("#sidenav-overlay").trigger("click");
+    });
   $(document).ready(function() {
     Materialize.updateTextFields();
   });
