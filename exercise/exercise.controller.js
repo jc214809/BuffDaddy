@@ -10,7 +10,18 @@
   function ExerciseController($scope, authService, $state, $http, exerciseservice) {
     $scope.filterAllExercises = [];
     $scope.filterByUsersExercises = [];
- 
+    $scope.currentPage = 0;
+    $scope.pageSize = 10;
+    $scope.exercisesSort = '';
+
+    $scope.getMyExercises = function () {
+      return $filter('filter')($scope.usersExercises, $scope.exercisesSort)
+    }
+
+    $scope.numberOfPages = function() {
+      return Math.ceil($scope.usersExercises.length / $scope.pageSize);
+    }
+
     $http.get($scope.url + "/getAllExercises")
       .then(function successCallback(response) {
           $scope.exercises = response.data;
