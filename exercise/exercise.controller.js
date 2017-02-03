@@ -11,7 +11,7 @@
     $scope.filterAllExercises = [];
     $scope.filterByUsersExercises = [];
     $scope.currentPage = 0;
-    $scope.pageSize = 10;
+    $scope.pageSize = 8;
     $scope.exercisesSort = '';
 
     $scope.getMyExercises = function () {

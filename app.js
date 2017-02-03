@@ -19,11 +19,6 @@
       $scope.close = function() {
         $('.button-collapse').sideNav('hide');
       }
-    }).filter('startFrom', function() {
-      return function(input, start) {
-        start = +start; //parse to int
-        return input.slice(start);
-      }
     });
 
   config.$inject = ['$stateProvider', 'lockProvider', '$urlRouterProvider', 'jwtOptionsProvider'];
@@ -39,8 +34,7 @@
           requiresLogin: true,
           pageTitle: 'Home'
         }
-      })
-      .state('login', {
+      }).state('login', {
         url: '/login',
         controller: 'LoginController',
         templateUrl: 'login/login.html',
@@ -63,6 +57,14 @@
         data: {
           requiresLogin: true,
           pageTitle: 'Exercise'
+        }
+      }).state('previousWorkouts', {
+        url: '/previousWorkouts',
+        controller: 'PreviousWorkoutsController',
+        templateUrl: 'previousworkouts/previousworkouts.html',
+        data: {
+          requiresLogin: true,
+          pageTitle: 'Previous Workouts'
         }
       });
 
