@@ -1,3 +1,12 @@
 <div>
-    Joel was here
+  <!-- {{previousData}} -->
+  <div ng-repeat="(workoutId, workoutData) in previousData | groupBy: 'workoutId'">
+    {{ workoutId }} Workout
+    <div ng-repeat="(exerciseName, exerciseData) in workoutData | orderBy: 'sortId' | groupBy: 'exerciseName'">
+      {{exerciseName}}
+      <div ng-repeat="set in exerciseData">
+        {{ set.reps}} {{ set.weight }} 
+      </div>
+    </div>
+  </div>
 </div>

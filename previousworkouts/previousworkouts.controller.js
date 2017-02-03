@@ -5,12 +5,16 @@
     .module('app')
     .controller('PreviousWorkoutsController', PreviousWorkoutsController);
 
-  PreviousWorkoutsController.$inject = ['$scope','authService'];
+  PreviousWorkoutsController.$inject = ['$scope','authService','$http'];
 
-  function PreviousWorkoutsController($scope, authService) {
+  function PreviousWorkoutsController($scope, authService, $http) {
 
-    $scope.authService = authService;
-    $state.go('home');
+    $http.get($scope.url + "/getPreviousWorkouts?socialId=" + $scope.socialId).then(function successCallback(response) {
+          $scope.previousData = response.data;
+        },
+        function errorCallback(response) {
+          console.log("Error getting users exercises " + JSON.stringify(response));
+        });
   }
 
 }());

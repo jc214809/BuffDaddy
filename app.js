@@ -3,7 +3,7 @@
   'use strict';
 
   angular
-    .module('app', ['auth0.lock', 'angular-jwt', 'ui.router', 'ui.materialize'])
+    .module('app', ['auth0.lock', 'angular-jwt', 'ui.router', 'ui.materialize', 'angular.filter'])
     .config(config)
     .controller('AppCtrl', function AppCtrl($scope, authService) {
       $scope.authService = authService;
