@@ -6,8 +6,8 @@
       <div class="collapsible-body">
         <span>
         <div ng-repeat="(exerciseName, exerciseData) in workoutData | orderBy: 'sortId' | groupBy: 'exerciseName'">
-          {{exerciseName}}
-          <div ng-repeat="set in exerciseData">
+          <h5 style="padding-left: 10px; color: blue;" ng-bind="exerciseName"></h5>
+          <div style="padding-left: 20px" ng-repeat="set in exerciseData">
             <b ng-if="set.reps != null"><i title="Reps" class="flaticon-reps"></i> {{set.reps}}</b>
             <b ng-if="set.weight != null"><i title="Weight" class="flaticon-weight"></i> {{set.weight}}</b>
             <b ng-if="set.time != null"><i title="Time" class="fa fa-clock-o" aria-hidden="true"></i> {{set.time}}</b>
