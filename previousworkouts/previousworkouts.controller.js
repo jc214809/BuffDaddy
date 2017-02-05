@@ -11,7 +11,7 @@
 
     $http.get($scope.url + "/getPreviousWorkouts?socialId=" + $scope.socialId).then(function successCallback(response) {
           //$scope.previousData = response.data;
-          $scope.previousData = $filter('orderBy')(response.data, '-workoutId');
+          $scope.previousData = $filter('orderBy')(response.data, '+workoutId');
 
         },
         function errorCallback(response) {
