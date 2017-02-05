@@ -1,12 +1,12 @@
 <div>
   <!-- {{previousData}} -->
   <ul class="collapsible" data-collapsible="accordion">
-    <li ng-repeat="(workoutId, workoutData) in previousData | groupBy: 'workoutId'">
-      <div class="collapsible-header">{{ workoutId }} Workout</div>
+    <li ng-repeat="workoutData in previousData | groupBy: 'workoutId' | toArray:true | orderBy:'workoutId':true">
+      <div class="collapsible-header">{{ workoutData[0].workoutId }} Workout</div>
       <div class="collapsible-body">
         <span>
-        <div ng-repeat="(exerciseName, exerciseData) in workoutData | orderBy: 'sortId' | groupBy: 'exerciseName'">
-          <h5 style="padding-left: 10px; color: blue;" ng-bind="exerciseName"></h5>
+        <div ng-repeat="exerciseData in workoutData | groupBy: 'sortId' | toArray:true | orderBy:'sortId'">
+          <h5 style="padding-left: 10px; color: blue; margin: 0.82rem 0 0 0;" ng-bind="exerciseData[0].exerciseName"></h5>
           <div style="padding-left: 20px" ng-repeat="set in exerciseData">
             <b ng-if="set.reps != null"><i title="Reps" class="flaticon-reps"></i> {{set.reps}}</b>
             <b ng-if="set.weight != null"><i title="Weight" class="flaticon-weight"></i> {{set.weight}}</b>
