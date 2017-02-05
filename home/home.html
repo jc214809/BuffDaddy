@@ -98,7 +98,7 @@
       <div id="exerciseDescription" class="exerciseDescription" ng-click="toggleExerciseDescription()" style="{{functionThatReturnsStyle()}}" ng-bind="modalExerciseDetails.exerciseDescription">
       </div>
       <div ng-repeat="workout in previousData" ng-if="workout != null">
-        <h5 class="light-blue-text text-accent-4">{{$index+1}} Workout(s) Ago</h5>
+        <h6 class="light-blue-text text-accent-4">{{$index+1}} Workout(s) Ago - {{getDate(workout[0].workoutDate)}}</h6>
         <div ng-repeat="set in workout">
           <b>Set {{$index+1}} <i class="fa fa-arrow-right" aria-hidden="true"></i> </b>
           <b ng-if="set.reps != null"><i title="Reps" class="flaticon-reps"></i> {{set.reps}}</b>
