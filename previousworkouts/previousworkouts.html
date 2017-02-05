@@ -1,7 +1,7 @@
 <div>
   <!-- {{previousData}} -->
   <ul class="collapsible" data-collapsible="accordion">
-    <li ng-repeat="(workoutId, workoutData) in previousData | groupBy: 'workoutId'| orderBy:'workoutId'">
+    <li ng-repeat="(workoutId, workoutData) in previousData | groupBy: 'workoutId'| toArray: true |torderBy:'workoutId'">
       <div class="collapsible-header">{{ workoutId }} Workout</div>
       <div class="collapsible-body">
         <span>
