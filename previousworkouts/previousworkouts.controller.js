@@ -5,9 +5,9 @@
     .module('app')
     .controller('PreviousWorkoutsController', PreviousWorkoutsController);
 
-  PreviousWorkoutsController.$inject = ['$scope','authService','$http'];
+  PreviousWorkoutsController.$inject = ['$scope','authService','$http','$filter'];
 
-  function PreviousWorkoutsController($scope, authService, $http) {
+  function PreviousWorkoutsController($scope, authService, $http,$filter) {
 
     $http.get($scope.url + "/getPreviousWorkouts?socialId=" + $scope.socialId).then(function successCallback(response) {
           //$scope.previousData = response.data;
