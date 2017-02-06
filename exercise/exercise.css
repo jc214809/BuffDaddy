@@ -19,6 +19,14 @@ input {
   font-size: 12px;
 }
 
+.tabs {
+  overflow-x: hidden;
+}
+
+#logoutNav{
+  cursor: pointer;
+}
+
 
 /*.display {
     position: relative !important;
