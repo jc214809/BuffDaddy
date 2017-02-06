@@ -11,7 +11,6 @@
 
     $http.get($scope.url + "/getPreviousWorkouts?socialId=" + $scope.socialId).then(function successCallback(response) {
           $scope.previousData = response.data;
-
         },
         function errorCallback(response) {
           console.log("Error getting users exercises " + JSON.stringify(response));
