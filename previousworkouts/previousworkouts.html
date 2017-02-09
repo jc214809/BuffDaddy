@@ -7,7 +7,7 @@
         <span>
         <div ng-repeat="exerciseData in workoutData | groupBy: 'sortId' | toArray:true | orderBy:'sortId'">
           <h5 style="padding-left: 10px; color: blue; margin: 0.82rem 0 0 0;" ng-bind="exerciseData[0].exerciseName"></h5>
-          <div style="padding-left: 20px" ng-repeat="set in exerciseData">
+          <div style="padding-left: 20px" ng-repeat="set in exerciseData | orderBy:'setId'">
             <b ng-if="set.reps != null"><i title="Reps" class="flaticon-reps"></i> {{set.reps}}</b>
             <b ng-if="set.weight != null"><i title="Weight" class="flaticon-weight"></i> {{set.weight}}</b>
             <b ng-if="set.time != null"><i title="Time" class="fa fa-clock-o" aria-hidden="true"></i> {{set.time}}</b>
