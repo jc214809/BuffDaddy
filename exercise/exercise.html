@@ -16,10 +16,10 @@
       <div id="myExercises" class="col s12">
         </br>
         <div class="list collection-item" ng-repeat="exercise in usersExercises | orderBy:'exerciseName' | filter:exercisesSort | startFrom:currentPage*pageSize | limitTo:pageSize">
-          <a class="btn-floating btn-small waves-effect waves-light red modal-trigger" ng-click="deleteUserExercise(exercise.exerciseID)">
+          <a class="btn-floating btn-small waves-effect waves-light red modal-trigger" ng-click="deleteUserExercise(exercise.exerciseId)">
             <i class="fa fa-minus material-icons plus-icon" aria-hidden="true"></i>
           </a>
-          <span ng-click="toggle(exercise.exerciseID)">
+          <span ng-click="toggle(exercise.exerciseId)">
           <span ng-bind="exercise.exerciseName" style="font-size:20px"></span>
           <i ng-if="exercise.weight" title="Weight" class="flaticon-exercise icon"></i>
           <i ng-if="exercise.reps" title="Reps" class="flaticon-gym icon"></i>
@@ -28,7 +28,7 @@
           <i ng-if="exercise.calories" title="Calories" class="fa fa-fire icon" aria-hidden="true"></i>
           <i ng-if="exercise.heartRate" title="Heart Rate" class="fa fa-heartbeat icon" aria-hidden="true"></i>
           </span>
-          <div id="details-{{exercise.exerciseID}}" class="row" style="display:none; font-size:15px;">
+          <div id="details-{{exercise.exerciseId}}" class="row" style="display:none; font-size:15px;">
             <div class="col s6">
               <b><span>Exercise Description:</span></b>
               <div>{{exercise.exerciseDescription}}</div>
@@ -55,11 +55,11 @@
       </div>
       <div id="allExercises" class="col s12">
         </br>
-        <div class="list collection-item" ng-repeat="exercise in exercises | notInArray:filterByUsersExercises:'exerciseID' | orderBy:'exerciseName'">
-          <a class="btn-floating btn-small waves-effect waves-light green modal-trigger" ng-click="addUserExercise(exercise.exerciseID)">
+        <div class="list collection-item" ng-repeat="exercise in exercises | notInArray:filterByUsersExercises:'exerciseId' | orderBy:'exerciseName'">
+          <a class="btn-floating btn-small waves-effect waves-light green modal-trigger" ng-click="addUserExercise(exercise.exerciseId)">
             <i class="fa fa-plus material-icons plus-icon" aria-hidden="true"></i>
           </a>
-          <span ng-click="toggle(exercise.exerciseID)">
+          <span ng-click="toggle(exercise.exerciseId)">
           <span ng-bind="exercise.exerciseName" style="font-size:20px"></span>
           <i ng-if="exercise.weight" title="Weight" class="flaticon-exercise icon"></i>
           <i ng-if="exercise.reps" title="Reps" class="flaticon-gym icon"></i>
@@ -68,7 +68,7 @@
           <i ng-if="exercise.calories" title="Calories" class="fa fa-fire icon" aria-hidden="true"></i>
           <i ng-if="exercise.heartRate" title="Heart Rate" class="fa fa-heartbeat icon" aria-hidden="true"></i>
           </span>
-          <div id="details-{{exercise.exerciseID}}" class="row" style="display:none; font-size:15px;">
+          <div id="details-{{exercise.exerciseId}}" class="row" style="display:none; font-size:15px;">
             <div class="col s6">
               <b><span>Exercise Description:</span></b>
               <div>{{exercise.exerciseDescription}}</div>

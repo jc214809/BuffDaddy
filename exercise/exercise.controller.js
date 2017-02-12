@@ -26,7 +26,7 @@
       .then(function successCallback(response) {
           $scope.exercises = response.data;
           angular.forEach($scope.exercises, function(exercise) {
-            $scope.filterAllExercises.push(exercise.exerciseID);
+            $scope.filterAllExercises.push(exercise.exerciseId);
           });
         },
         function errorCallback(response) {
@@ -36,7 +36,7 @@
       .then(function successCallback(response) {
           $scope.usersExercises = response.data;
           angular.forEach($scope.usersExercises, function(exercise) {
-            $scope.filterByUsersExercises.push(exercise.exerciseID);
+            $scope.filterByUsersExercises.push(exercise.exerciseId);
           });
         },
         function errorCallback(response) {
@@ -48,13 +48,13 @@
     $scope.deleteUserExercise = function(exerciseId) {
       $scope.exercise = {
         "socialId": $scope.socialId,
-        "exerciseID": exerciseId
+        "exerciseId": exerciseId
       };
 
       $http.post($scope.url + "/deleteUsersExercise", $scope.exercise)
         .then(function successCallback(response) {
             for (var i = 0; i < $scope.usersExercises.length; i++) {
-              if ($scope.usersExercises[i].exerciseID == exerciseId) {
+              if ($scope.usersExercises[i].exerciseId == exerciseId) {
                 var index = $scope.filterByUsersExercises.indexOf($scope.usersExercises[i].exerciseId);
                 $scope.filterByUsersExercises.splice(index, 1);
                 $scope.usersExercises.splice(i, 1);
@@ -78,14 +78,14 @@
     $scope.addUserExercise = function(exerciseId) {
       $scope.exercise = {
         "socialId": $scope.socialId,
-        "exerciseID": exerciseId
+        "exerciseId": exerciseId
       };
 
       $http.post($scope.url + "/addExerciseToUser", $scope.exercise)
         .then(function successCallback(response) {
             $scope.filterByUsersExercises.push(exerciseId);
             for (var i = 0; i < $scope.exercises.length; i++) {
-              if ($scope.exercises[i].exerciseID == exerciseId) {
+              if ($scope.exercises[i].exerciseId == exerciseId) {
                 $scope.usersExercises.push($scope.exercises[i]);
               }
             }

@@ -42,8 +42,8 @@
               $scope.workoutIndicator = false;
             } else {
               $scope.workoutIndicator = true;
-              $scope.getExercise(response.data.workoutID);
-              $scope.getSets(response.data.workoutID);
+              $scope.getExercise(response.data.workoutId);
+              $scope.getSets(response.data.workoutId);
             }
           },
           function errorCallback(response) {
@@ -55,40 +55,40 @@
       var count = 0
       for (var i = 0; i < $scope.workoutExercises.length; i++) {
         if (exerciseId == $scope.workoutExercises[i].exerciseId) {
-          if ($scope.workoutExercises[i].calories == "1") {
+          if ($scope.workoutExercises[i].calories) {
             count++
           }
-          if ($scope.workoutExercises[i].distance == "1") {
+          if ($scope.workoutExercises[i].distance) {
             count++
           }
-          if ($scope.workoutExercises[i].heartRate == "1") {
+          if ($scope.workoutExercises[i].heartRate) {
             count++
           }
-          if ($scope.workoutExercises[i].reps == "1") {
+          if ($scope.workoutExercises[i].reps) {
             count++
           }
-          if ($scope.workoutExercises[i].time == "1") {
+          if ($scope.workoutExercises[i].time) {
             count++
           }
-          if ($scope.workoutExercises[i].weight == "1") {
+          if ($scope.workoutExercises[i].weight) {
             count++
           }
-          if ($scope.workoutExercises[i].stairs == "1") {
+          if ($scope.workoutExercises[i].stairs) {
             count++
           }
-          if ($scope.workoutExercises[i].steps == "1") {
+          if ($scope.workoutExercises[i].steps) {
             count++
           }
-          if ($scope.workoutExercises[i].level == "1") {
+          if ($scope.workoutExercises[i].level) {
             count++
           }
-          if ($scope.workoutExercises[i].incline == "1") {
+          if ($scope.workoutExercises[i].incline) {
             count++
           }
-          if ($scope.workoutExercises[i].strokes == "1") {
+          if ($scope.workoutExercises[i].strokes) {
             count++
           }
-          if ($scope.workoutExercises[i].speed == "1") {
+          if ($scope.workoutExercises[i].speed) {
             count++
           }
         }
@@ -188,7 +188,11 @@
                   var index = $scope.filterBy.indexOf($scope.workoutExercises[i].exerciseId);
                   $scope.filterBy.splice(index, 1);
                   //Delete Workout Exercise
-                  $http.post($scope.url + "/deleteWorkoutExercise", $scope.workoutExercises[i])
+                  $scope.setDetails = {
+                    "workoutId": $scope.workoutData.workoutId,
+                    "exerciseId": $scope.workoutExercises[i].exerciseId
+                  }
+                  $http.post($scope.url + "/deleteWorkoutExercise", $scope.setDetails)
                     .then(
                       function successCallback(response) {
                         console.log("Deleted UserExercise");
@@ -222,8 +226,8 @@
       }
       return false;
     };
-    $scope.getSets = function(workoutID) {
-      $http.get($scope.url + "/getSets?id=" + workoutID)
+    $scope.getSets = function(workoutId) {
+      $http.get($scope.url + "/getSets?id=" + workoutId)
         .then(
           function successCallback(response) {
             if ($scope.sets == undefined || $scope.sets.length == undefined) {
@@ -249,8 +253,8 @@
       });
     };
 
-    $scope.getExercise = function(workoutID) {
-      $http.get($scope.url + "/getExercisesForWorkout?id=" + workoutID)
+    $scope.getExercise = function(workoutId) {
+      $http.get($scope.url + "/getExercisesForWorkout?id=" + workoutId)
         .then(
           function successCallback(response) {
             if ($scope.workoutExercises == undefined || $scope.workoutExercises.length == undefined) {
@@ -260,6 +264,7 @@
               });
             } else {
               $scope.newWorkoutExercises = response.data;
+              console.log($scope.newWorkoutExercises);
               angular.forEach($scope.newWorkoutExercises, function(exercise) {
                 if (!$scope.checkForExercise(exercise.exerciseId, $scope.workoutExercises)) {
 
@@ -302,7 +307,7 @@
 
     $scope.addSet = function(exerciseId) {
       $scope.setDetails = {
-        "workoutId": $scope.workoutData.workoutID,
+        "workoutId": $scope.workoutData.workoutId,
         "exerciseId": exerciseId
       }
       if (!$scope.checkForExercise(exerciseId, $scope.workoutExercises)) {
@@ -318,8 +323,8 @@
       $http.post($scope.url + "/addSet", $scope.setDetails)
         .then(
           function successCallback(response) {
-            $scope.getExercise($scope.workoutData.workoutID);
-            $scope.getSets($scope.workoutData.workoutID);
+            $scope.getExercise($scope.workoutData.workoutId);
+            $scope.getSets($scope.workoutData.workoutId);
             $scope.filters.search = '';
             $('#exerciseModal').modal('close');
           },
@@ -331,7 +336,7 @@
     $scope.getModalDetails = function(exerciseId) {
       $scope.previousData = null;
       for (var i = $scope.exercises.length - 1; i >= 0; i--) {
-        if ($scope.exercises[i].exerciseID == exerciseId) {
+        if ($scope.exercises[i].exerciseId == exerciseId) {
           $scope.modalExerciseDetails = $scope.exercises[i];
           break;
         }

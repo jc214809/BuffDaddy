@@ -24,7 +24,13 @@
         incline: false,
         strokes: false,
         speed: false,
-        socialId: $scope.socialId
+        socialId: $scope.socialId,
+        arms: false,
+        back: false,
+        chest: false,
+        core: false,
+        legs: false,
+        shoulders: false
       };
     };
     $scope.count = function() {
@@ -49,7 +55,8 @@
       $scope.buttonText = "Update"
     }
     $("#exerciseForm").submit(function(event) {
-      if ($scope.exercise.exerciseID == null) {
+      console.log(JSON.stringify($scope.exercise));
+      if ($scope.exercise.exerciseId == null) {
         $http.post($scope.url + "/addExercise", $scope.exercise)
           .then(
             function successCallback(response) {

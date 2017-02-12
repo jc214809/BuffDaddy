@@ -13,51 +13,51 @@
       <form ng-submit="saveSetDetails(set)" name="setForm">
         <div class="row">
           <input id="setId{{set.setId}}" type="text" ng-model="set.setId" class="validate" hidden>
-          <div class="input-field col set" style="width:{{size}}" ng-class="{'hide-input': exercise.reps == 0}">
+          <div class="input-field col set" style="width:{{size}}" ng-class="{'hide-input': !(exercise.reps)}">
             <input id="reps{{set.setId}}" ng-model-options="{ updateOn: 'blur' }" ng-change="saveSetDetails(set);setForm.$setPristine();" type="text" pattern="[0-9]*" ng-model="set.reps" class="validate">
             <label for="reps{{set.setId}}"><i title="Reps" class="flaticon-reps"></i>Reps</label>
           </div>
-          <div class="input-field col set" style="width:{{size}}" ng-class="{'hide-input': exercise.weight == 0}">
+          <div class="input-field col set" style="width:{{size}}" ng-class="{'hide-input': !(exercise.weight)}">
             <input id="weight{{set.setId}}" ng-model-options="{ updateOn: 'blur' }" ng-change="saveSetDetails(set);setForm.$setPristine();" type="text" pattern="[0-9]*" ng-model="set.weight" class="validate">
             <label for="weight{{set.setId}}"><i title="Weight" class="flaticon-weight"></i>Weight</label>
           </div>
-          <div class="input-field col set" style="width:{{size}}" ng-class="{'hide-input': exercise.time == 0}">
+          <div class="input-field col set" style="width:{{size}}" ng-class="{'hide-input': !(exercise.time)}">
             <input id="time{{set.setId}}" ng-model-options="{ updateOn: 'blur' }" ng-change="saveSetDetails(set);setForm.$setPristine();" type="text" ng-model="set.time" class="validate">
             <label for="time{{set.setId}}"><i title="Time" class="fa fa-clock-o" aria-hidden="true"></i>Duration</label>
           </div>
-          <div class="input-field col set" style="width:{{size}}" ng-class="{'hide-input': exercise.distance == 0}">
+          <div class="input-field col set" style="width:{{size}}" ng-class="{'hide-input': !(exercise.distance)}">
             <input id="distance{{set.setId}}" ng-model-options="{ updateOn: 'blur' }" ng-change="saveSetDetails(set);setForm.$setPristine();" type="text" ng-model="set.distance" class="validate">
             <label for="distance{{set.setId}}"><i title="Distance" class="fa fa-map-marker" aria-hidden="true"></i>Distance</label>
           </div>
-          <div class="input-field col set" style="width:{{size}}" ng-class="{'hide-input': exercise.heartRate == 0}">
+          <div class="input-field col set" style="width:{{size}}" ng-class="{'hide-input': !(exercise.heartRate)}">
             <input id="heartRate{{set.setId}}" ng-model-options="{ updateOn: 'blur' }" ng-change="saveSetDetails(set);setForm.$setPristine();" type="text" pattern="[0-9]*" ng-model="set.heartRate" class="validate">
             <label for="heartRate{{set.setId}}"><i title="Heart Rate" class="fa fa-heartbeat" aria-hidden="true"></i>Heart Rate</label>
           </div>
-          <div class="input-field col set" style="width:{{size}}" ng-class="{'hide-input': exercise.calories == 0}">
+          <div class="input-field col set" style="width:{{size}}" ng-class="{'hide-input': !(exercise.calories)}">
             <input id="calories{{set.setId}}" ng-model-options="{ updateOn: 'blur' }" ng-change="saveSetDetails(set);setForm.$setPristine();" type="text" pattern="[0-9]*" ng-model="set.calories" class="validate">
             <label for="calories{{set.setId}}"><i title="Calories" class="fa fa-fire" aria-hidden="true"></i>Calories</label>
           </div>
-          <div class="input-field col set" style="width:{{size}}" ng-class="{'hide-input': exercise.stairs == 0}">
+          <div class="input-field col set" style="width:{{size}}" ng-class="{'hide-input': !(exercise.stairs)}">
             <input id="stairs{{set.setId}}" ng-model-options="{ updateOn: 'blur' }" ng-change="saveSetDetails(set);setForm.$setPristine();" type="text" pattern="[0-9]*" ng-model="set.stairs" class="validate">
             <label for="stairs{{set.setId}}"><i title="Stairs" class="flaticon-stairs" aria-hidden="true"></i>Stairs</label>
           </div>
-          <div class="input-field col set" style="width:{{size}}" ng-class="{'hide-input': exercise.steps == 0}">
+          <div class="input-field col set" style="width:{{size}}" ng-class="{'hide-input': !(exercise.steps)}">
             <input id="steps{{set.setId}}" ng-model-options="{ updateOn: 'blur' }" ng-change="saveSetDetails(set);setForm.$setPristine();" type="text" pattern="[0-9]*" ng-model="set.steps" class="validate">
             <label for="steps{{set.setId}}"><i title="Steps" class="flaticon-steps" aria-hidden="true"></i>Steps</label>
           </div>
-          <div class="input-field col set" style="width:{{size}}" ng-class="{'hide-input': exercise.level == 0}">
+          <div class="input-field col set" style="width:{{size}}" ng-class="{'hide-input': !(exercise.level)}">
             <input id="level{{set.setId}}" ng-model-options="{ updateOn: 'blur' }" ng-change="saveSetDetails(set);setForm.$setPristine();" type="text" pattern="[0-9]*" ng-model="set.level" class="validate">
             <label for="level{{set.setId}}"><i title="Level" class="flaticon-level" aria-hidden="true"></i>Level</label>
           </div>
-          <div class="input-field col set" style="width:{{size}}" ng-class="{'hide-input': exercise.incline == 0}">
+          <div class="input-field col set" style="width:{{size}}" ng-class="{'hide-input': !(exercise.incline)}">
             <input id="incline{{set.setId}}" ng-model-options="{ updateOn: 'blur' }" ng-change="saveSetDetails(set);setForm.$setPristine();" type="text" ng-model="set.incline" class="validate">
             <label for="incline{{set.setId}}"><i title="Incline" class="flaticon-incline" aria-hidden="true"></i>Incline</label>
           </div>
-          <div class="input-field col set" style="width:{{size}}" ng-class="{'hide-input': exercise.strokes == 0}">
+          <div class="input-field col set" style="width:{{size}}" ng-class="{'hide-input': !(exercise.strokes)}">
             <input id="strokes{{set.setId}}" ng-model-options="{ updateOn: 'blur' }" ng-change="saveSetDetails(set);setForm.$setPristine();" type="text" pattern="[0-9]*" ng-model="set.strokes" class="validate">
             <label for="strokes{{set.setId}}"><i title="Strokes" class="flaticon-strokes" aria-hidden="true"></i>Strokes</label>
           </div>
-          <div class="input-field col set" style="width:{{size}}" ng-class="{'hide-input': exercise.speed == 0}">
+          <div class="input-field col set" style="width:{{size}}" ng-class="{'hide-input': !(exercise.speed)}">
             <input id="speed{{set.setId}}" ng-model-options="{ updateOn: 'blur' }" ng-change="saveSetDetails(set);setForm.$setPristine();" type="text" ng-model="set.speed" class="validate">
             <label for="speed{{set.setId}}"><i title="Speed" class="flaticon-speed" aria-hidden="true"></i>Speed</label>
           </div>
@@ -84,8 +84,8 @@
       <div class="row">
         <input type="text" ng-model="filters.search" placeholder="Search Exercises">
       </div>
-      <div class="row" ng-repeat="exercise in exercises | filter:filters.search | notInArray:filterBy:'exerciseID' | orderBy:'exerciseName'">
-        <a class="modal-action modal-close btn-floating btn-small waves-effect waves-light red" style="margin-right: 3px" ng-click="addSet(exercise.exerciseID)"><i class="fa fa-plus" aria-hidden="true"></i></a><span class="modal-exercise-name" ng-bind="exercise.exerciseName"></span>
+      <div class="row" ng-repeat="exercise in exercises | filter:filters.search | notInArray:filterBy:'exerciseId' | orderBy:'exerciseName'">
+        <a class="modal-action modal-close btn-floating btn-small waves-effect waves-light red" style="margin-right: 3px" ng-click="addSet(exercise.exerciseId)"><i class="fa fa-plus" aria-hidden="true"></i></a><span class="modal-exercise-name" ng-bind="exercise.exerciseName"></span>
       </div>
     </div>
   </div>

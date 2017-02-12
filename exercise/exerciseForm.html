@@ -4,17 +4,17 @@
     <p>{{directions}}</p>
   </center>
   <form id="exerciseForm" name="exerciseForm" class="container">
-    <input type="hidden" ng-model="exercise.socialId" name="socialId">
-    <div class="">
+    <input class="attribute" type="hidden" ng-model="exercise.socialId" name="socialId">
+    <div class="form-group">
       <label class="col-sm-2 left-align" for="exerciseName">Exercise Name</label>
       <div class="col-sm-3">
-        <input type="text" ng-model="exercise.exerciseName" name="exerciseName">
+        <input class="attribute" type="text" ng-model="exercise.exerciseName" name="exerciseName">
       </div>
     </div>
     <div class="form-group">
       <label class="col-md-2 left-align" for="recommendation">Recommendation</label>
       <div class="col-md-3">
-        <input id="recommendation" ng-model="exercise.recommendation" name="recommendation">
+        <input class="attribute" id="recommendation" ng-model="exercise.recommendation" name="recommendation">
       </div>
     </div>
     <div class="form-group">
@@ -23,6 +23,36 @@
         <textarea id="exerciseDescription" ng-model="exercise.exerciseDescription" name="exerciseDescription" class="materialize-textarea" length="2000"></textarea>
       </div>
     </div>
+    <label class="col-md-2 left-align">Muscle Group</label>
+    <div class="row">
+      <div class="col s4">
+        <input class="muscle-group" type="checkbox" ng-model="exercise.arms" id="arms" />
+        <label for="arms">Arms</label>
+      </div>
+      <div class="col s4">
+        <input class="muscle-group" type="checkbox" ng-model="exercise.back" id="back" />
+        <label for="back">Back</label>
+      </div>
+      <div class="col s4">
+        <input class="muscle-group" type="checkbox" ng-model="exercise.chest" id="chest" />
+        <label for="chest">Chest</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s4">
+        <input class="muscle-group" type="checkbox" ng-model="exercise.core" id="core" />
+        <label for="core">Core</label>
+      </div>
+      <div class="col s4">
+        <input class="muscle-group" type="checkbox" ng-model="exercise.legs" id="legs" />
+        <label for="legs">Legs</label>
+      </div>
+      <div class="col s4">
+        <input class="muscle-group" type="checkbox" ng-model="exercise.shoulders" id="shoulders" />
+        <label for="shoulders">Shoulders</label>
+      </div>
+    </div>
+    <label class="col-md-2 left-align">Attributes</label>
     <div class="row center">
       <div class="col s4">
         <div class="form-group">
@@ -33,7 +63,7 @@
           <div class="col-md-3">
             <div class="switch">
               <label>
-                <input name="weight" ng-model="exercise.weight" type="checkbox">
+                <input class="attribute" name="weight" ng-model="exercise.weight" type="checkbox">
                 <span class="lever"></span>
               </label>
             </div>
@@ -47,7 +77,7 @@
           <div class="col-md-3">
             <div class="switch">
               <label>
-                <input name="reps" ng-model="exercise.reps" type="checkbox">
+                <input class="attribute" name="reps" ng-model="exercise.reps" type="checkbox">
                 <span class="lever"></span>
               </label>
             </div>
@@ -61,7 +91,7 @@
           <div class="col-md-3">
             <div class="switch">
               <label>
-                <input name="time" ng-model="exercise.time" type="checkbox">
+                <input class="attribute" name="time" ng-model="exercise.time" type="checkbox">
                 <span class="lever"></span>
               </label>
             </div>
@@ -75,7 +105,7 @@
           <div class="col-md-3">
             <div class="switch">
               <label>
-                <input name="distance" ng-model="exercise.distance" type="checkbox">
+                <input class="attribute" name="distance" ng-model="exercise.distance" type="checkbox">
                 <span class="lever"></span>
               </label>
             </div>
@@ -91,7 +121,7 @@
           <div class="col-md-3">
             <div class="switch">
               <label>
-                <input name="calories" ng-model="exercise.calories" type="checkbox">
+                <input class="attribute" name="calories" ng-model="exercise.calories" type="checkbox">
                 <span class="lever"></span>
               </label>
             </div>
@@ -105,7 +135,7 @@
           <div class="col-md-3 ">
             <div class="switch ">
               <label>
-                <input name="heartRate" ng-model="exercise.heartRate" type="checkbox">
+                <input class="attribute" name="heartRate" ng-model="exercise.heartRate" type="checkbox">
                 <span class="lever"></span>
               </label>
             </div>
@@ -119,7 +149,7 @@
           <div class="col-md-3 ">
             <div class="switch ">
               <label>
-                <input name="stairs" ng-model="exercise.stairs" type="checkbox">
+                <input class="attribute" name="stairs" ng-model="exercise.stairs" type="checkbox">
                 <span class="lever"></span>
               </label>
             </div>
@@ -133,7 +163,7 @@
           <div class="col-md-3 ">
             <div class="switch ">
               <label>
-                <input name="steps" ng-model="exercise.steps" type="checkbox">
+                <input class="attribute" name="steps" ng-model="exercise.steps" type="checkbox">
                 <span class="lever"></span>
               </label>
             </div>
@@ -149,7 +179,7 @@
           <div class="col-md-3 ">
             <div class="switch ">
               <label>
-                <input name="level" ng-model="exercise.level" type="checkbox">
+                <input class="attribute" name="level" ng-model="exercise.level" type="checkbox">
                 <span class="lever"></span>
               </label>
             </div>
@@ -163,7 +193,7 @@
           <div class="col-md-3 ">
             <div class="switch ">
               <label>
-                <input name="incline" ng-model="exercise.incline" type="checkbox">
+                <input class="attribute" name="incline" ng-model="exercise.incline" type="checkbox">
                 <span class="lever"></span>
               </label>
             </div>
@@ -177,7 +207,7 @@
           <div class="col-md-3 ">
             <div class="switch ">
               <label>
-                <input name="strokes" ng-model="exercise.strokes" type="checkbox">
+                <input class="attribute" name="strokes" ng-model="exercise.strokes" type="checkbox">
                 <span class="lever"></span>
               </label>
             </div>
@@ -191,7 +221,7 @@
           <div class="col-md-3 ">
             <div class="switch ">
               <label>
-                <input name="speed" ng-model="exercise.speed" type="checkbox">
+                <input class="attribute" name="speed" ng-model="exercise.speed" type="checkbox">
                 <span class="lever"></span>
               </label>
             </div>
@@ -207,9 +237,10 @@
 <script type="text/javascript">
 var limit = 4;
 $('input[type=checkbox]').on('change', function(evt) {
-  if ($("input[type=checkbox]:checked").length > limit) {
+  if ($("input.attribute:checked").length > limit) {
     this.checked = false;
     alert("Only four attribute allowed per exercise");
   }
 });
+
 </script>

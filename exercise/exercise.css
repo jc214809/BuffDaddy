@@ -23,10 +23,17 @@ input {
   overflow-x: hidden;
 }
 
-#logoutNav{
+#logoutNav {
   cursor: pointer;
 }
 
+#exerciseForm label {
+	color: blue !important;
+}
+
+#exerciseForm .row label {
+	color: black !important;
+}
 
 /*.display {
     position: relative !important;
