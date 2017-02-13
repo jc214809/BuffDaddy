@@ -41,10 +41,10 @@
       }
     }
 
-    if (exerciseservice.exercise.exerciseID) {
+    if (exerciseservice.exercise.exerciseId) {
       $scope.exercise = exerciseservice.exercise;
     }
-    if ($scope.exercise.exerciseID == null) {
+    if ($scope.exercise.exerciseId == null) {
       $scope.header = "Add";
       $scope.directions = "Here you can add Exercises that you would like to track throughout your workouts.";
       $scope.buttonText = "Add"
