@@ -13,8 +13,8 @@
         $scope.socialId = $scope.profile.identities[0].user_id;
       });
 
-      $scope.url = 'http://localhost:8089/BuffDaddyAPI';
-      //$scope.url = 'http://75.118.135.179:7080/BuffDaddyAPI';
+      //$scope.url = 'http://localhost:8089/BuffDaddyAPI';
+      $scope.url = 'http://75.118.135.179:7080/BuffDaddyAPI';
 
       $scope.close = function() {
         $('.button-collapse').sideNav('hide');
