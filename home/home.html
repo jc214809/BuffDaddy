@@ -4,7 +4,7 @@
     <h3>{{profile.name}}!</h3>
     <button class="btn btn-primary" ng-if="workoutIndicator != null" ng-hide="workoutIndicator" ng-click="newWorkout()">Start Workout</button>
     <button class="btn modal-trigger red" data-target="confirmationModal" ng-if="workoutIndicator != null" ng-show="workoutIndicator">End Workout</button>
-    <a class="btn-floating btn-large waves-effect waves-light red modal-trigger add-exercise" ng-show="workoutIndicator" data-target="exerciseModal" ng-click="resetScroll()"><i class="fa fa-plus material-icons plus-icon" aria-hidden="true"></i></a>
+    <a class="btn-floating btn-large waves-effect waves-light red modal-trigger add-exercise" ng-show="workoutIndicator" data-target="exerciseModal" ng-click="resetScroll()"><i class="fa fa-plus plus-icon" aria-hidden="true"></i></a>
   </div>
   <div class="exercise-section row" ng-repeat="exercise in workoutExercises | orderBy:'sortId'" repeat-done="initModals()">
     {{inputWidth(exercise.exerciseId)}}

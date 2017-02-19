@@ -29,6 +29,15 @@
           <i ng-if="exercise.heartRate" title="Heart Rate" class="fa fa-heartbeat icon" aria-hidden="true"></i>
           </span>
           <div id="details-{{exercise.exerciseId}}" class="row" style="display:none; font-size:15px;">
+            <div class="col s12 right-align">
+              <div ng-if="exercise.arms" class="chip red"><b>Arms</b></div>
+              <div ng-if="exercise.back" class="chip blue"><b>Back</b></div>
+              <div ng-if="exercise.cardio" class="chip green"><b>Cardio</b></div>
+              <div ng-if="exercise.chest" class="chip oranage"><b>Chest</b></div>
+              <div ng-if="exercise.core" class="chip purple"><b>Core</b></div>
+              <div ng-if="exercise.legs" class="chip yellow"><b>Legs</b></div>
+              <div ng-if="exercise.shoulders" class="chip brown"><b>Shoulders</b></div>
+            </div>
             <div class="col s6">
               <b><span>Exercise Description:</span></b>
               <div>{{exercise.exerciseDescription}}</div>
