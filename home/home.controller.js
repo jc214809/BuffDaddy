@@ -15,6 +15,7 @@
     };
     $scope.filterBy = [];
     $scope.workoutIndicator = null;
+    //$scope.workoutTitle = null;
 
     authService.getProfileDeferred().then(function(profile) {
       $scope.profile = profile;
@@ -244,7 +245,6 @@
           function errorCallback(response) {
             console.log("Error Getting sets " + JSON.stringify(response));
           });
-
     };
     $scope.getPreviousData = function(exerciseId) {
       var promise = previousDataService.getPreviousData($scope.url, exerciseId, $scope.socialId)
@@ -262,6 +262,7 @@
               angular.forEach($scope.workoutExercises, function(exercise) {
                 $scope.filterBy.push(exercise.exerciseId);
               });
+              //$scope.getWorkoutTitle();
             } else {
               $scope.newWorkoutExercises = response.data;
               console.log($scope.newWorkoutExercises);
@@ -272,19 +273,84 @@
                   $scope.filterBy.push(exercise.exerciseId);
                 }
               });
+              //$scope.getWorkoutTitle();
             }
           },
           function errorCallback(response) {
             console.log("Error getting Exercises " + JSON.stringify(response));
           });
     };
+    $scope.filter = function(arr) {
+      return arr.sort(function(a, b) {
+        return a < b;
+      });
+    }
 
+    $scope.getWorkoutTitle = function() {
+      $scope.groups = {
+        arm: 0,
+        back: 0,
+        cardio: 0,
+        chest: 0,
+        core: 0,
+        legs: 0,
+        shoulders: 0
+      };
+      for (var i = 0; i < $scope.workoutExercises.length; i++) {
+        //if (exerciseId == $scope.workoutExercises[i].exerciseId) {
+        if ($scope.workoutExercises[i].arms) {
+          $scope.groups.arms++
+        }
+        if ($scope.workoutExercises[i].back) {
+          $scope.groups.back++
+        }
+        if ($scope.workoutExercises[i].cardio) {
+          $scope.groups.cardio++
+        }
+        if ($scope.workoutExercises[i].chest) {
+          $scope.groups.chest++
+        }
+        if ($scope.workoutExercises[i].core) {
+          $scope.groups.core++
+        }
+        if ($scope.workoutExercises[i].legs) {
+          $scope.groups.legs++
+        }
+        if ($scope.workoutExercises[i].shoulders) {
+          $scope.groups.shoulders++
+        }
+        //}
+      };
+
+
+      //console.dir($scope.groups);
+      // for (var i = $scope.groups.length - 1; i >= 0; i--) {
+      //   $scope.groups[i]
+      // }
+      // var Joel = [];
+      // Joel.push($scope.groups);
+      // var items = Joel;
+      // for (var i = 0; i < items.length; ++i) {
+      //   console.log("Item #" + i);
+      //   for (var name in items[i]) {
+      //     console.log(name + "=====" + items[i][name]);
+      //   }
+      //   // return items[i].sort(function(a, b) {
+      //   //   console.dir(a);
+      //   //   console.dir(b);
+      //   //   return a < b;
+      //   // })
+      // }
+      //console.dir(items);
+      //console.log($scope.filter($scope.groups));
+    }
     $scope.endWorkout = function() {
-      $http.post($scope.url + "/endWorkout", $scope.workoutDetails)
+      $http.post($scope.url + "/endWorkout", { workoutId: $scope.workoutData.workoutId, userId: $scope.socialId, workoutTitle: $scope.workoutTitle })
         .then(
           function successCallback(response) {
             $scope.workoutData = '';
             $scope.sets = [];
+            $scope.workoutTitle = null;
             $scope.workoutExercises = [];
             $scope.filterBy = [];
             $scope.workoutIndicator = false;

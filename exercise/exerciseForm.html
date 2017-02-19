@@ -17,23 +17,27 @@
         <input class="attribute" id="recommendation" ng-model="exercise.recommendation" name="recommendation">
       </div>
     </div>
-    <div class="form-group">
-      <label class="col-md-2 left-align" for="exerciseDescription">Exercise Description</label>
+    <div class="form-group">Description</label>
       <div class="col-md-3">
-        <textarea id="exerciseDescription" ng-model="exercise.exerciseDescription" name="exerciseDescription" class="materialize-textarea" length="2000"></textarea>
+        <label class="col-md-2 left-align" for="exerciseDescription">Exercise
+          <textarea id="exerciseDescription" ng-model="exercise.exerciseDescription" name="exerciseDescription" class="materialize-textarea" length="2000"></textarea>
       </div>
     </div>
     <label class="col-md-2 left-align">Muscle Group</label>
     <div class="row">
-      <div class="col s4">
+      <div class="col s3">
         <input class="muscle-group" type="checkbox" ng-model="exercise.arms" id="arms" />
         <label for="arms">Arms</label>
       </div>
-      <div class="col s4">
+      <div class="col s3">
         <input class="muscle-group" type="checkbox" ng-model="exercise.back" id="back" />
         <label for="back">Back</label>
       </div>
-      <div class="col s4">
+      <div class="col s3">
+        <input class="muscle-group" type="checkbox" ng-model="exercise.cardio" id="cardio" />
+        <label for="cardio">Cardio</label>
+      </div>
+      <div class="col s3">
         <input class="muscle-group" type="checkbox" ng-model="exercise.chest" id="chest" />
         <label for="chest">Chest</label>
       </div>
@@ -242,5 +246,4 @@ $('input[type=checkbox]').on('change', function(evt) {
     alert("Only four attribute allowed per exercise");
   }
 });
-
 </script>

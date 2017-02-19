@@ -30,7 +30,8 @@
         chest: false,
         core: false,
         legs: false,
-        shoulders: false
+        shoulders: false,
+        cardio:false
       };
     };
     $scope.count = function() {
