@@ -30,6 +30,7 @@
           </span>
           <div id="details-{{exercise.exerciseId}}" class="row" style="display:none; font-size:15px;">
             <div class="col s12 right-align">
+              <!-- <center> -->
               <div ng-if="exercise.arms" class="chip red"><b>Arms</b></div>
               <div ng-if="exercise.back" class="chip blue"><b>Back</b></div>
               <div ng-if="exercise.cardio" class="chip green"><b>Cardio</b></div>
@@ -37,15 +38,16 @@
               <div ng-if="exercise.core" class="chip purple"><b>Core</b></div>
               <div ng-if="exercise.legs" class="chip yellow"><b>Legs</b></div>
               <div ng-if="exercise.shoulders" class="chip brown"><b>Shoulders</b></div>
+              <!-- </center> -->
             </div>
-            <div class="col s6">
+            <div class="col s">
               <b><span>Exercise Description:</span></b>
-              <div>{{exercise.exerciseDescription}}</div>
+              <div class="exerciseDescription">{{exercise.exerciseDescription}}</div>
             </div>
-            <div class="col s6">
+            <!-- <div class="col s6">
               <span>Exercise Description:</span>
               <div>{{exercise.exerciseDescription}}</div>
-            </div>
+            </div> -->
             <div class="col s12" ng-hide="exercise.socialId != socialId" ng-show="exercise.socialId == socialId">
               <a class="waves-effect waves-light btn green" ng-click="editExercise(exercise)"><i class="fa fa-pencil material-icons plus-icon" aria-hidden="true"></i> Edit</a>
               <a class="waves-effect waves-light btn red"><i class="fa fa-trash material-icons plus-icon" aria-hidden="true"></i> Delete</a>
