@@ -1,21 +1,4 @@
-Skip to content
-This repository
-Search
-Pull requests
-Issues
-Gist
-@jc214809
-Sign out
-Unwatch 1
-Star 0
-Fork 0 jc214809 / BuffDaddy
-Code Issues 6 Pull requests 0 Projects 1 Wiki Pulse Graphs Settings
-Branch: gh - pages Find file Copy pathBuffDaddy / home / home.controller.js
-fe5e843 11 days ago
-@jc214809 jc214809 Add Ability to add a workout Title
-1 contributor
-RawBlameHistory
-422 lines(397 sloc) 13.6 KB(function() {
+(function() {
 
   'use strict';
 
@@ -304,41 +287,47 @@ RawBlameHistory
     }
 
     $scope.getWorkoutTitle = function() {
-      $scope.groups = [
-        {
-          name: "arms"
-          count: $scope.workoutExercises.filter(function(x){ return x.arms; }).length
-        },
-        {
-          name: "back"
-          count: $scope.workoutExercises.filter(function(x){ return x.back; }).length
-        },
-        {
-          name: "cardio"
-          count: $scope.workoutExercises.filter(function(x){ return x.cardio; }).length
-        },
-        {
-          name: "chest"
-          count: $scope.workoutExercises.filter(function(x){ return x.chest; }).length
-        },
-        {
-          name: "core"
-          count: $scope.workoutExercises.filter(function(x){ return x.core; }).length
-        },
-        {
-          name: "legs"
-          count: $scope.workoutExercises.filter(function(x){ return x.legs; }).length
-        },
-        {
-          name: "shoulders"
-          count: $scope.workoutExercises.filter(function(x){ return x.shoulders; }).length
-        }
-      ];
+      $scope.groups = [{
+        name: "arms",
+        count: $scope.workoutExercises.filter(function(x) {
+          return x.arms;
+        }).length
+      }, {
+        name: "back",
+        count: $scope.workoutExercises.filter(function(x) {
+          return x.back;
+        }).length
+      }, {
+        name: "cardio",
+        count: $scope.workoutExercises.filter(function(x) {
+          return x.cardio;
+        }).length
+      }, {
+        name: "chest",
+        count: $scope.workoutExercises.filter(function(x) {
+          return x.chest;
+        }).length
+      }, {
+        name: "core",
+        count: $scope.workoutExercises.filter(function(x) {
+          return x.core;
+        }).length
+      }, {
+        name: "legs",
+        count: $scope.workoutExercises.filter(function(x) {
+          return x.legs;
+        }).length
+      }, {
+        name: "shoulders",
+        count: $scope.workoutExercises.filter(function(x) {
+          return x.shoulders;
+        }).length
+      }];
       $scope.groups.sort(function(a, b) {
         return parseFloat(a.count) - parseFloat(b.count);
       });
 
-      $scope.groups.filter(function (el) {
+      $scope.groups.filter(function(el) {
         return el.count > 0
       });
 

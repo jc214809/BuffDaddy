@@ -71,7 +71,7 @@
     </div>
     <a href="#!/" class="form-btn col" ng-click="addSet(exercise.exerciseId)">Add a Set...</a>
   </div>
-   <a href="#!/" class="waves-effect waves-green btn-flat" ng-click="getWorkoutTitle()">Get Title</a>
+  <a href="#!/" class="waves-effect waves-green btn-flat" ng-click="getWorkoutTitle()">Get Title</a>
   <div id="exerciseModal" class="modal bottom-sheet">
     <div class="modal-content">
       <div class="row">
@@ -94,7 +94,14 @@
     <div class="modal-content">
       <div>
         <h4 ng-bind="modalExerciseDetails.exerciseName"></h4>
-        <span ng-if="modalExerciseDetails.recommendation" class="red-text" ng-bind="modalExerciseDetails.recommendation"></span>
+        <span ng-if="modalExerciseDetails.recommendation" class="red-text" ng-bind="modalExerciseDetails.recommendation">              
+        <div ng-if="modalExerciseDetails.arms" class="chip red"><b>Arms</b></div>
+        <div ng-if="modalExerciseDetails.back" class="chip blue"><b>Back</b></div>
+        <div ng-if="modalExerciseDetails.cardio" class="chip green"><b>Cardio</b></div>
+        <div ng-if="modalExerciseDetails.chest" class="chip oranage"><b>Chest</b></div>
+        <div ng-if="modalExerciseDetails.core" class="chip purple"><b>Core</b></div>
+        <div ng-if="modalExerciseDetails.legs" class="chip yellow"><b>Legs</b></div>
+        <div ng-if="modalExerciseDetails.shoulders" class="chip brown"><b>Shoulders</b></div></span>
       </div>
       <div id="exerciseDescription" class="exerciseDescription" ng-click="toggleExerciseDescription()" style="{{functionThatReturnsStyle()}}" ng-bind="modalExerciseDetails.exerciseDescription">
       </div>
