@@ -1,4 +1,21 @@
-(function() {
+Skip to content
+This repository
+Search
+Pull requests
+Issues
+Gist
+@jc214809
+Sign out
+Unwatch 1
+Star 0
+Fork 0 jc214809 / BuffDaddy
+Code Issues 6 Pull requests 0 Projects 1 Wiki Pulse Graphs Settings
+Branch: gh - pages Find file Copy pathBuffDaddy / home / home.controller.js
+fe5e843 11 days ago
+@jc214809 jc214809 Add Ability to add a workout Title
+1 contributor
+RawBlameHistory
+422 lines(397 sloc) 13.6 KB(function() {
 
   'use strict';
 
@@ -287,43 +304,45 @@
     }
 
     $scope.getWorkoutTitle = function() {
-      $scope.groups = {
-        arm: 0,
-        back: 0,
-        cardio: 0,
-        chest: 0,
-        core: 0,
-        legs: 0,
-        shoulders: 0
-      };
-      for (var i = 0; i < $scope.workoutExercises.length; i++) {
-        //if (exerciseId == $scope.workoutExercises[i].exerciseId) {
-        if ($scope.workoutExercises[i].arms) {
-          $scope.groups.arms++
+      $scope.groups = [
+        {
+          name: "arms"
+          count: $scope.workoutExercises.filter(function(x){ return x.arms; }).length
+        },
+        {
+          name: "back"
+          count: $scope.workoutExercises.filter(function(x){ return x.back; }).length
+        },
+        {
+          name: "cardio"
+          count: $scope.workoutExercises.filter(function(x){ return x.cardio; }).length
+        },
+        {
+          name: "chest"
+          count: $scope.workoutExercises.filter(function(x){ return x.chest; }).length
+        },
+        {
+          name: "core"
+          count: $scope.workoutExercises.filter(function(x){ return x.core; }).length
+        },
+        {
+          name: "legs"
+          count: $scope.workoutExercises.filter(function(x){ return x.legs; }).length
+        },
+        {
+          name: "shoulders"
+          count: $scope.workoutExercises.filter(function(x){ return x.shoulders; }).length
         }
-        if ($scope.workoutExercises[i].back) {
-          $scope.groups.back++
-        }
-        if ($scope.workoutExercises[i].cardio) {
-          $scope.groups.cardio++
-        }
-        if ($scope.workoutExercises[i].chest) {
-          $scope.groups.chest++
-        }
-        if ($scope.workoutExercises[i].core) {
-          $scope.groups.core++
-        }
-        if ($scope.workoutExercises[i].legs) {
-          $scope.groups.legs++
-        }
-        if ($scope.workoutExercises[i].shoulders) {
-          $scope.groups.shoulders++
-        }
-        //}
-      };
+      ];
+      $scope.groups.sort(function(a, b) {
+        return parseFloat(a.count) - parseFloat(b.count);
+      });
 
+      $scope.groups.filter(function (el) {
+        return el.count > 0
+      });
 
-      //console.dir($scope.groups);
+      console.dir($scope.groups);
       // for (var i = $scope.groups.length - 1; i >= 0; i--) {
       //   $scope.groups[i]
       // }
