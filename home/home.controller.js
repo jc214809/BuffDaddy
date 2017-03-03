@@ -286,6 +286,18 @@
       });
     }
 
+    function compare(a, b) {
+      if (a.count < b.count)
+        return -1;
+      if (a.count > b.count)
+        return 1;
+      return 0;
+    }
+
+    function capitalizeFirstLetter(string) {
+      return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
     $scope.getWorkoutTitle = function() {
       $scope.groups = [{
         name: "arms",
@@ -323,34 +335,19 @@
           return x.shoulders;
         }).length
       }];
-      $scope.groups.sort(function(a, b) {
-        return parseFloat(a.count) - parseFloat(b.count);
+      $scope.groups.sort(compare).reverse();
+
+      $scope.groups = $scope.groups.filter(function(value, index, array) {
+        return (value.count > 0);
       });
 
-      $scope.groups.filter(function(el) {
-        return el.count > 0
-      });
-
-      console.dir($scope.groups);
-      // for (var i = $scope.groups.length - 1; i >= 0; i--) {
-      //   $scope.groups[i]
-      // }
-      // var Joel = [];
-      // Joel.push($scope.groups);
-      // var items = Joel;
-      // for (var i = 0; i < items.length; ++i) {
-      //   console.log("Item #" + i);
-      //   for (var name in items[i]) {
-      //     console.log(name + "=====" + items[i][name]);
-      //   }
-      //   // return items[i].sort(function(a, b) {
-      //   //   console.dir(a);
-      //   //   console.dir(b);
-      //   //   return a < b;
-      //   // })
-      // }
-      //console.dir(items);
-      //console.log($scope.filter($scope.groups));
+      $scope.workoutTitle = "";
+      for (var i = 0; i < $scope.groups.length; i++) {
+        $scope.workoutTitle += capitalizeFirstLetter($scope.groups[i].name);
+        if (i < $scope.groups.length - 1) {
+          $scope.workoutTitle += ", ";
+        }
+      }
     }
     $scope.endWorkout = function() {
       $http.post($scope.url + "/endWorkout", { workoutId: $scope.workoutData.workoutId, userId: $scope.socialId, workoutTitle: $scope.workoutTitle })
