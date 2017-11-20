@@ -29,10 +29,6 @@
         });
     });
 
-    $scope.workoutDetails = {
-      "socialId": $scope.socialId
-    };
-
     $scope.checkForWorkout = function() {
       $http.get($scope.url + "/workoutInProgress?id=" + $scope.socialId)
         .then(
@@ -334,13 +330,14 @@
     };
 
     $scope.newWorkout = function() {
-      $http.post($scope.url + "/newWorkout", $scope.workoutDetails)
-        .then(function successCallback(response) {
-            $scope.checkForWorkout();
-          },
-          function errorCallback(response) {
-            console.log("Error starting workout " + JSON.stringify(response));
-          });
+      $http.post($scope.url + "/newWorkout", {
+        "socialId": $scope.socialId
+      }).then(function successCallback(response) {
+          $scope.checkForWorkout();
+        },
+        function errorCallback(response) {
+          console.log("Error starting workout " + JSON.stringify(response));
+        });
     };
 
     $scope.addSet = function(exerciseId) {
