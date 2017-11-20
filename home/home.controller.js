@@ -6,16 +6,15 @@
     .module('app')
     .controller('HomeController', HomeController);
 
-  HomeController.$inject = ['$scope', 'authService', '$http', '$location', 'previousDataService'];
+  HomeController.$inject = ['$scope', 'authService', '$http', '$location', 'previousDataService', '$filter'];
 
-  function HomeController($scope, authService, $http, $location, previousDataService) {
+  function HomeController($scope, authService, $http, $location, previousDataService, $filter) {
     $scope.authService = authService;
     $scope.filters = {
       search: ''
     };
     $scope.filterBy = [];
-    $scope.workoutIndicator = null;
-    //$scope.workoutTitle = null;
+    $scope.workoutIndicator = false;
 
     authService.getProfileDeferred().then(function(profile) {
       $scope.profile = profile;
@@ -39,9 +38,7 @@
         .then(
           function successCallback(response) {
             $scope.workoutData = response.data;
-            if ($scope.workoutData == '') {
-              $scope.workoutIndicator = false;
-            } else {
+            if ($scope.workoutData != '') {
               $scope.workoutIndicator = true;
               $scope.getExercise(response.data.workoutId);
               $scope.getSets(response.data.workoutId);
@@ -128,18 +125,12 @@
         ready: function(modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
         },
         complete: function() {
-            //e.preventDefault();
-          } // Callback for Modal close
+          //e.preventDefault();
+        } // Callback for Modal close
       });
     }
     $scope.setWidth = function(count) {
       switch (count) {
-        // case 6:
-        //   $scope.size = "13.5%";
-        //   break;
-        // case 5:
-        //   $scope.size = "16.2%";
-        //   break;
         case 4:
           $scope.size = "22.25%";
           break;
@@ -166,50 +157,49 @@
             console.log("Error saving set details " + JSON.stringify(response));
           });
     };
+    $scope.removeSetFromArray = function(set) {
+      for (var i = 0; i < $scope.sets.length; i++) {
+        if ($scope.sets[i].setId == set.setId) {
+          $scope.sets.splice(i, 1);
+        }
+      }
+    }
+
+    $scope.countSetsOfExercise = function(set) {
+      var count = 0;
+      angular.forEach($scope.sets, function(eachSet) {
+        if (eachSet.exerciseId == set.exerciseId) {
+          count++;
+        }
+      });
+      return count;
+    }
+    $scope.deleteExerciseFromDB = function(set) {
+      var index = $scope.workoutExercises.indexOf($filter('filter')($scope.workoutExercises, { exerciseId: set.exerciseId }, true)[0]);
+      //Delete Workout Exercise
+      $http.post($scope.url + "/deleteWorkoutExercise", {
+        "workoutId": $scope.workoutData.workoutId,
+        "exerciseId": set.exerciseId
+      }).then(function successCallback(response) {
+        $scope.filterBy.splice(index, 1);
+        $scope.workoutExercises.splice(index, 1);
+        console.log("Deleted UserExercise");
+      }, function errorCallback(response) {
+        console.log("Failed to Deleted UserExercise");
+      });
+    }
+
     $scope.deleteSet = function() {
       var set = $scope.setDeleteData;
-      $http.post($scope.url + "/deleteSet", set)
-        .then(
-          function successCallback(response) {
-            for (var i = 0; i < $scope.sets.length; i++) {
-              if ($scope.sets[i].setId == set.setId) {
-                $scope.sets.splice(i, 1);
-              }
-            }
-            var count = 0;
-            angular.forEach($scope.sets, function(eachSet) {
-              if (eachSet.exerciseId == set.exerciseId) {
-                count++;
-              }
-
-            });
-            if (count == 0) {
-              for (var i = 0; i < $scope.workoutExercises.length; i++) {
-                if ($scope.workoutExercises[i].exerciseId == set.exerciseId) {
-                  var index = $scope.filterBy.indexOf($scope.workoutExercises[i].exerciseId);
-                  $scope.filterBy.splice(index, 1);
-                  //Delete Workout Exercise
-                  $scope.setDetails = {
-                    "workoutId": $scope.workoutData.workoutId,
-                    "exerciseId": $scope.workoutExercises[i].exerciseId
-                  }
-                  $http.post($scope.url + "/deleteWorkoutExercise", $scope.setDetails)
-                    .then(
-                      function successCallback(response) {
-                        console.log("Deleted UserExercise");
-                      },
-                      function errorCallback(response) {
-                        console.log("Failed to Deleted UserExercise");
-                      });
-                  $scope.workoutExercises.splice(i, 1);
-                }
-              }
-            }
-            console.log("Deleted");
-          },
-          function errorCallback(response) {
-            console.log("Error deleting set " + JSON.stringify(response));
-          });
+      $http.post($scope.url + "/deleteSet", set).then(function successCallback(response) {
+          $scope.removeSetFromArray(set);
+          if ($scope.countSetsOfExercise(set) == 0) {
+            $scope.deleteExerciseFromDB(set);
+          }
+        },
+        function errorCallback(response) {
+          console.log("Error deleting set " + JSON.stringify(response));
+        });
     };
     $scope.checkForSets = function(newSetId, oldSetsArray) {
       for (var i = 0; i < oldSetsArray.length; i++) {
@@ -229,8 +219,7 @@
     };
     $scope.getSets = function(workoutId) {
       $http.get($scope.url + "/getSets?id=" + workoutId)
-        .then(
-          function successCallback(response) {
+        .then(function successCallback(response) {
             if ($scope.sets == undefined || $scope.sets.length == undefined) {
               $scope.sets = response.data;
             } else {
@@ -255,8 +244,7 @@
 
     $scope.getExercise = function(workoutId) {
       $http.get($scope.url + "/getExercisesForWorkout?id=" + workoutId)
-        .then(
-          function successCallback(response) {
+        .then(function successCallback(response) {
             if ($scope.workoutExercises == undefined || $scope.workoutExercises.length == undefined) {
               $scope.workoutExercises = response.data;
               angular.forEach($scope.workoutExercises, function(exercise) {
@@ -265,15 +253,13 @@
               //$scope.getWorkoutTitle();
             } else {
               $scope.newWorkoutExercises = response.data;
-              console.log($scope.newWorkoutExercises);
+              //console.log($scope.newWorkoutExercises);
               angular.forEach($scope.newWorkoutExercises, function(exercise) {
                 if (!$scope.checkForExercise(exercise.exerciseId, $scope.workoutExercises)) {
-
                   $scope.workoutExercises.push(exercise);
                   $scope.filterBy.push(exercise.exerciseId);
                 }
               });
-              //$scope.getWorkoutTitle();
             }
           },
           function errorCallback(response) {
@@ -301,39 +287,25 @@
     $scope.getWorkoutTitle = function() {
       $scope.groups = [{
         name: "arms",
-        count: $scope.workoutExercises.filter(function(x) {
-          return x.arms;
-        }).length
+        count: $scope.workoutExercises.filter(function(x) { return x.arms; }).length
       }, {
         name: "back",
-        count: $scope.workoutExercises.filter(function(x) {
-          return x.back;
-        }).length
+        count: $scope.workoutExercises.filter(function(x) { return x.back; }).length
       }, {
         name: "cardio",
-        count: $scope.workoutExercises.filter(function(x) {
-          return x.cardio;
-        }).length
+        count: $scope.workoutExercises.filter(function(x) { return x.cardio; }).length
       }, {
         name: "chest",
-        count: $scope.workoutExercises.filter(function(x) {
-          return x.chest;
-        }).length
+        count: $scope.workoutExercises.filter(function(x) { return x.chest; }).length
       }, {
         name: "core",
-        count: $scope.workoutExercises.filter(function(x) {
-          return x.core;
-        }).length
+        count: $scope.workoutExercises.filter(function(x) { return x.core; }).length
       }, {
         name: "legs",
-        count: $scope.workoutExercises.filter(function(x) {
-          return x.legs;
-        }).length
+        count: $scope.workoutExercises.filter(function(x) { return x.legs; }).length
       }, {
         name: "shoulders",
-        count: $scope.workoutExercises.filter(function(x) {
-          return x.shoulders;
-        }).length
+        count: $scope.workoutExercises.filter(function(x) { return x.shoulders; }).length
       }];
       $scope.groups.sort(compare).reverse();
 
@@ -351,8 +323,7 @@
     }
     $scope.endWorkout = function() {
       $http.post($scope.url + "/endWorkout", { workoutId: $scope.workoutData.workoutId, userId: $scope.socialId, workoutTitle: $scope.workoutTitle })
-        .then(
-          function successCallback(response) {
+        .then(function successCallback(response) {
             $scope.workoutData = '';
             $scope.sets = [];
             $scope.workoutTitle = null;
@@ -367,8 +338,7 @@
 
     $scope.newWorkout = function() {
       $http.post($scope.url + "/newWorkout", $scope.workoutDetails)
-        .then(
-          function successCallback(response) {
+        .then(function successCallback(response) {
             $scope.checkForWorkout();
           },
           function errorCallback(response) {
@@ -377,31 +347,28 @@
     };
 
     $scope.addSet = function(exerciseId) {
-      $scope.setDetails = {
-        "workoutId": $scope.workoutData.workoutId,
-        "exerciseId": exerciseId
-      }
       if (!$scope.checkForExercise(exerciseId, $scope.workoutExercises)) {
-        $http.post($scope.url + "/addWorkoutExercise", $scope.setDetails)
-          .then(
-            function successCallback(response) {
-              console.log("Added UserExercise");
-            },
-            function errorCallback(response) {
-              console.log("Failed to Add UserExercise");
-            });
-      }
-      $http.post($scope.url + "/addSet", $scope.setDetails)
-        .then(
-          function successCallback(response) {
-            $scope.getExercise($scope.workoutData.workoutId);
-            $scope.getSets($scope.workoutData.workoutId);
-            $scope.filters.search = '';
-            $('#exerciseModal').modal('close');
+        $http.post($scope.url + "/addWorkoutExercise", {
+          "workoutId": $scope.workoutData.workoutId,
+          "exerciseId": exerciseId
+        }).then(function successCallback(response) {
+            console.log("Added UserExercise");
           },
           function errorCallback(response) {
-            console.log("Error adding set" + JSON.stringify(response));
+            console.log("Failed to Add UserExercise");
           });
+      }
+      $http.post($scope.url + "/addSet", {
+        "workoutId": $scope.workoutData.workoutId,
+        "exerciseId": exerciseId
+      }).then(function successCallback(response) {
+        $scope.getExercise($scope.workoutData.workoutId);
+        $scope.getSets($scope.workoutData.workoutId);
+        $scope.filters.search = '';
+        $('#exerciseModal').modal('close');
+      }, function errorCallback(response) {
+        console.log("Error adding set" + JSON.stringify(response));
+      });
     };
 
     $scope.getModalDetails = function(exerciseId) {
