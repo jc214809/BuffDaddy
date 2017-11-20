@@ -157,18 +157,13 @@
       for (var i = 0; i < $scope.sets.length; i++) {
         if ($scope.sets[i].setId == set.setId) {
           $scope.sets.splice(i, 1);
+          break;
         }
       }
     }
 
     $scope.countSetsOfExercise = function(set) {
-      var count = 0;
-      angular.forEach($scope.sets, function(eachSet) {
-        if (eachSet.exerciseId == set.exerciseId) {
-          count++;
-        }
-      });
-      return count;
+      return $filter('filter')($scope.sets, { exerciseId: set.exerciseId }, true).length;
     }
     $scope.removeFromSortTable = function(set) {
       var index = $scope.workoutExercises.indexOf($filter('filter')($scope.workoutExercises, { exerciseId: set.exerciseId }, true)[0]);
