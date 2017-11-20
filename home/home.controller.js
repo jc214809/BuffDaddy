@@ -174,7 +174,7 @@
       });
       return count;
     }
-    $scope.deleteExerciseFromDB = function(set) {
+    $scope.removeFromSortTable = function(set) {
       var index = $scope.workoutExercises.indexOf($filter('filter')($scope.workoutExercises, { exerciseId: set.exerciseId }, true)[0]);
       //Delete Workout Exercise
       $http.post($scope.url + "/deleteWorkoutExercise", {
@@ -194,29 +194,26 @@
       $http.post($scope.url + "/deleteSet", set).then(function successCallback(response) {
           $scope.removeSetFromArray(set);
           if ($scope.countSetsOfExercise(set) == 0) {
-            $scope.deleteExerciseFromDB(set);
+            $scope.removeFromSortTable(set);
           }
         },
         function errorCallback(response) {
           console.log("Error deleting set " + JSON.stringify(response));
         });
     };
-    $scope.checkForSets = function(newSetId, oldSetsArray) {
-      for (var i = 0; i < oldSetsArray.length; i++) {
-        if (oldSetsArray[i].setId == newSetId) {
-          return true;
-        }
+    $scope.checkForSets = function(setId) {
+      if ($filter('filter')($scope.sets, { setId: setId })[0]) {
+        return true;
       }
       return false;
     };
-    $scope.checkForExercise = function(newExerciseId, oldExerciseArray) {
-      for (var i = 0; i < oldExerciseArray.length; i++) {
-        if (oldExerciseArray[i].exerciseId == newExerciseId) {
-          return true;
-        }
+    $scope.checkForExercise = function(exerciseId) {
+      if ($filter('filter')($scope.workoutExercises, { exerciseId: exerciseId })[0]) {
+        return true;
       }
       return false;
     };
+
     $scope.getSets = function(workoutId) {
       $http.get($scope.url + "/getSets?id=" + workoutId)
         .then(function successCallback(response) {
@@ -225,7 +222,7 @@
             } else {
               $scope.newSets = response.data;
               angular.forEach($scope.newSets, function(set) {
-                if (!$scope.checkForSets(set.setId, $scope.sets, 'setId')) {
+                if (!$scope.checkForSets(set.setId)) {
                   $scope.sets.push(set);
                 }
               });
