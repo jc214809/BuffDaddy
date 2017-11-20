@@ -14,7 +14,7 @@
     $scope.pageSize = 8;
     $scope.exercisesSort = '';
 
-    $scope.getMyExercises = function () {
+    $scope.getMyExercises = function() {
       return $filter('filter')($scope.usersExercises, $scope.exercisesSort)
     }
 
@@ -46,12 +46,10 @@
       $("#details-" + id).toggle("slow");
     };
     $scope.deleteUserExercise = function(exerciseId) {
-      $scope.exercise = {
-        "socialId": $scope.socialId,
-        "exerciseId": exerciseId
-      };
-
-      $http.post($scope.url + "/deleteUsersExercise", $scope.exercise)
+      $http.post($scope.url + "/deleteUsersExercise", {
+          "socialId": $scope.socialId,
+          "exerciseId": exerciseId
+        })
         .then(function successCallback(response) {
             for (var i = 0; i < $scope.usersExercises.length; i++) {
               if ($scope.usersExercises[i].exerciseId == exerciseId) {
@@ -76,24 +74,21 @@
       $state.go('exerciseForm');
     }
     $scope.addUserExercise = function(exerciseId) {
-      $scope.exercise = {
+      $http.post($scope.url + "/addExerciseToUser", {
         "socialId": $scope.socialId,
         "exerciseId": exerciseId
-      };
-
-      $http.post($scope.url + "/addExerciseToUser", $scope.exercise)
-        .then(function successCallback(response) {
-            $scope.filterByUsersExercises.push(exerciseId);
-            for (var i = 0; i < $scope.exercises.length; i++) {
-              if ($scope.exercises[i].exerciseId == exerciseId) {
-                $scope.usersExercises.push($scope.exercises[i]);
-              }
+      }).then(function successCallback(response) {
+          $scope.filterByUsersExercises.push(exerciseId);
+          for (var i = 0; i < $scope.exercises.length; i++) {
+            if ($scope.exercises[i].exerciseId == exerciseId) {
+              $scope.usersExercises.push($scope.exercises[i]);
             }
-            alert("Added " + JSON.stringify(response));
-          },
-          function errorCallback(response) {
-            alert("Error " + JSON.stringify(response));
-          });
+          }
+          alert("Added " + JSON.stringify(response));
+        },
+        function errorCallback(response) {
+          alert("Error " + JSON.stringify(response));
+        });
     };
   }
 
