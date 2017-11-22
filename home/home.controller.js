@@ -206,22 +206,21 @@
     };
 
     $scope.getSets = function(workoutId) {
-      $http.get($scope.url + "/getSets?id=" + workoutId)
-        .then(function successCallback(response) {
-            if ($scope.sets == undefined || $scope.sets.length == undefined) {
-              $scope.sets = response.data;
-            } else {
-              $scope.newSets = response.data;
-              angular.forEach($scope.newSets, function(set) {
-                if (!$scope.checkForSets(set.setId)) {
-                  $scope.sets.push(set);
-                }
-              });
-            }
-          },
-          function errorCallback(response) {
-            console.log("Error Getting sets " + JSON.stringify(response));
-          });
+      $http.get($scope.url + "/getSets?id=" + workoutId).then(function successCallback(response) {
+          if ($scope.sets == undefined || $scope.sets.length == undefined) {
+            $scope.sets = response.data;
+          } else {
+            $scope.newSets = response.data;
+            angular.forEach($scope.newSets, function(set) {
+              if (!$scope.checkForSets(set.setId)) {
+                $scope.sets.push(set);
+              }
+            });
+          }
+        },
+        function errorCallback(response) {
+          console.log("Error Getting sets " + JSON.stringify(response));
+        });
     };
     $scope.getPreviousData = function(exerciseId) {
       var promise = previousDataService.getPreviousData($scope.url, exerciseId, $scope.socialId)
@@ -342,11 +341,18 @@
           "exerciseId": exerciseId
         }).then(function successCallback(response) {
             console.log("Added UserExercise");
+            $scope.createSet(exerciseId);
           },
           function errorCallback(response) {
             console.log("Failed to Add UserExercise");
           });
+      } else {
+        $scope.createSet(exerciseId);
       }
+    };
+
+
+    $scope.createSet = function(exerciseId) {
       $http.post($scope.url + "/addSet", {
         "workoutId": $scope.workoutData.workoutId,
         "exerciseId": exerciseId
