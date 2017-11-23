@@ -21,12 +21,13 @@
       $scope.socialId = $scope.profile.identities[0].user_id;
 
       $scope.checkForWorkout();
-      $http.get($scope.url + "/getUsersExercises?id=" + $scope.socialId).then(function successCallback(response) {
-          $scope.exercises = response.data;
-        },
-        function errorCallback(response) {
-          console.log("Error getting users exercises " + JSON.stringify(response));
-        });
+      $http.get($scope.url + "/getUsersExercises?id=" + $scope.socialId)
+        .then(function successCallback(response) {
+            $scope.exercises = response.data;
+          },
+          function errorCallback(response) {
+            console.log("Error getting users exercises " + JSON.stringify(response));
+          });
     });
 
     $scope.checkForWorkout = function() {
@@ -242,7 +243,7 @@
               $scope.newWorkoutExercises = response.data;
               //console.log($scope.newWorkoutExercises);
               angular.forEach($scope.newWorkoutExercises, function(exercise) {
-                if (!$scope.checkForExercise(exercise.exerciseId, $scope.workoutExercises)) {
+                if (!$scope.checkForExercise(exercise.exerciseId)) {
                   $scope.workoutExercises.push(exercise);
                   $scope.filterBy.push(exercise.exerciseId);
                 }
