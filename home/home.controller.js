@@ -200,7 +200,7 @@
       return false;
     };
     $scope.checkForExercise = function(exerciseId) {
-      if ($filter('filter')($scope.workoutExercises, { exerciseId: exerciseId })[0]) {
+      if ($filter('filter')($scope.workoutExercises, { exerciseId: exerciseId }, true)[0]) {
         return true;
       }
       return false;
