@@ -4,7 +4,6 @@
   <ul class="collapsible" data-collapsible="accordion">
     <li ng-repeat="workoutData in previousData | groupBy: 'workoutId' | toArray:true | orderBy:'workoutId':true">
       <div class="collapsible-header">{{getDate(workoutData[0].workoutDate)}} - {{workoutData[0].workoutTitle}}
-        <a class="waves-effect waves-light btn right" ng-click="repeatWorkout(workoutData)">Do It Again</a>
       </div>
       <div class="collapsible-body">
         <span>
@@ -24,6 +23,11 @@
             <b ng-if="set.strokes != null"><i title="Strokes" class="flaticon-strokes" aria-hidden="true"></i> {{set.strokes}}</b>
             <b ng-if="set.speed != null"><i title="Speed" class="flaticon-speed" aria-hidden="true"></i> {{set.speed}}</b>
           </div>
+        </div>
+        <div>
+          <a class="waves-effect waves-light btn right" ng-click="repeatWorkout(workoutData)">Do It Again</a>
+          <br/>
+          <br/>
         </div>
         </span>
       </div>
