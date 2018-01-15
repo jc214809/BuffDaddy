@@ -308,6 +308,7 @@
           $scope.workoutTitle += ", ";
         }
       }
+      $scope.workoutTitle = $scope.workoutTitle.replace(/,(?=[^,]+$)/, ' &');
     }
     $scope.endWorkout = function() {
       $http.post($scope.url + "/endWorkout", { workoutId: $scope.workoutData.workoutId, userId: $scope.socialId, workoutTitle: $scope.workoutTitle })
