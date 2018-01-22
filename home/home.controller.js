@@ -301,6 +301,8 @@
         return (value.count > 0);
       });
 
+      $scope.groups = $scope.removeCardio($scope.groups);
+
       $scope.workoutTitle = "";
       for (var i = 0; i < $scope.groups.length; i++) {
         $scope.workoutTitle += capitalizeFirstLetter($scope.groups[i].name);
@@ -309,6 +311,15 @@
         }
       }
       $scope.workoutTitle = $scope.workoutTitle.replace(/,(?=[^,]+$)/, ' &');
+    }
+    $scope.removeCardio = function(groups) {
+      var totalExercisesCount = $scope.workoutExercises.filter(function(x) { return x.arms; }).length + $scope.workoutExercises.filter(function(x) { return x.back; }).length + $scope.workoutExercises.filter(function(x) { return x.cardio; }).length + $scope.workoutExercises.filter(function(x) { return x.chest; }).length + $scope.workoutExercises.filter(function(x) { return x.core; }).length + $scope.workoutExercises.filter(function(x) { return x.legs; }).length + $scope.workoutExercises.filter(function(x) { return x.shoulders; }).length;
+      var cardioExercisesCount = $scope.workoutExercises.filter(function(x) { return x.cardio; }).length
+      if (.25 > (cardioExercisesCount / totalExercisesCount) && cardioExercisesCount != 0) {
+        var i = groups.map(function(e) { return e.name; }).indexOf('cardio');
+        groups.splice(i, 1);
+      }
+      return groups;
     }
     $scope.endWorkout = function() {
       $http.post($scope.url + "/endWorkout", { workoutId: $scope.workoutData.workoutId, userId: $scope.socialId, workoutTitle: $scope.workoutTitle })
