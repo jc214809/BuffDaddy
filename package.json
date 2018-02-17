@@ -1,0 +1,30 @@
+{
+  "name": "Buff Daddy",
+  "version": "0.2.0",
+  "description": "An AngularJS, Node.js Project",
+  "main": "index.js",
+  "scripts": {
+    "test": "jasmine",
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.13.3"
+  },
+  "engines": {
+    "node": "4.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/heroku/node-js-sample"
+  },
+  "keywords": [
+    "node",
+    "heroku",
+    "express"
+  ],
+  "author": "Joel Clark",
+  "license": "MIT",
+  "devDependencies": {
+    "jasmine": "^3.0.0"
+  }
+}
