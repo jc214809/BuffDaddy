@@ -4,6 +4,7 @@
   "description": "An AngularJS, Node.js Project",
   "main": "index.js",
   "scripts": {
+    "test": "jasmine",
     "start": "node index.js"
   },
   "dependencies": {
