@@ -70,6 +70,45 @@ describe('Home Controller', function() {
       scope.getWorkoutTitle();
       expect(scope.workoutTitle).toEqual("Legs, Shoulders, Core, Chest, Back & Arms");
     });
+    it('checkForExercise returns FALSE when Exercise in NOT present', function() {
+      scope.workoutExercises = [
+        { "exerciseId": 24, "exerciseName": "1", "arms": true, "back": false, "chest": false, "core": false, "legs": false, "shoulders": false, "cardio": false, "$$hashKey": "object:139" }
+      ]
+      expect(scope.checkForExercise(10)).toEqual(false);
+    });
+    it('checkForExercise returns TRUE when Exercise IS present', function() {
+      scope.workoutExercises = [
+        { "exerciseId": 24, "exerciseName": "1", "arms": true, "back": false, "chest": false, "core": false, "legs": false, "shoulders": false, "cardio": false, "$$hashKey": "object:139" }
+      ]
+      expect(scope.checkForExercise(24)).toEqual(true);
+    });
+    it('countSetsOfExercise returns correct number of sets', function() {
+      var the1stSet = { "setId": 2190, "workoutId": 134, "exerciseId": 37 };
+      var the2ndSet = { "setId": 2190, "workoutId": 134, "exerciseId": 100 };
+      var the3rdSet = { "setId": 2190, "workoutId": 134, "exerciseId": 12 };
+      scope.sets = [
+        { "setId": 2190, "workoutId": 134, "exerciseId": 37, "sortId": 0, "exerciseName": "Squat Machine", "weight": "360", "reps": "8", "time": null, "distance": null, "calories": null, "heartRate": null, "stairs": null, "steps": null, "level": null, "incline": null, "strokes": null, "speed": null, "$$hashKey": "object:153" },
+        { "setId": 2189, "workoutId": 134, "exerciseId": 37, "sortId": 0, "exerciseName": "Squat Machine", "weight": "340", "reps": "10", "time": null, "distance": null, "calories": null, "heartRate": null, "stairs": null, "steps": null, "level": null, "incline": null, "strokes": null, "speed": null, "$$hashKey": "object:152" },
+        { "setId": 2188, "workoutId": 134, "exerciseId": 37, "sortId": 0, "exerciseName": "Squat Machine", "weight": "320", "reps": "10", "time": null, "distance": null, "calories": null, "heartRate": null, "stairs": null, "steps": null, "level": null, "incline": null, "strokes": null, "speed": null, "$$hashKey": "object:151" },
+        { "setId": 2191, "workoutId": 134, "exerciseId": 37, "sortId": 0, "exerciseName": "Squat Machine", "weight": "380", "reps": "8", "time": null, "distance": null, "calories": null, "heartRate": null, "stairs": null, "steps": null, "level": null, "incline": null, "strokes": null, "speed": null, "$$hashKey": "object:154" },
+        { "setId": 2209, "workoutId": 134, "exerciseId": 12, "sortId": 0, "exerciseName": "Leg Curls", "weight": "155", "reps": "15", "time": null, "distance": null, "calories": null, "heartRate": null, "stairs": null, "steps": null, "level": null, "incline": null, "strokes": null, "speed": null, "$$hashKey": "object:169" }
+      ]
+      expect(scope.countSetsOfExercise(the1stSet)).toEqual(4);
+      expect(scope.countSetsOfExercise(the2ndSet)).toEqual(0);
+      expect(scope.countSetsOfExercise(the3rdSet)).toEqual(1);
+    });
+    it('checkForSets returns TRUE is already part of Sets', function() {
+      scope.sets = [
+        { "setId": 2190, "workoutId": 134, "exerciseId": 37, "sortId": 0, "exerciseName": "Squat Machine", "weight": "360", "reps": "8", "time": null, "distance": null, "calories": null, "heartRate": null, "stairs": null, "steps": null, "level": null, "incline": null, "strokes": null, "speed": null, "$$hashKey": "object:153" }
+      ]
+      expect(scope.checkForSets(2190)).toEqual(true);
+    });
+    it('checkForSets returns FALSE if it is not part of Sets', function() {
+      scope.sets = [
+        { "setId": 2190, "workoutId": 134, "exerciseId": 37, "sortId": 0, "exerciseName": "Squat Machine", "weight": "360", "reps": "8", "time": null, "distance": null, "calories": null, "heartRate": null, "stairs": null, "steps": null, "level": null, "incline": null, "strokes": null, "speed": null, "$$hashKey": "object:153" }
+      ]
+      expect(scope.checkForSets(2191)).toEqual(false);
+    });
 
   });
 });

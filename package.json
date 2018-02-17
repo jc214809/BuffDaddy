@@ -1,9 +1,10 @@
 {
-  "name": "node-js-sample",
+  "name": "Buff Daddy",
   "version": "0.2.0",
-  "description": "A sample Node.js app using Express 4",
+  "description": "An AngularJS, Node.js Project",
   "main": "index.js",
   "scripts": {
+    "test": "jasmine",
     "start": "node index.js"
   },
   "dependencies": {
@@ -21,12 +22,9 @@
     "heroku",
     "express"
   ],
-  "author": "Mark Pundsack",
-  "contributors": [
-    "Zeke Sikelianos <zeke@sikelianos.com> (http://zeke.sikelianos.com)"
-  ],
+  "author": "Joel Clark",
   "license": "MIT",
   "devDependencies": {
-    "jasmine": "^2.9.0"
+    "jasmine": "^3.0.0"
   }
 }
