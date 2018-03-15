@@ -36,7 +36,7 @@
     };
     $scope.validateForm = function() {
       if ($("input[type=checkbox].muscle-group:checked").length > 0 && $("input[type=checkbox].attribute:checked").length > 0 &&
-        $.trim($("input[name='exerciseName']")) && $.trim($("input[name='recommendation']")) && $.trim($("textarea[name='exerciseDescription']").val())) {
+        $.trim($("input[name='exerciseName']").val()) && $.trim($("input[name='recommendation']").val()) && $.trim($("textarea[name='exerciseDescription']").val())) {
         return false;
       }
       return true;
