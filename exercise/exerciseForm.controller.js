@@ -34,13 +34,13 @@
         cardio:false
       };
     };
-    // $scope.count = function() {
-    //   if ($("input[type=checkbox]:checked").length === 0) {
-    //     return false;
-    //   } else {
-    //     return true;
-    //   }
-    // }
+    $scope.count = function() {
+      if ($("input[type=checkbox]:checked").length === 0) {
+        return false;
+      } else {
+        return true;
+    }
+    }
 
     if (exerciseservice.exercise.exerciseId) {
       $scope.exercise = exerciseservice.exercise;
