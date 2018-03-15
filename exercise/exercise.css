@@ -3,10 +3,12 @@
   color: black !important;
 }
 
+textarea:focus,
 input:focus {
   border-bottom: 1px solid black !important;
 }
 
+textarea,
 input {
   box-shadow: none !important;
 }
@@ -28,16 +30,9 @@ input {
 }
 
 #exerciseForm label {
-	color: blue !important;
+  color: blue !important;
 }
 
 #exerciseForm .row label {
-	color: black !important;
+  color: black !important;
 }
-
-/*.display {
-    position: relative !important;
-    left: 0px !important;
-    visibility: visible !important;
-}
-*/
