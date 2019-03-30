@@ -2,7 +2,9 @@
   <center>
     <h4>Previous Workouts</h4></center>
   <ul class="collapsible" data-collapsible="accordion">
+    <div style="text-align: center" ng-show="!previousData.length">No Workouts Found</div>
     <li ng-repeat="workoutData in previousData | groupBy: 'workoutId' | toArray:true | orderBy:'workoutId':true">
+      <div ng-show="!previousData.length">No Workouts Found</div>
       <div class="collapsible-header">{{getDate(workoutData[0].workoutDate)}} - {{workoutData[0].workoutTitle}}
       </div>
       <div class="collapsible-body">
