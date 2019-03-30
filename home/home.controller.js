@@ -15,6 +15,7 @@
     };
     $scope.filterBy = [];
     $scope.workoutIndicator = false;
+    $scope.disabled = true;
 
     authService.getProfileDeferred().then(function(profile) {
       $scope.profile = profile;
@@ -40,6 +41,7 @@
               $scope.getExercise(response.data.workoutId);
               $scope.getSets(response.data.workoutId);
             }
+            $scope.disabled = false;
           },
           function errorCallback(response) {
             console.log("Error checking for workout" + JSON.stringify(response));
@@ -322,6 +324,7 @@
       return groups;
     }
     $scope.endWorkout = function() {
+      $scope.disabled = true;
       $http.post($scope.url + "/endWorkout", { workoutId: $scope.workoutData.workoutId, userId: $scope.socialId, workoutTitle: $scope.workoutTitle })
         .then(function successCallback(response) {
             $scope.workoutData = '';
@@ -330,6 +333,7 @@
             $scope.workoutExercises = [];
             $scope.filterBy = [];
             $scope.workoutIndicator = false;
+            $scope.disabled = false;
           },
           function errorCallback(response) {
             console.log("Error Ending workout " + JSON.stringify(response));
@@ -337,10 +341,12 @@
     };
 
     $scope.newWorkout = function() {
+      $scope.disabled = true;
       $http.post($scope.url + "/newWorkout", {
         "socialId": $scope.socialId
       }).then(function successCallback(response) {
           $scope.checkForWorkout();
+          $scope.disabled = false;
         },
         function errorCallback(response) {
           console.log("Error starting workout " + JSON.stringify(response));
