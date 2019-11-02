@@ -1,94 +1,103 @@
-    angular.module('sample', [
-        'auth0',
-        'ngRoute',
-        'sample.home',
-        'sample.login',
-        'sample.exerciseForm',
-        'sample.exercise',
-        'angular-storage',
-        'angular-jwt',
-        'ui.materialize',
-        'ngInputModified'
-      ])
-      .config(function myAppConfig($routeProvider, authProvider, $httpProvider, $locationProvider,
-        jwtInterceptorProvider) {
-        $routeProvider
-          .when('/', {
-            controller: 'HomeCtrl',
-            templateUrl: 'home/home.html',
-            pageTitle: 'Homepage',
-            requiresLogin: true
-          })
-          .when('/login', {
-            controller: 'LoginCtrl',
-            templateUrl: 'login/login.html',
-            pageTitle: 'Login'
-          })
-          .when('/exercise', {
-            controller: 'ExerciseCtrl',
-            templateUrl: 'exercise/exercise.html',
-            pageTitle: 'Exercise',
-            requiresLogin: true
-          })
-          .when('/exerciseForm', {
-            controller: 'ExerciseFormCtrl',
-            templateUrl: 'exercise/exerciseForm.html',
-            pageTitle: 'Exercise',
-            requiresLogin: true
-          });
+(function() {
 
+  'use strict';
 
-        authProvider.init({
-          domain: AUTH0_DOMAIN,
-          clientID: AUTH0_CLIENT_ID,
-          loginUrl: '/login'
-        });
+  angular
+    .module('app', ['auth0.lock', 'angular-jwt', 'ui.router', 'ui.materialize', 'angular.filter'])
+    .config(config)
+    .controller('AppCtrl', function AppCtrl($scope, authService) {
+      $scope.authService = authService;
 
-        // jwtInterceptorProvider.tokenGetter = function(store) {
-        //     return store.get('token');
-        // }
-
-
-        // Add a simple interceptor that will fetch all requests and add the jwt token to its authorization header.
-        // NOTE: in case you are calling APIs which expect a token signed with a different secret, you might
-        // want to check the delegation-token example
-        $httpProvider.interceptors.push('jwtInterceptor');
-      }).run(function($rootScope, auth, store, jwtHelper, $location) {
-        $rootScope.$on('$locationChangeStart', function() {
-          if (!auth.isAuthenticated) {
-            var token = store.get('token');
-            if (token) {
-              if (!jwtHelper.isTokenExpired(token)) {
-                auth.authenticate(store.get('profile'), token);
-              } else {
-                $location.path('/login');
-              }
-            }
-          }
-
-        });
-      })
-      .controller('AppCtrl', function AppCtrl($scope, $location, auth, store) {
-        $scope.auth = auth;
-
-        //$scope.url = 'http://localhost:8089/BuffDaddyAPI';
-        $scope.url = 'http://75.118.135.179:7080/BuffDaddyAPI';
-
-        $scope.logout = function() {
-          auth.signout();
-          store.remove('profile');
-          store.remove('token');
-          $location.path('/login');
-          $('.button-collapse').sideNav('hide');
-        }
-
-        $scope.close = function() {
-          $('.button-collapse').sideNav('hide');
-        }
-
-        $scope.$on('$routeChangeSuccess', function(e, nextRoute) {
-          if (nextRoute.$$route && angular.isDefined(nextRoute.$$route.pageTitle)) {
-            $scope.pageTitle = nextRoute.$$route.pageTitle + ' | BuffDaddy';
-          }
-        });
+      authService.getProfileDeferred().then(function(profile) {
+        $scope.profile = profile;
+        $scope.socialId = $scope.profile.identities[0].user_id;
       });
+
+      //$scope.url = 'http://localhost:8089/BuffDaddyAPI';
+      $scope.url = 'http://75.118.135.179:7079/BuffDaddyAPI';
+
+      $scope.close = function() {
+        $('.button-collapse').sideNav('hide');
+      }
+
+      var month_names_short = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      $scope.getDate = function(date) {
+        var d = new Date(date);
+        return month_names_short[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear();
+      };
+
+    });
+
+  config.$inject = ['$stateProvider', 'lockProvider', '$urlRouterProvider', 'jwtOptionsProvider'];
+
+  function config($stateProvider, lockProvider, $urlRouterProvider, jwtOptionsProvider) {
+
+    $stateProvider
+      .state('home', {
+        url: '/',
+        controller: 'HomeController',
+        templateUrl: 'home/home.html',
+        data: {
+          requiresLogin: true,
+          pageTitle: 'Home'
+        }
+      }).state('login', {
+        url: '/login',
+        controller: 'LoginController',
+        templateUrl: 'login/login.html',
+        data: {
+          requiresLogin: false,
+          pageTitle: 'Login'
+        }
+      }).state('exercise', {
+        url: '/exercise',
+        controller: 'ExerciseController',
+        templateUrl: 'exercise/exercise.html',
+        data: {
+          requiresLogin: true,
+          pageTitle: 'Exercise'
+        }
+      }).state('exerciseForm', {
+        url: '/exerciseForm',
+        controller: 'ExerciseFormController',
+        templateUrl: 'exercise/exerciseForm.html',
+        data: {
+          requiresLogin: true,
+          pageTitle: 'Exercise'
+        }
+      }).state('previousWorkouts', {
+        url: '/previousWorkouts',
+        controller: 'PreviousWorkoutsController',
+        templateUrl: 'previousworkouts/previousworkouts.html',
+        data: {
+          requiresLogin: true,
+          pageTitle: 'Previous Workouts'
+        }
+      });
+
+    lockProvider.init({
+      clientID: AUTH0_CLIENT_ID,
+      domain: AUTH0_DOMAIN,
+      //loginState: '/login',
+    });
+
+    $urlRouterProvider.otherwise('/login');
+
+
+    // Configuration for angular-jwt
+    jwtOptionsProvider.config({
+      tokenGetter: ['options', function(options) {
+        if (options && options.url.substr(options.url.length - 5) == '.html') {
+          return null;
+        }
+        return localStorage.getItem('id_token');
+      }],
+      whiteListedDomains: ['localhost'],
+      unauthenticatedRedirector: ['$state', function($state) {
+        $state.go('login');
+      }]
+    });
+
+  }
+
+})();

@@ -1,0 +1,38 @@
+<div>
+  <center>
+    <h4>Previous Workouts</h4></center>
+  <ul class="collapsible" data-collapsible="accordion">
+    <div style="text-align: center" ng-show="!previousData.length">No Workouts Found</div>
+    <li ng-repeat="workoutData in previousData | groupBy: 'workoutId' | toArray:true | orderBy:'workoutId':true">
+      <div ng-show="!previousData.length">No Workouts Found</div>
+      <div class="collapsible-header">{{getDate(workoutData[0].workoutDate)}} - {{workoutData[0].workoutTitle}}
+      </div>
+      <div class="collapsible-body">
+        <span>
+        <div ng-repeat="exerciseData in workoutData | groupBy: 'sortId' | toArray:true | orderBy:'sortId'">
+          <h5 style="padding-left: 10px; color: blue; margin: 0.82rem 0 0 0;" ng-bind="exerciseData[0].exerciseName"></h5>
+          <div style="padding-left: 20px" ng-repeat="set in exerciseData | orderBy:'setId'">
+            <b ng-if="set.reps != null"><i title="Reps" class="flaticon-reps"></i> {{set.reps}}</b>
+            <b ng-if="set.weight != null"><i title="Weight" class="flaticon-weight"></i> {{set.weight}}</b>
+            <b ng-if="set.time != null"><i title="Time" class="fa fa-clock-o" aria-hidden="true"></i> {{set.time}}</b>
+            <b ng-if="set.distance != null"><i title="Distance" class="fa fa-map-marker" aria-hidden="true"></i> {{set.distance}}</b>
+            <b ng-if="set.heartRate != null"><i title="Heart Rate" class="fa fa-heartbeat" aria-hidden="true"></i> {{set.heartRate}}</b>
+            <b ng-if="set.calories != null"><i title="Calories" class="fa fa-fire" aria-hidden="true"></i> {{set.calories}}</b>
+            <b ng-if="set.stairs != null"><i title="Stairs" class="flaticon-stairs" aria-hidden="true"></i> {{set.stairs}}</b>
+            <b ng-if="set.steps != null"><i title="Steps" class="flaticon-steps" aria-hidden="true"></i> {{set.steps}}</b>
+            <b ng-if="set.level != null"><i title="Level" class="flaticon-level" aria-hidden="true"></i> {{set.level}}</b>
+            <b ng-if="set.incline != null"><i title="Incline" class="flaticon-incline" aria-hidden="true"></i> {{set.incline}}</b>
+            <b ng-if="set.strokes != null"><i title="Strokes" class="flaticon-strokes" aria-hidden="true"></i> {{set.strokes}}</b>
+            <b ng-if="set.speed != null"><i title="Speed" class="flaticon-speed" aria-hidden="true"></i> {{set.speed}}</b>
+          </div>
+        </div>
+        <div>
+          <a class="waves-effect waves-light btn right" ng-click="repeatWorkout(workoutData)">Do It Again</a>
+          <br/>
+          <br/>
+        </div>
+        </span>
+      </div>
+    </li>
+  </ul>
+</div>

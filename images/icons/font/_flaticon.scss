@@ -1,6 +1,6 @@
     /*
     Flaticon icon font: Flaticon
-    Creation date: 17/06/2016 16:29
+    Creation date: 19/01/2017 21:20
     */
 
     @font-face {
@@ -36,8 +36,20 @@
   font-smoothing: antialiased;
     }
 
-    .flaticon-exercise:before { content: "\f100"; }
-.flaticon-gym:before { content: "\f101"; }
+    .flaticon-incline:before { content: "\f100"; }
+.flaticon-level:before { content: "\f101"; }
+.flaticon-reps:before { content: "\f102"; }
+.flaticon-signs:before { content: "\f103"; }
+.flaticon-speed:before { content: "\f104"; }
+.flaticon-steps:before { content: "\f105"; }
+.flaticon-strokes:before { content: "\f106"; }
+.flaticon-weight:before { content: "\f107"; }
     
-    $font-Flaticon-exercise: "\f100";
-    $font-Flaticon-gym: "\f101";
+    $font-Flaticon-incline: "\f100";
+    $font-Flaticon-level: "\f101";
+    $font-Flaticon-reps: "\f102";
+    $font-Flaticon-signs: "\f103";
+    $font-Flaticon-speed: "\f104";
+    $font-Flaticon-steps: "\f105";
+    $font-Flaticon-strokes: "\f106";
+    $font-Flaticon-weight: "\f107";

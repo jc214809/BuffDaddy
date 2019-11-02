@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>Jasmine Spec Runner</title>
+  <link rel="stylesheet" href="../bower_components/jasmine/lib/jasmine-core/jasmine.css">
+</head>
+
+<body>
+  <!-- Jasmine -->
+  <script src="../bower_components/jasmine/lib/jasmine-core/jasmine.js"></script>
+  <script src="../bower_components/jasmine/lib/jasmine-core/jasmine-html.js"></script>
+  <script src="../bower_components/jasmine/lib/jasmine-core/boot.js"></script>
+  <!-- Angular dependencies -->
+  <script type="text/javascript" src="../bower_components/angular/angular.js"></script>
+  <script type="text/javascript" src="../bower_components/angular-mocks/angular-mocks.js"></script>
+  <!-- include source files here... -->
+  <script type="text/javascript" src="../auth0-variables.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.4.7/angular-filter.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-materialize/0.1.8/angular-materialize.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+  <script type="text/javascript" src="../bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+  <script type="text/javascript" src="../bower_components/auth0-lock/build/lock.js"></script>
+  <script type="text/javascript" src="../bower_components/angular-lock/dist/angular-lock.js"></script>
+  <script type="text/javascript" src="../bower_components/angular-jwt/dist/angular-jwt.js"></script>
+  <script type="text/javascript" src="../app.js"></script>
+  <script type="text/javascript" src="../home/home.controller.js"></script>
+  <script type="text/javascript" src="../exercise/exercise.controller.js"></script>
+  <!-- DIRECTIVES | FILTERS | SERVICES -->
+  <script type="text/javascript" src="../auth/auth.service.js"></script>
+  <script type="text/javascript" src="../home/notInArray.filter.js"></script>
+  <script type="text/javascript" src="../home/inArray.filter.js"></script>
+  <script type="text/javascript" src="../exercise/startFrom.filter.js"></script>
+  <script type="text/javascript" src="../home/previousDataService.service.js"></script>
+  <script type="text/javascript" src="../exercise/exerciseservice.service.js"></script>
+  <script type="text/javascript" src="../home/repeatDone.directive.js"></script>
+  <!-- include spec files here... -->
+  <script src="spec/home.controller.spec.js"></script>
+  <script src="spec/exercise.controller.spec.js"></script>
+</body>
+
+</html>

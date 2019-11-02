@@ -1,3 +1,10 @@
 .login-page .login-box {
     padding: 100px 0;
 }
+
+@media screen and (max-device-width: 375px) and (max-device-height: 667px) {
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+}

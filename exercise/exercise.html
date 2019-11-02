@@ -2,19 +2,104 @@
   <center>
     <h3>Exercises</h3>
   </center>
+  <a class="btn-floating btn-large waves-effect waves-light red modal-trigger add-exercise" href="" ng-click="goToForm()"><i class="fa fa-plus material-icons plus-icon" aria-hidden="true"></i></a>
   <div class="container">
-    <center>
-      <ul class="collection">
-        <li class="list collection-item" ng-repeat="exercise in exercises">
-          {{exercise.exerciseName}}
+    <div class="row">
+      <div class="col s12">
+        <ul class="tabs">
+          <li class="tab col s6"><a class="active" href="/#myExercises">My Exercises</a></li>
+          <li class="tab col s6"><a href="/#allExercises">All Exercises</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="row">
+      <div id="myExercises" class="col s12">
+        </br>
+        <div class="list collection-item" ng-repeat="exercise in usersExercises | orderBy:'exerciseName' | filter:exercisesSort | startFrom:currentPage*pageSize | limitTo:pageSize">
+          <a class="btn-floating btn-small waves-effect waves-light red modal-trigger" ng-click="deleteUserExercise(exercise.exerciseId)">
+            <i class="fa fa-minus material-icons plus-icon" aria-hidden="true"></i>
+          </a>
+          <span ng-click="toggle(exercise.exerciseId)">
+          <span ng-bind="exercise.exerciseName" style="font-size:20px"></span>
+          <!-- <i ng-if="exercise.weight" title="Weight" class="flaticon-exercise icon"></i>
+          <i ng-if="exercise.reps" title="Reps" class="flaticon-gym icon"></i>
+          <i ng-if="exercise.time" title="Time" class="fa fa-clock-o icon" aria-hidden="true"></i>
+          <i ng-if="exercise.distance" title="Distance" class="fa fa-map-marker icon" aria-hidden="true"></i>
+          <i ng-if="exercise.calories" title="Calories" class="fa fa-fire icon" aria-hidden="true"></i>
+          <i ng-if="exercise.heartRate" title="Heart Rate" class="fa fa-heartbeat icon" aria-hidden="true"></i> -->
+          </span>
+          <div id="details-{{exercise.exerciseId}}" class="row" style="display:none; font-size:15px;">
+            <div class="col s12 right-align">
+              <!-- <center> -->
+              <div ng-if="exercise.arms" class="chip red"><b>Arms</b></div>
+              <div ng-if="exercise.back" class="chip blue"><b>Back</b></div>
+              <div ng-if="exercise.cardio" class="chip green"><b>Cardio</b></div>
+              <div ng-if="exercise.chest" class="chip oranage"><b>Chest</b></div>
+              <div ng-if="exercise.core" class="chip purple"><b>Core</b></div>
+              <div ng-if="exercise.legs" class="chip yellow"><b>Legs</b></div>
+              <div ng-if="exercise.shoulders" class="chip brown"><b>Shoulders</b></div>
+              <!-- </center> -->
+            </div>
+            <div class="col s">
+              <b><span>Exercise Description:</span></b>
+              <div class="exerciseDescription">{{exercise.exerciseDescription}}</div>
+            </div>
+            <!-- <div class="col s6">
+              <span>Exercise Description:</span>
+              <div>{{exercise.exerciseDescription}}</div>
+            </div> -->
+            <div class="col s12" ng-hide="exercise.socialId != socialId" ng-show="exercise.socialId == socialId">
+              <a class="waves-effect waves-light btn green" ng-click="editExercise(exercise)"><i class="fa fa-pencil material-icons plus-icon" aria-hidden="true"></i> Edit</a>
+              <a class="waves-effect waves-light btn red"><i class="fa fa-trash material-icons plus-icon" aria-hidden="true"></i> Delete</a>
+            </div>
+          </div>
+        </div>
+        <center>
+          <button class="btn blue" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">
+            <i class="fa fa-caret-left" aria-hidden="true"></i>
+          </button>
+          {{currentPage+1}}/{{numberOfPages()}}
+          <button class="btn blue" ng-disabled="currentPage == numberOfPages() - 1" ng-click="currentPage=currentPage+1">
+            <i class="fa fa-caret-right" aria-hidden="true"></i>
+          </button>
+        </center>
+      </div>
+      <div id="allExercises" class="col s12">
+        </br>
+        <div class="list collection-item" ng-repeat="exercise in exercises | notInArray:filterByUsersExercises:'exerciseId' | orderBy:'exerciseName'">
+          <a class="btn-floating btn-small waves-effect waves-light green modal-trigger" ng-click="addUserExercise(exercise.exerciseId)">
+            <i class="fa fa-plus material-icons plus-icon" aria-hidden="true"></i>
+          </a>
+          <span ng-click="toggle(exercise.exerciseId)">
+          <span ng-bind="exercise.exerciseName" style="font-size:20px"></span>
           <i ng-if="exercise.weight" title="Weight" class="flaticon-exercise icon"></i>
           <i ng-if="exercise.reps" title="Reps" class="flaticon-gym icon"></i>
           <i ng-if="exercise.time" title="Time" class="fa fa-clock-o icon" aria-hidden="true"></i>
           <i ng-if="exercise.distance" title="Distance" class="fa fa-map-marker icon" aria-hidden="true"></i>
           <i ng-if="exercise.calories" title="Calories" class="fa fa-fire icon" aria-hidden="true"></i>
           <i ng-if="exercise.heartRate" title="Heart Rate" class="fa fa-heartbeat icon" aria-hidden="true"></i>
-        </li>
-      </ul>
-    </center>
+          </span>
+          <div id="details-{{exercise.exerciseId}}" class="row" style="display:none; font-size:15px;">
+            <div class="col s6">
+              <b><span>Exercise Description:</span></b>
+              <div>{{exercise.exerciseDescription}}</div>
+            </div>
+            <div class="col s6">
+              <span>Exercise Description:</span>
+              <div>{{exercise.exerciseDescription}}</div>
+            </div>
+            <div class="col s12" ng-hide="exercise.socialId != user" ng-show="exercise.socialId == user">
+              <a class="waves-effect waves-light btn green" ng-click="editExercise(exercise)" ng-disabled="user != exercise.socialId"><i class="fa fa-pencil material-icons plus-icon" aria-hidden="true"></i> Edit</a>
+              <a class="waves-effect waves-light btn red"><i class="fa fa-trash material-icons plus-icon" aria-hidden="true"></i> Delete</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
+<script type="text/javascript">
+$(document).ready(function() {
+  $('ul.tabs').tabs();
+});
+</script>
