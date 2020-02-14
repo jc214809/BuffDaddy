@@ -46,7 +46,7 @@
             <label for="steps{{set.setId}}"><i title="Steps" class="flaticon-steps" aria-hidden="true"></i>Steps</label>
           </div>
           <div class="input-field col set" style="width:{{size}}" ng-class="{'hide-input': !(exercise.level)}">
-            <input id="level{{set.setId}}" ng-model-options="{ updateOn: 'blur' }" ng-change="saveSetDetails(set);setForm.$setPristine();" type="number" step="any" ng-model="set.level" class="validate">
+            <input id="level{{set.setId}}" ng-model-options="{ updateOn: 'blur' }" ng-change="saveSetDetails(set);setForm.$setPristine();" inputmode="decimal" ng-model="set.level" class="validate">
             <label for="level{{set.setId}}"><i title="Level" class="flaticon-level" aria-hidden="true"></i>Level</label>
           </div>
           <div class="input-field col set" style="width:{{size}}" ng-class="{'hide-input': !(exercise.incline)}">
