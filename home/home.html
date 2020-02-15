@@ -18,7 +18,7 @@
             <label for="reps{{set.setId}}"><i title="Reps" class="flaticon-reps"></i>Reps</label>
           </div>
           <div class="input-field col set" style="width:{{size}}" ng-class="{'hide-input': !(exercise.weight)}">
-            <input id="weight{{set.setId}}" ng-model-options="{ updateOn: 'blur' }" ng-change="saveSetDetails(set);setForm.$setPristine();" type="text" pattern="[0-9]*" ng-model="set.weight" class="validate">
+            <input id="weight{{set.setId}}" ng-model-options="{ updateOn: 'blur' }" ng-change="saveSetDetails(set);setForm.$setPristine();" type="text" inputmode="decimal" ng-model="set.weight" class="validate">
             <label for="weight{{set.setId}}"><i title="Weight" class="flaticon-weight"></i>Weight</label>
           </div>
           <div class="input-field col set" style="width:{{size}}" ng-class="{'hide-input': !(exercise.time)}">
@@ -26,7 +26,7 @@
             <label for="time{{set.setId}}"><i title="Time" class="fa fa-clock-o" aria-hidden="true"></i>Duration</label>
           </div>
           <div class="input-field col set" style="width:{{size}}" ng-class="{'hide-input': !(exercise.distance)}">
-            <input id="distance{{set.setId}}" ng-model-options="{ updateOn: 'blur' }" ng-change="saveSetDetails(set);setForm.$setPristine();" type="text" ng-model="set.distance" class="validate">
+            <input id="distance{{set.setId}}" ng-model-options="{ updateOn: 'blur' }" ng-change="saveSetDetails(set);setForm.$setPristine();" type="text" inputmode="decimal" ng-model="set.distance" class="validate">
             <label for="distance{{set.setId}}"><i title="Distance" class="fa fa-map-marker" aria-hidden="true"></i>Distance</label>
           </div>
           <div class="input-field col set" style="width:{{size}}" ng-class="{'hide-input': !(exercise.heartRate)}">
@@ -46,11 +46,11 @@
             <label for="steps{{set.setId}}"><i title="Steps" class="flaticon-steps" aria-hidden="true"></i>Steps</label>
           </div>
           <div class="input-field col set" style="width:{{size}}" ng-class="{'hide-input': !(exercise.level)}">
-            <input id="level{{set.setId}}" ng-model-options="{ updateOn: 'blur' }" ng-change="saveSetDetails(set);setForm.$setPristine();" type=“text” inputmode="decimal" ng-model="set.level" class="validate">
+            <input id="level{{set.setId}}" ng-model-options="{ updateOn: 'blur' }" ng-change="saveSetDetails(set);setForm.$setPristine();" type="text" inputmode="decimal" ng-model="set.level" class="validate">
             <label for="level{{set.setId}}"><i title="Level" class="flaticon-level" aria-hidden="true"></i>Level</label>
           </div>
           <div class="input-field col set" style="width:{{size}}" ng-class="{'hide-input': !(exercise.incline)}">
-            <input id="incline{{set.setId}}" ng-model-options="{ updateOn: 'blur' }" ng-change="saveSetDetails(set);setForm.$setPristine();" type="text" ng-model="set.incline" class="validate">
+            <input id="incline{{set.setId}}" ng-model-options="{ updateOn: 'blur' }" ng-change="saveSetDetails(set);setForm.$setPristine();" type="text" inputmode="decimal" ng-model="set.incline" class="validate">
             <label for="incline{{set.setId}}"><i title="Incline" class="flaticon-incline" aria-hidden="true"></i>Incline</label>
           </div>
           <div class="input-field col set" style="width:{{size}}" ng-class="{'hide-input': !(exercise.strokes)}">
@@ -58,7 +58,7 @@
             <label for="strokes{{set.setId}}"><i title="Strokes" class="flaticon-strokes" aria-hidden="true"></i>Strokes</label>
           </div>
           <div class="input-field col set" style="width:{{size}}" ng-class="{'hide-input': !(exercise.speed)}">
-            <input id="speed{{set.setId}}" ng-model-options="{ updateOn: 'blur' }" ng-change="saveSetDetails(set);setForm.$setPristine();" type="text" ng-model="set.speed" class="validate">
+            <input id="speed{{set.setId}}" ng-model-options="{ updateOn: 'blur' }" ng-change="saveSetDetails(set);setForm.$setPristine();" type="text" inputmode="decimal" ng-model="set.speed" class="validate">
             <label for="speed{{set.setId}}"><i title="Speed" class="flaticon-speed" aria-hidden="true"></i>Speed</label>
           </div>
           <div class="input-field col action-icons">

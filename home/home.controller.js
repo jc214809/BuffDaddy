@@ -154,6 +154,7 @@
           },
           function errorCallback(response) {
             console.log("Error saving set details " + JSON.stringify(response));
+            alert("That shit failed to save!")
           });
     };
     $scope.removeSetFromArray = function(set) {

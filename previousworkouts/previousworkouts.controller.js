@@ -23,7 +23,7 @@
         "workoutId": workoutData[0].workoutId,
         "userId": $scope.socialId
       }).then(function successCallback(response) {
-          console.log("Routine Complete");
+          console.log("Routine Added Successfully");
           $state.go('home');
         },
         function errorCallback(response) {
