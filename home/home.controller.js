@@ -41,7 +41,7 @@
               $scope.getExercise(response.data.workoutId);
               $scope.getSets(response.data.workoutId);
             }
-            $scope.disabled = false;
+            //$scope.disabled = false;
           },
           function errorCallback(response) {
             console.log("Error checking for workout" + JSON.stringify(response));
@@ -221,6 +221,7 @@
               }
             });
           }
+          $scope.disabled = false;
         },
         function errorCallback(response) {
           console.log("Error Getting sets " + JSON.stringify(response));
