@@ -31,6 +31,12 @@
         });
     };
 
+    var month_names_short = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    $scope.getDate = function(date) {
+      var d = new Date(date);
+      return month_names_short[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear();
+    };
+
   }
 
 }());
