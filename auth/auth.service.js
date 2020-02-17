@@ -51,7 +51,7 @@
             gender: profile.gender,
             socialId: profile.identities[0].user_id
           };
-          $http.post("http://75.118.135.179:7079/BuffDaddyAPI/register", JSON.stringify(userDetails))
+          $http.post("http://75.118.135.179:9080/BuffDaddyAPI/register", JSON.stringify(userDetails))
             .then(
               function successCallback(response) {
                 console.log("Success register");
