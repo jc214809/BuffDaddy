@@ -34,7 +34,7 @@
     var month_names_short = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     $scope.getDate = function(date) {
       console.log(date);
-      $scope.d = new Date(date);
+      $scope.d = new Date(date.replace(/ /g,"T"));
       console.log("Date: " + " -- " + $scope.d + "Month Number: " + $scope.d.getMonth() + " -- " +"Month name: " + month_names_short[$scope.d.getMonth()] + " -- " +"Month day: " + $scope.d.getDate() + " -- " +"Year Number: " + $scope.d.getFullYear() + " -- " +"Whole Thing: " + month_names_short[$scope.d.getMonth()] + " " + $scope.d.getDate() + ", " + $scope.d.getFullYear());
       return month_names_short[$scope.d.getMonth()] + " " + $scope.d.getDate() + ", " + $scope.d.getFullYear();
     };
