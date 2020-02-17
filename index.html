@@ -36,7 +36,7 @@
   <link rel="stylesheet" type="text/css" href="home/home.css">
   <link rel="stylesheet" type="text/css" href="exercise/exercise.css">
   <script type="text/javascript">
-  //if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
+  if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
     var myDiv;
     console.origLog = console.log;
     console.log = function(x) {
@@ -44,7 +44,7 @@
       if (myDiv) myDiv.innerHTML = x;
       else console.origLog("can not determine myDiv");
     }
-  //}
+  }
   </script>
 </head>
 
