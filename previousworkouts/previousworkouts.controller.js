@@ -9,7 +9,7 @@
 
   function PreviousWorkoutsController($scope, authService, $http, $state) {
 
-    $http.get($scope.url + "/getPreviousWorkouts?socialId=" + $scope.socialId).then(function successCallback(response) {
+    $http.get($scope.url + "/getAllPreviousWorkoutSets?socialId=" + $scope.socialId).then(function successCallback(response) {
         $scope.previousData = response.data;
         console.dir(response.data);
       },
