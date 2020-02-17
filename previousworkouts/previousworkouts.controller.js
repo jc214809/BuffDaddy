@@ -33,10 +33,8 @@
 
     var month_names_short = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     $scope.getDate = function(date) {
-      //alert(date.substring(0, 10));
-      $scope.d = new Date(date.substring(0, 10));
-      console.log("OG1 Date: " + date.replace(/-/g, "/") + " -- " + "Formated Date: " + date.replace(/-/g, "/") + " -- " + "JS Date: "  + $scope.d + " -- "+  "Month Number: " + $scope.d.getMonth() + " -- " +"Month name: " + month_names_short[$scope.d.getMonth()] + " -- " +"Month day: " + $scope.d.getDate() + " -- " +"Year Number: " + $scope.d.getFullYear() + " -- " +"Whole Thing: " + month_names_short[$scope.d.getMonth()] + " " + $scope.d.getDate() + ", " + $scope.d.getFullYear());
-      return month_names_short[$scope.d.getMonth()] + " " + $scope.d.getDate() + ", " + $scope.d.getFullYear();
+      var d = new Date(date.substring(0, 10));
+      return month_names_short[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear();
     };
 
   }
