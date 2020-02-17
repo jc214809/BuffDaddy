@@ -40,8 +40,9 @@
               $scope.workoutIndicator = true;
               $scope.getExercise(response.data.workoutId);
               $scope.getSets(response.data.workoutId);
+            } else {
+              $scope.disabled = false;
             }
-            //$scope.disabled = false;
           },
           function errorCallback(response) {
             console.log("Error checking for workout" + JSON.stringify(response));
