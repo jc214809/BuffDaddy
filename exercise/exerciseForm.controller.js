@@ -8,7 +8,9 @@
   ExerciseFormController.$inject = ['$scope', 'authService', '$state', '$http', 'exerciseservice'];
 
   function ExerciseFormController($scope, authService, $state, $http, exerciseservice) {
+    $scope.disabled = true;
     $scope.exercise = {};
+
     $scope.resetForm = function() {
       $scope.exercise = {
         image: null,
@@ -34,12 +36,13 @@
         cardio: false
       };
     };
+
     $scope.validateForm = function() {
       if ($("input[type=checkbox].muscle-group:checked").length > 0 && $("input[type=checkbox].attribute:checked").length > 0 &&
         $.trim($("input[name='exerciseName']").val()) && $.trim($("input[name='recommendation']").val()) && $.trim($("textarea[name='exerciseDescription']").val())) {
-        return false;
+        $scope.disabled = false; 
       }
-      return true;
+      $scope.disabled = true;
     }
 
     if (exerciseservice.exercise.exerciseId) {
@@ -63,6 +66,7 @@
             function successCallback(response) {
               alert("Success " + JSON.stringify(response));
               $scope.resetForm();
+              $scope.disabled = false;
             },
             function errorCallback(response) {
               alert("Error " + JSON.stringify(response));
@@ -73,12 +77,14 @@
             function successCallback(response) {
               alert("Updated " + JSON.stringify(response));
               $state.go('exercise');
+              $scope.disabled = false;
             },
             function errorCallback(response) {
               alert("Error " + JSON.stringify(response));
             });
       }
     });
+    $scope.disabled = false;
   }
 
 }());
